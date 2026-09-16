@@ -3,7 +3,6 @@ import { Plus, Trash2 } from 'lucide-react';
 import { FormEventHandler } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import guru from '@/routes/guru';
@@ -149,7 +148,7 @@ export default function GuruModulShow({ modul }: { modul: Modul }) {
                                 </div>
                                 <div className="grid gap-2">
                                     <Label>Key Jawaban</Label>
-                                    <Input
+                                    <Textarea
                                         value={row.key_jawaban}
                                         onChange={(e) =>
                                             updateRow(
@@ -158,7 +157,7 @@ export default function GuruModulShow({ modul }: { modul: Modul }) {
                                                 e.target.value,
                                             )
                                         }
-                                        placeholder="kata kunci penilaian, dipisah koma"
+                                        placeholder="Poin-poin unsur yang diharapkan ada di jawaban siswa, satu poin per baris"
                                         required
                                     />
                                 </div>

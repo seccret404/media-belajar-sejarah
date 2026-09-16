@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Services\ModulContent;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 
 class DatabaseSeeder extends Seeder
 {
@@ -28,15 +29,26 @@ class DatabaseSeeder extends Seeder
             'email' => 'siswa@example.com',
         ]);
 
+        /** @var list<array{urutan: int, soal: list<array{soal: string, jawaban_ekspektasi: string, key_jawaban: string}>}> $evaluasi */
+        $evaluasi = json_decode(File::get(resource_path('data/kuis-evaluasi.json')), true);
+        $evaluasiByUrutan = collect($evaluasi)->keyBy('urutan');
+
         foreach (ModulContent::all() as $materi) {
             $modul = Modul::factory()->create([
                 'nama_modul' => $materi['judul'],
                 'urutan' => $materi['urutan'],
             ]);
 
-            Kuis::factory(8)->create([
-                'id_modul' => $modul->id,
-            ]);
+            $soal = $evaluasiByUrutan->get($materi['urutan'])['soal'] ?? [];
+
+            foreach ($soal as $item) {
+                Kuis::create([
+                    'id_modul' => $modul->id,
+                    'soal' => $item['soal'],
+                    'jawaban_ekspektasi' => $item['jawaban_ekspektasi'],
+                    'key_jawaban' => $item['key_jawaban'],
+                ]);
+            }
         }
     }
 }

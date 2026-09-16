@@ -1,0 +1,632 @@
+[
+    {
+        "urutan": 1,
+        "soal": [
+            {
+                "soal": "Tuliskan pengertian sejarah secara sederhana berdasarkan materi yang telah kamu pelajari!",
+                "jawaban_ekspektasi": "Sejarah adalah ilmu yang mempelajari kehidupan manusia dan berbagai peristiwa yang terjadi pada masa lalu.",
+                "key_jawaban": "- Sejarah merupakan ilmu/pengetahuan.\n- Mempelajari kehidupan manusia.\n- Berkaitan dengan peristiwa masa lalu."
+            },
+            {
+                "soal": "Sebutkan empat hal utama yang menjadi dasar dalam memahami hakikat sejarah!",
+                "jawaban_ekspektasi": "Empat hal utama dalam memahami hakikat sejarah adalah sejarah berkaitan dengan masa lalu, berkaitan dengan manusia, membahas peristiwa yang nyata, dan dapat diketahui melalui sumber.",
+                "key_jawaban": "- Berkaitan dengan masa lalu.\n- Berkaitan dengan manusia.\n- Membahas peristiwa nyata.\n- Diketahui melalui sumber."
+            },
+            {
+                "soal": "Sebutkan empat contoh sumber atau informasi yang dapat digunakan untuk mengetahui peristiwa masa lalu!",
+                "jawaban_ekspektasi": "Contohnya antara lain foto, surat, dokumen, prasasti, bangunan, benda peninggalan, atau cerita dari saksi.",
+                "key_jawaban": "- Foto.\n- Surat/dokumen.\n- Prasasti/bangunan/benda peninggalan.\n- Cerita atau kesaksian."
+            },
+            {
+                "soal": "Tuliskan istilah yang digunakan untuk sejarah dalam bahasa Inggris dan istilah yang dikenal dalam bahasa Yunani!",
+                "jawaban_ekspektasi": "Dalam bahasa Inggris digunakan istilah history, sedangkan dalam bahasa Yunani dikenal istilah historia.",
+                "key_jawaban": "- History.\n- Historia."
+            },
+            {
+                "soal": "Sebutkan tiga pengertian sejarah menurut KBBI yang terdapat dalam materi!",
+                "jawaban_ekspektasi": "Sejarah dapat berarti asal-usul atau silsilah; kejadian dan peristiwa yang benar-benar terjadi pada masa lampau; serta pengetahuan atau uraian mengenai peristiwa yang benar-benar terjadi pada masa lampau.",
+                "key_jawaban": "- Asal-usul/silsilah.\n- Kejadian atau peristiwa nyata pada masa lampau.\n- Pengetahuan/uraian tentang peristiwa nyata pada masa lampau."
+            },
+            {
+                "soal": "Jelaskan dengan bahasamu sendiri apa yang dimaksud dengan sejarah!",
+                "jawaban_ekspektasi": "Sejarah adalah ilmu yang mempelajari kehidupan manusia dan berbagai kejadian yang benar-benar terjadi pada masa lalu melalui informasi atau sumber yang dapat membantu kita memahaminya.",
+                "key_jawaban": "- Mempelajari kehidupan/peristiwa manusia.\n- Berkaitan dengan masa lalu.\n- Peristiwa yang dipelajari benar-benar terjadi.\n- Masa lalu dapat dipahami melalui informasi atau sumber."
+            },
+            {
+                "soal": "Mengapa sejarah tidak dapat disamakan dengan cerita khayalan? Jelaskan!",
+                "jawaban_ekspektasi": "Sejarah tidak dapat disamakan dengan cerita khayalan karena sejarah membahas kejadian yang benar-benar terjadi pada masa lalu dan dapat dipahami melalui informasi atau sumber yang berkaitan dengan peristiwa tersebut.",
+                "key_jawaban": "- Sejarah membahas kejadian nyata.\n- Kejadian tersebut terjadi pada masa lalu.\n- Sejarah didukung informasi atau sumber.\n- Cerita khayalan tidak harus berdasarkan kejadian nyata."
+            },
+            {
+                "soal": "Jelaskan mengapa manusia menjadi bagian penting dalam memahami sejarah!",
+                "jawaban_ekspektasi": "Manusia menjadi bagian penting dalam sejarah karena manusia melakukan, mengalami, dan menyaksikan berbagai peristiwa. Kehidupan dan pengalaman manusia menjadi bagian yang dipelajari untuk memahami peristiwa masa lalu.",
+                "key_jawaban": "- Manusia terlibat dalam kehidupan/peristiwa masa lalu.\n- Manusia dapat melakukan, mengalami, atau menyaksikan peristiwa.\n- Kehidupan/pengalaman manusia dapat dipelajari dalam sejarah."
+            },
+            {
+                "soal": "Mengapa sumber atau informasi diperlukan untuk memahami suatu peristiwa yang terjadi pada masa lalu?",
+                "jawaban_ekspektasi": "Sumber diperlukan karena peristiwa masa lalu sudah terjadi dan tidak dapat disaksikan kembali secara langsung. Foto, dokumen, benda peninggalan, kesaksian, dan sumber lain dapat memberikan informasi yang membantu kita mengetahui dan memahami peristiwa tersebut.",
+                "key_jawaban": "- Peristiwa masa lalu sudah terjadi.\n- Sumber memberikan informasi tentang masa lalu.\n- Informasi dari sumber membantu memahami peristiwa.\n- Menyebutkan minimal satu contoh sumber yang tepat."
+            },
+            {
+                "soal": "Kamu menemukan sebuah foto ulang tahunmu ketika berusia lima tahun. Jelaskan informasi apa saja yang dapat diketahui dari foto tersebut untuk membantu memahami masa lalumu!",
+                "jawaban_ekspektasi": "Foto tersebut dapat memberikan informasi mengenai peristiwa yang terjadi, orang-orang yang terlibat, tempat berlangsungnya kegiatan, dan waktu atau masa ketika peristiwa tersebut terjadi.",
+                "key_jawaban": "- Apa/peristiwa yang terjadi.\n- Siapa yang terlibat.\n- Di mana peristiwa berlangsung.\n- Kapan peristiwa berlangsung."
+            },
+            {
+                "soal": "Mengapa sejarah tidak hanya berkaitan dengan peristiwa besar seperti peperangan atau perjuangan kemerdekaan? Jelaskan dengan satu contoh dari kehidupan sehari-hari!",
+                "jawaban_ekspektasi": "Sejarah juga dapat ditemukan dalam kehidupan sehari-hari karena setiap manusia, keluarga, sekolah, atau lingkungan mempunyai perjalanan masa lalu yang dapat diketahui kembali. Misalnya, foto masa kecil dapat membantu mengetahui pengalaman seseorang pada masa lalu.",
+                "key_jawaban": "- Sejarah juga terdapat dalam kehidupan sehari-hari.\n- Kehidupan manusia/keluarga/sekolah memiliki masa lalu.\n- Masa lalu tersebut dapat diketahui atau diceritakan kembali.\n- Memberikan satu contoh yang sesuai."
+            },
+            {
+                "soal": "Sebuah cerita menyebutkan bahwa suatu kejadian benar-benar terjadi pada masa lalu. Mengapa pernyataan tersebut sebaiknya didukung oleh informasi atau sumber ketika dipelajari sebagai sejarah?",
+                "jawaban_ekspektasi": "Informasi atau sumber membantu memberikan dasar untuk mengetahui dan memahami bahwa suatu peristiwa memang berkaitan dengan kejadian masa lalu. Sumber juga dapat memberikan informasi tentang orang, tempat, waktu, atau kejadian yang dipelajari.",
+                "key_jawaban": "- Sumber membantu memahami kejadian masa lalu.\n- Memberikan informasi tentang peristiwa.\n- Dapat memberikan informasi tentang manusia/tempat/waktu/kejadian.\n- Menghubungkan sumber dengan pemahaman terhadap peristiwa nyata."
+            },
+            {
+                "soal": "Perhatikan dua contoh berikut: • Sebuah foto memperlihatkan kegiatan perpisahan sekolah yang benar-benar berlangsung lima tahun lalu. • Sebuah cerita tentang kerajaan ajaib yang dibuat berdasarkan imajinasi penulis. Manakah yang lebih tepat digunakan sebagai contoh untuk memahami sejarah? Jelaskan alasannya!",
+                "jawaban_ekspektasi": "Contoh A lebih tepat karena menggambarkan kegiatan yang benar-benar terjadi pada masa lalu dan foto tersebut dapat memberikan informasi mengenai peristiwa tersebut. Contoh B merupakan cerita imajinatif sehingga tidak menunjukkan peristiwa nyata seperti yang menjadi kajian sejarah.",
+                "key_jawaban": "- Memilih A.\n- A merupakan peristiwa yang benar-benar terjadi.\n- A berkaitan dengan masa lalu.\n- Foto dapat menjadi sumber/informasi.\n- B merupakan cerita imajinatif/tidak harus nyata."
+            },
+            {
+                "soal": "Apa yang dimaksud dengan pernyataan “sejarah ada di sekitar kita”? Jelaskan menggunakan salah satu contoh: diri sendiri, keluarga, atau sekolah!",
+                "jawaban_ekspektasi": "Pernyataan tersebut berarti sejarah tidak hanya terdapat dalam buku atau peristiwa besar. Diri sendiri, keluarga, dan sekolah mempunyai perjalanan masa lalu yang dapat diketahui melalui berbagai informasi. Contohnya, sejarah sekolah dapat diketahui melalui tahun berdiri, perubahan fasilitas, atau orang-orang yang pernah berperan di dalamnya.",
+                "key_jawaban": "- Sejarah tidak hanya terdapat pada peristiwa besar/buku.\n- Kehidupan sekitar juga mempunyai masa lalu.\n- Masa lalu dapat diketahui melalui informasi/sumber.\n- Memberikan satu contoh yang sesuai."
+            },
+            {
+                "soal": "Rina menemukan foto lama keluarganya beserta catatan mengenai tempat dan tahun foto tersebut dibuat. Jelaskan tiga hal dari hakikat sejarah yang dapat ditunjukkan oleh contoh tersebut!",
+                "jawaban_ekspektasi": "Contoh tersebut menunjukkan bahwa sejarah berkaitan dengan masa lalu karena foto dibuat pada waktu sebelumnya; berkaitan dengan manusia karena foto berisi kehidupan anggota keluarga; dan diketahui melalui sumber karena foto serta catatan memberikan informasi mengenai masa lalu. Apabila foto tersebut merekam kejadian yang benar-benar berlangsung, contoh itu juga menunjukkan bahwa sejarah membahas peristiwa nyata.",
+                "key_jawaban": "- Berkaitan dengan masa lalu.\n- Berkaitan dengan manusia.\n- Diketahui melalui sumber.\n- Berkaitan dengan kejadian yang benar-benar terjadi."
+            }
+        ]
+    },
+    {
+        "urutan": 2,
+        "soal": [
+            {
+                "soal": "Sebutkan lima manfaat mempelajari sejarah yang telah kamu pelajari!",
+                "jawaban_ekspektasi": "Manfaat mempelajari sejarah adalah memahami kehidupan masa kini, belajar dari pengalaman masa lalu, mengenal identitas diri dan bangsa, mempersiapkan masa depan, serta mengembangkan kemampuan berpikir kritis dan reflektif.",
+                "key_jawaban": "- Memahami kehidupan masa kini.\n- Belajar dari pengalaman masa lalu.\n- Mengenal identitas diri dan bangsa.\n- Mempersiapkan masa depan.\n- Mengembangkan kemampuan berpikir kritis dan reflektif."
+            },
+            {
+                "soal": "Sebutkan tiga bagian waktu yang saling berkaitan dalam mempelajari sejarah!",
+                "jawaban_ekspektasi": "Tiga bagian waktu tersebut adalah masa lalu, masa kini, dan masa depan.",
+                "key_jawaban": "- Masa lalu.\n- Masa kini.\n- Masa depan."
+            },
+            {
+                "soal": "Sebutkan tiga bentuk pengalaman masa lalu yang dapat dijadikan pembelajaran bagi manusia!",
+                "jawaban_ekspektasi": "Pengalaman masa lalu dapat berupa keberhasilan yang pernah dicapai, perjuangan yang dilakukan, dan kesalahan yang pernah terjadi.",
+                "key_jawaban": "- Keberhasilan.\n- Perjuangan.\n- Kesalahan."
+            },
+            {
+                "soal": "Sebutkan tiga nilai yang dapat dipelajari dari perjuangan kemerdekaan Indonesia berdasarkan materi!",
+                "jawaban_ekspektasi": "Nilai yang dapat dipelajari antara lain kerja sama, keberanian, dan semangat perjuangan.",
+                "key_jawaban": "- Kerja sama.\n- Keberanian.\n- Semangat perjuangan.\n- Nilai-nilai tersebut memang digunakan sebagai contoh dalam materi Modul 2."
+            },
+            {
+                "soal": "Sebutkan dua kemampuan berpikir yang dapat dikembangkan melalui pembelajaran sejarah!",
+                "jawaban_ekspektasi": "Pembelajaran sejarah dapat membantu mengembangkan kemampuan berpikir kritis dan reflektif.",
+                "key_jawaban": "- Berpikir kritis.\n- Berpikir reflektif."
+            },
+            {
+                "soal": "Jelaskan dengan bahasamu sendiri mengapa sejarah penting untuk dipelajari!",
+                "jawaban_ekspektasi": "Sejarah penting dipelajari karena pengalaman dan peristiwa masa lalu membantu manusia memahami kehidupan masa kini, mengetahui bagaimana perubahan terjadi, mengambil pelajaran dari pengalaman sebelumnya, dan menentukan langkah yang lebih baik untuk masa depan.",
+                "key_jawaban": "- Masa lalu memberikan pengalaman/pelajaran.\n- Membantu memahami kehidupan masa kini.\n- Membantu memahami perubahan yang terjadi.\n- Membantu menentukan tindakan yang lebih baik pada masa depan."
+            },
+            {
+                "soal": "Jelaskan hubungan antara masa lalu, masa kini, dan masa depan dalam mempelajari sejarah!",
+                "jawaban_ekspektasi": "Masa lalu berisi berbagai pengalaman dan peristiwa yang telah terjadi. Pengalaman tersebut dapat digunakan untuk memahami kehidupan masa kini. Pelajaran yang diperoleh dari masa lalu dan masa kini dapat membantu manusia menentukan tindakan atau keputusan yang lebih baik untuk masa depan.",
+                "key_jawaban": "- Masa lalu berisi pengalaman/peristiwa yang telah terjadi.\n- Masa lalu membantu memahami masa kini.\n- Pelajaran sejarah dapat digunakan sebagai pertimbangan.\n- Membantu menentukan tindakan atau keputusan untuk masa depan.\n- Hubungan tersebut ditampilkan secara langsung dalam materi sebagai masa lalu → masa kini → masa depan."
+            },
+            {
+                "soal": "Mengapa mempelajari masa lalu dapat membantu kita memahami kehidupan yang terjadi pada masa kini?",
+                "jawaban_ekspektasi": "Kehidupan masa kini terbentuk melalui berbagai proses yang telah berlangsung pada masa lalu. Dengan mempelajari proses tersebut, kita dapat mengetahui bagaimana suatu keadaan terbentuk dan mengapa terjadi perubahan hingga menghasilkan keadaan sekarang.",
+                "key_jawaban": "- Kehidupan masa kini berkaitan dengan proses masa lalu.\n- Suatu keadaan tidak terbentuk secara tiba-tiba.\n- Sejarah membantu memahami proses terbentuknya keadaan.\n- Sejarah membantu memahami perubahan."
+            },
+            {
+                "soal": "Perkembangan teknologi yang kita gunakan saat ini tidak muncul secara tiba-tiba. Jelaskan bagaimana contoh tersebut menunjukkan manfaat mempelajari sejarah!",
+                "jawaban_ekspektasi": "Perkembangan teknologi terjadi melalui berbagai penemuan dan perkembangan dari waktu ke waktu. Dengan mempelajari perjalanan tersebut, kita dapat memahami bagaimana teknologi pada masa kini terbentuk melalui proses yang terjadi pada masa lalu.",
+                "key_jawaban": "- Teknologi berkembang melalui proses.\n- Terdapat penemuan/perkembangan pada masa sebelumnya.\n- Keadaan masa kini berkaitan dengan masa lalu.\n- Sejarah membantu memahami proses perkembangan tersebut.\n- Contoh perkembangan teknologi memang digunakan dalam materi untuk menjelaskan hubungan masa lalu dan masa kini."
+            },
+            {
+                "soal": "Seseorang pernah melakukan kesalahan dan kemudian menggunakan pengalaman tersebut agar tidak mengulangi kesalahan yang sama. Jelaskan hubungan contoh tersebut dengan manfaat mempelajari sejarah!",
+                "jawaban_ekspektasi": "Contoh tersebut menunjukkan bahwa pengalaman masa lalu dapat menjadi pembelajaran. Dengan memahami kesalahan yang pernah terjadi, seseorang dapat memperbaiki tindakannya dan membuat keputusan yang lebih baik ketika menghadapi keadaan serupa.",
+                "key_jawaban": "- Pengalaman masa lalu dapat menjadi pembelajaran.\n- Kesalahan masa lalu dapat dipahami.\n- Pembelajaran tersebut membantu menghindari kesalahan yang sama.\n- Membantu mengambil keputusan yang lebih baik.\n- Perencanaan pembelajaran juga menggunakan contoh seseorang atau masyarakat yang mengulangi kesalahan karena tidak belajar dari pengalaman masa lalu."
+            },
+            {
+                "soal": "Jelaskan bagaimana mempelajari sejarah dapat membantu seseorang mengenal identitas diri dan bangsanya!",
+                "jawaban_ekspektasi": "Sejarah membantu seseorang mengetahui asal-usul dan perjalanan kehidupannya. Melalui sejarah, seseorang dapat mengenal keluarga, budaya masyarakat, dan perjalanan bangsanya sehingga dapat lebih memahami serta menghargai identitas diri dan lingkungan.",
+                "key_jawaban": "- Mengetahui asal-usul/perjalanan kehidupan.\n- Mengenal keluarga atau latar belakang diri.\n- Mengenal budaya/perjalanan bangsa.\n- Membantu memahami atau menghargai identitas."
+            },
+            {
+                "soal": "Bagaimana pengalaman keberhasilan dan kesalahan pada masa lalu dapat membantu manusia mempersiapkan masa depan? Jelaskan!",
+                "jawaban_ekspektasi": "Keberhasilan dan kesalahan masa lalu dapat digunakan sebagai bahan pertimbangan. Manusia dapat mempertahankan atau mengambil pelajaran dari hal yang berhasil serta menghindari kesalahan yang pernah terjadi sehingga dapat menentukan tindakan yang lebih bijak pada masa depan.",
+                "key_jawaban": "- Keberhasilan dan kesalahan dapat menjadi pengalaman.\n- Pengalaman digunakan sebagai pertimbangan.\n- Kesalahan dapat dijadikan pembelajaran.\n- Membantu mengambil tindakan/keputusan yang lebih baik pada masa depan."
+            },
+            {
+                "soal": "Mengapa mempelajari sejarah dapat membantu mengembangkan kemampuan berpikir kritis dan reflektif?",
+                "jawaban_ekspektasi": "Ketika mempelajari sejarah, seseorang tidak hanya mengetahui apa yang terjadi, tetapi juga berusaha memahami penyebab, akibat, dan makna suatu peristiwa. Proses tersebut membantu seseorang berpikir secara kritis dan merefleksikan pelajaran yang dapat diperoleh dari pengalaman masa lalu.",
+                "key_jawaban": "- Tidak hanya mengetahui fakta/peristiwa.\n- Memahami penyebab.\n- Memahami akibat dan/atau makna.\n- Mengambil atau merefleksikan pelajaran dari peristiwa.\n- Materi media memang menjelaskan berpikir kritis dan reflektif melalui pemahaman terhadap penyebab, akibat, dan makna peristiwa."
+            },
+            {
+                "soal": "Ketika mempelajari perjuangan kemerdekaan Indonesia, kita dapat menemukan nilai seperti kerja sama, keberanian, dan semangat perjuangan. Jelaskan bagaimana nilai-nilai tersebut menunjukkan manfaat sejarah bagi kehidupan masa kini!",
+                "jawaban_ekspektasi": "Sejarah memungkinkan manusia memperoleh nilai dan pelajaran dari pengalaman masa lalu. Nilai seperti kerja sama, keberanian, dan semangat perjuangan masih dapat diterapkan dalam kehidupan sekarang, misalnya ketika bekerja bersama atau menghadapi kesulitan.",
+                "key_jawaban": "- Sejarah memberikan nilai/pelajaran.\n- Menyebutkan nilai yang relevan dari contoh.\n- Nilai tersebut masih relevan pada masa kini.\n- Menjelaskan penerapannya secara sederhana."
+            },
+            {
+                "soal": "Catatan mengenai wabah penyakit pada masa lalu menunjukkan pentingnya menjaga kesehatan dan lingkungan. Berdasarkan contoh tersebut, jelaskan manfaat mempelajari sejarah bagi kehidupan manusia!",
+                "jawaban_ekspektasi": "Catatan mengenai wabah pada masa lalu dapat memberikan pengalaman dan pelajaran kepada masyarakat. Dari pengalaman tersebut, manusia dapat memahami pentingnya menjaga kesehatan dan lingkungan serta menggunakan pelajaran masa lalu sebagai pertimbangan dalam kehidupan masa kini dan masa depan.",
+                "key_jawaban": "- Peristiwa masa lalu memberikan pengalaman/pelajaran.\n- Pelajaran tersebut dapat digunakan pada masa kini.\n- Memahami pentingnya menjaga kesehatan dan lingkungan.\n- Pengalaman dapat menjadi pertimbangan untuk masa depan."
+            }
+        ]
+    },
+    {
+        "urutan": 3,
+        "soal": [
+            {
+                "soal": "Sebutkan tiga peran manusia dalam sejarah yang telah kamu pelajari!",
+                "jawaban_ekspektasi": "Manusia dalam sejarah dapat berperan sebagai pelaku sejarah, saksi sejarah, dan penggerak sejarah.",
+                "key_jawaban": "- Pelaku sejarah.\n- Saksi sejarah.\n- Penggerak sejarah."
+            },
+            {
+                "soal": "Apa yang dimaksud dengan manusia sebagai pelaku sejarah?",
+                "jawaban_ekspektasi": "Pelaku sejarah adalah manusia yang terlibat secara langsung atau mengambil bagian dalam berlangsungnya suatu peristiwa sejarah.",
+                "key_jawaban": "- Manusia/orang yang terlibat.\n- Terlibat secara langsung.\n- Mengambil bagian dalam suatu peristiwa sejarah.\n- Materi media memang mendefinisikan pelaku sejarah berdasarkan keterlibatan langsung dalam peristiwa."
+            },
+            {
+                "soal": "Apa yang dimaksud dengan manusia sebagai saksi sejarah?",
+                "jawaban_ekspektasi": "Saksi sejarah adalah manusia yang melihat, menyaksikan, atau mengalami secara langsung suatu peristiwa sejarah.",
+                "key_jawaban": "- Melihat/menyaksikan suatu peristiwa.\n- Atau mengalami peristiwa.\n- Terjadi secara langsung."
+            },
+            {
+                "soal": "Apa yang dimaksud dengan manusia sebagai penggerak sejarah?",
+                "jawaban_ekspektasi": "Penggerak sejarah adalah manusia yang melalui pemikiran, gagasan, atau tindakannya mendorong terjadinya perubahan dalam masyarakat.",
+                "key_jawaban": "- Memiliki pemikiran, gagasan, atau tindakan.\n- Gagasan/tindakan tersebut memberi pengaruh.\n- Mendorong terjadinya perubahan dalam masyarakat."
+            },
+            {
+                "soal": "Sebutkan dua kedudukan manusia dalam kajian sejarah yang dijelaskan pada materi!",
+                "jawaban_ekspektasi": "Manusia dalam kajian sejarah dapat dipahami sebagai subjek sejarah dan objek sejarah.",
+                "key_jawaban": "- Subjek sejarah.\n- Objek sejarah.\n- Konsep manusia sebagai subjek dan objek juga terdapat dalam buku paket."
+            },
+            {
+                "soal": "Jelaskan dengan bahasamu sendiri mengapa manusia menjadi bagian penting dalam mempelajari sejarah!",
+                "jawaban_ekspektasi": "Manusia menjadi bagian penting dalam sejarah karena manusia dapat melakukan, mengalami, menyaksikan, serta mendorong perubahan. Melalui tindakan, pengalaman, pemikiran, dan kesaksian manusia, kita dapat memahami suatu peristiwa masa lalu dengan lebih jelas.",
+                "key_jawaban": "- Manusia terlibat dalam peristiwa atau kehidupan masa lalu.\n- Manusia dapat melakukan/mengalami/menyaksikan peristiwa.\n- Pemikiran atau tindakan manusia dapat mendorong perubahan.\n- Pengalaman atau kesaksian manusia membantu memahami sejarah."
+            },
+            {
+                "soal": "Jelaskan perbedaan antara pelaku sejarah dan saksi sejarah!",
+                "jawaban_ekspektasi": "Pelaku sejarah adalah orang yang terlibat atau mengambil bagian secara langsung dalam suatu peristiwa, sedangkan saksi sejarah adalah orang yang melihat, menyaksikan, atau mengalami secara langsung peristiwa tersebut.",
+                "key_jawaban": "- Pelaku terlibat langsung dalam peristiwa.\n- Pelaku melakukan atau mengambil bagian dalam peristiwa.\n- Saksi melihat/menyaksikan/mengalami langsung.\n- Menunjukkan perbedaan fungsi keduanya."
+            },
+            {
+                "soal": "Apa perbedaan antara manusia sebagai pelaku sejarah dan manusia sebagai penggerak sejarah? Jelaskan!",
+                "jawaban_ekspektasi": "Pelaku sejarah adalah manusia yang terlibat langsung dalam suatu peristiwa. Penggerak sejarah adalah manusia yang gagasan, pemikiran, atau tindakannya mendorong terjadinya perubahan dalam masyarakat. Seseorang dapat menjadi pelaku sekaligus penggerak apabila memenuhi kedua peran tersebut.",
+                "key_jawaban": "- Pelaku berarti terlibat langsung.\n- Penggerak berkaitan dengan gagasan/pemikiran/tindakan.\n- Penggerak mendorong terjadinya perubahan.\n- Kedua peran berbeda tetapi dapat dimiliki oleh orang yang sama."
+            },
+            {
+                "soal": "Andi ikut secara langsung dalam sebuah kegiatan penting yang kemudian dicatat sebagai bagian dari sejarah sekolahnya. Berdasarkan perannya, Andi termasuk pelaku, saksi, atau penggerak sejarah? Jelaskan alasannya!",
+                "jawaban_ekspektasi": "Andi termasuk pelaku sejarah karena ia terlibat dan mengambil bagian secara langsung dalam kegiatan yang terjadi.",
+                "key_jawaban": "- Menentukan pelaku sejarah.\n- Andi terlibat langsung.\n- Andi mengambil bagian dalam kegiatan/peristiwa.\n- Alasan sesuai dengan ciri pelaku sejarah."
+            },
+            {
+                "soal": "Siti berada di lokasi suatu peristiwa dan menyaksikan secara langsung kejadian tersebut, tetapi ia tidak ikut melakukan kegiatan di dalamnya. Berdasarkan perannya, Siti termasuk pelaku, saksi, atau penggerak sejarah? Jelaskan!",
+                "jawaban_ekspektasi": "Siti termasuk saksi sejarah karena ia menyaksikan secara langsung suatu peristiwa meskipun tidak ikut terlibat dalam berlangsungnya peristiwa tersebut.",
+                "key_jawaban": "- Menentukan saksi sejarah.\n- Siti menyaksikan secara langsung.\n- Tidak harus ikut melakukan peristiwa.\n- Alasannya sesuai dengan ciri saksi sejarah."
+            },
+            {
+                "soal": "Seorang tokoh memiliki gagasan untuk memperbaiki pendidikan di lingkungannya. Gagasan tersebut kemudian diwujudkan dalam tindakan dan membawa perubahan bagi masyarakat. Berdasarkan perannya, tokoh tersebut termasuk pelaku, saksi, atau penggerak sejarah? Jelaskan!",
+                "jawaban_ekspektasi": "Tokoh tersebut termasuk penggerak sejarah karena gagasan dan tindakannya mendorong terjadinya perubahan dalam masyarakat, khususnya dalam bidang pendidikan.",
+                "key_jawaban": "- Menentukan penggerak sejarah.\n- Tokoh memiliki gagasan/pemikiran.\n- Gagasan diwujudkan melalui tindakan.\n- Tindakan tersebut mendorong perubahan dalam masyarakat."
+            },
+            {
+                "soal": "Jelaskan mengapa Ki Hadjar Dewantara dapat disebut sebagai pelaku sekaligus penggerak sejarah!",
+                "jawaban_ekspektasi": "Ki Hadjar Dewantara dapat disebut sebagai pelaku sejarah karena ia terlibat langsung dalam perjuangan, terutama dalam bidang pendidikan. Ia juga merupakan penggerak sejarah karena gagasan dan tindakannya, seperti mendirikan Taman Siswa, mendorong perubahan dan memperluas kesempatan pendidikan bagi masyarakat Indonesia.",
+                "key_jawaban": "- Ki Hadjar terlibat langsung dalam perjuangan.\n- Hal tersebut menunjukkan peran sebagai pelaku.\n- Ia memiliki gagasan/tindakan di bidang pendidikan.\n- Gagasan/tindakannya mendorong perubahan sehingga menunjukkan peran sebagai penggerak.\n- Materi media menggunakan pendirian Taman Siswa pada 1922 sebagai contoh perjuangannya, sedangkan buku paket secara eksplisit menyebut Ki Hadjar sebagai pelaku, saksi, sekaligus penggerak sejarah."
+            },
+            {
+                "soal": "Budi mengetahui peristiwa Proklamasi Kemerdekaan Indonesia karena membacanya dari buku pelajaran. Apakah Budi dapat disebut sebagai saksi sejarah peristiwa tersebut? Jelaskan alasannya!",
+                "jawaban_ekspektasi": "Tidak. Budi tidak dapat disebut sebagai saksi sejarah Proklamasi karena ia hanya mengetahui peristiwa tersebut melalui buku. Saksi sejarah berkaitan dengan orang yang melihat, menyaksikan, atau mengalami peristiwa secara langsung.",
+                "key_jawaban": "- Menjawab tidak.\n- Budi hanya mengetahui dari buku.\n- Saksi harus memiliki pengalaman/kesaksian langsung.\n- Menunjukkan perbedaan mengetahui informasi dengan menjadi saksi.\n- Materi Modul 3 secara khusus mengingatkan bahwa seseorang tidak menjadi saksi sejarah hanya karena mengetahui peristiwa dari buku atau cerita orang lain."
+            },
+            {
+                "soal": "Jelaskan dengan bahasamu sendiri apa yang dimaksud dengan manusia sebagai subjek dan objek sejarah!",
+                "jawaban_ekspektasi": "Manusia sebagai subjek sejarah berarti manusia melakukan tindakan, memiliki gagasan, dan dapat membawa perubahan. Manusia sebagai objek sejarah berarti kehidupan, pengalaman, pemikiran, dan tindakannya dapat dipelajari dalam sejarah.",
+                "key_jawaban": "- Subjek berkaitan dengan manusia sebagai pihak yang bertindak.\n- Manusia sebagai subjek dapat membawa/mendorong perubahan.\n- Objek berarti manusia dan kehidupannya dapat dipelajari.\n- Pengalaman, gagasan, atau tindakan manusia dapat menjadi bagian yang dikaji.\n- Buku paket juga menyatakan manusia dalam kajian sejarah merupakan subjek dan objek serta menekankan gagasan dan tindakannya sebagai penggerak perubahan."
+            },
+            {
+                "soal": "Apakah satu orang dapat menjadi pelaku, saksi, sekaligus penggerak sejarah? Jelaskan menggunakan contoh Ki Hadjar Dewantara yang telah dipelajari!",
+                "jawaban_ekspektasi": "Ya. Satu orang dapat memiliki lebih dari satu peran dalam sejarah. Ki Hadjar Dewantara menjadi pelaku karena terlibat langsung dalam perjuangan, menjadi saksi karena hidup dan mengalami berbagai peristiwa penting pada zamannya, serta menjadi penggerak karena gagasan dan tindakannya mendorong perubahan, khususnya di bidang pendidikan.",
+                "key_jawaban": "- Menjawab bahwa satu orang dapat memiliki lebih dari satu peran.\n- Ki Hadjar sebagai pelaku karena terlibat langsung.\n- Ki Hadjar sebagai saksi karena hidup/mengalami peristiwa penting pada zamannya.\n- Ki Hadjar sebagai penggerak karena gagasan/tindakannya mendorong perubahan.\n- Hal ini konsisten dengan materi media dan buku paket, yang sama-sama menempatkan Ki Hadjar Dewantara sebagai contoh pelaku, saksi, sekaligus penggerak sejarah."
+            }
+        ]
+    },
+    {
+        "urutan": 4,
+        "soal": [
+            {
+                "soal": "Apa yang dimaksud dengan ruang dalam sejarah?",
+                "jawaban_ekspektasi": "Ruang dalam sejarah adalah tempat atau lokasi berlangsungnya suatu peristiwa serta kondisi dan situasi yang berkaitan dengan tempat tersebut.",
+                "key_jawaban": "- Ruang menunjukkan tempat/lokasi.\n- Tempat berlangsungnya suatu peristiwa.\n- Ruang juga berkaitan dengan kondisi atau situasi tempat tersebut."
+            },
+            {
+                "soal": "Apa yang dimaksud dengan waktu dalam sejarah?",
+                "jawaban_ekspektasi": "Waktu dalam sejarah menunjukkan kapan suatu peristiwa berlangsung dan membantu menempatkan peristiwa tersebut dalam perjalanan sejarah.",
+                "key_jawaban": "- Waktu menunjukkan kapan peristiwa terjadi.\n- Berkaitan dengan waktu berlangsungnya suatu peristiwa.\n- Membantu mengetahui posisi peristiwa dalam perjalanan sejarah."
+            },
+            {
+                "soal": "Sebutkan tiga skala ruang yang dapat digunakan dalam mempelajari sejarah!",
+                "jawaban_ekspektasi": "Skala ruang dalam sejarah dapat berupa lokal, nasional, dan global.",
+                "key_jawaban": "- Lokal.\n- Nasional.\n- Global."
+            },
+            {
+                "soal": "Sebutkan tiga hal yang dapat dipahami melalui unsur waktu dalam sejarah!",
+                "jawaban_ekspektasi": "Waktu membantu memahami urutan terjadinya peristiwa, perubahan dari masa ke masa, serta hubungan antara peristiwa sebelum dan sesudahnya.",
+                "key_jawaban": "- Urutan peristiwa.\n- Perubahan dari masa ke masa.\n- Hubungan peristiwa sebelum dan sesudahnya."
+            },
+            {
+                "soal": "Sebutkan tiga unsur yang perlu diperhatikan untuk memahami suatu peristiwa sejarah berdasarkan Modul 4!",
+                "jawaban_ekspektasi": "Tiga unsur tersebut adalah manusia, ruang, dan waktu.",
+                "key_jawaban": "- Manusia.\n- Ruang.\n- Waktu."
+            },
+            {
+                "soal": "Mengapa ruang dalam sejarah tidak hanya berarti tempat atau lokasi terjadinya suatu peristiwa? Jelaskan!",
+                "jawaban_ekspektasi": "Ruang tidak hanya menunjukkan lokasi karena kondisi tempat juga dapat membantu menjelaskan suatu peristiwa. Ruang dapat berkaitan dengan kondisi sosial, budaya, geografis, dan ekonomi yang melatarbelakangi berlangsungnya peristiwa.",
+                "key_jawaban": "- Ruang tidak hanya menunjukkan lokasi.\n- Ruang berkaitan dengan kondisi/situasi tempat.\n- Menyebutkan minimal dua contoh kondisi, seperti sosial, budaya, geografis, atau ekonomi.\n- Kondisi tersebut membantu memahami peristiwa."
+            },
+            {
+                "soal": "Jelaskan mengapa unsur waktu penting dalam memahami suatu peristiwa sejarah!",
+                "jawaban_ekspektasi": "Waktu penting karena menunjukkan kapan suatu peristiwa berlangsung, membantu mengetahui urutan kejadian, melihat perubahan dari masa ke masa, serta memahami hubungan suatu peristiwa dengan peristiwa sebelum atau sesudahnya.",
+                "key_jawaban": "- Menunjukkan kapan peristiwa berlangsung.\n- Membantu mengetahui urutan.\n- Membantu memahami perubahan.\n- Membantu memahami hubungan sebelum dan sesudah."
+            },
+            {
+                "soal": "Jelaskan hubungan antara manusia, ruang, dan waktu dalam memahami suatu peristiwa sejarah!",
+                "jawaban_ekspektasi": "Manusia menunjukkan siapa yang terlibat dalam suatu peristiwa, ruang menunjukkan di mana dan dalam kondisi apa peristiwa berlangsung, sedangkan waktu menunjukkan kapan peristiwa terjadi. Ketiganya saling berkaitan untuk memberikan gambaran yang lebih jelas mengenai suatu peristiwa sejarah.",
+                "key_jawaban": "- Manusia menunjukkan siapa yang terlibat.\n- Ruang menunjukkan tempat dan/atau kondisi berlangsungnya peristiwa.\n- Waktu menunjukkan kapan peristiwa berlangsung.\n- Ketiganya saling berkaitan dalam memahami peristiwa."
+            },
+            {
+                "soal": "Sebuah cerita sejarah menjelaskan siapa yang terlibat dan kapan peristiwa terjadi, tetapi tidak menjelaskan tempat serta kondisi berlangsungnya peristiwa. Mengapa pemahaman terhadap peristiwa tersebut menjadi kurang lengkap?",
+                "jawaban_ekspektasi": "Pemahaman menjadi kurang lengkap karena kita tidak mengetahui ruang berlangsungnya peristiwa. Padahal ruang membantu mengetahui di mana peristiwa terjadi serta kondisi atau situasi tempat yang dapat berkaitan dengan peristiwa tersebut.",
+                "key_jawaban": "- Informasi ruang tidak diketahui.\n- Tidak diketahui tempat peristiwa.\n- Tidak diketahui kondisi/situasi tempat.\n- Akibatnya pemahaman terhadap peristiwa kurang lengkap."
+            },
+            {
+                "soal": "Mengapa sebuah peristiwa sejarah akan sulit dipahami secara lengkap jika kita tidak mengetahui kapan peristiwa tersebut terjadi?",
+                "jawaban_ekspektasi": "Tanpa mengetahui waktu, kita sulit menentukan posisi dan urutan suatu peristiwa dalam perjalanan sejarah. Kita juga menjadi lebih sulit memahami hubungan peristiwa tersebut dengan kejadian sebelum atau sesudahnya.",
+                "key_jawaban": "- Tidak diketahui kapan peristiwa terjadi.\n- Sulit menentukan urutan/posisi peristiwa.\n- Sulit memahami hubungan dengan peristiwa lain.\n- Waktu membantu memperjelas perjalanan sejarah."
+            },
+            {
+                "soal": "Jelaskan perbedaan fungsi ruang dan waktu dalam memahami peristiwa sejarah!",
+                "jawaban_ekspektasi": "Ruang membantu menjelaskan tempat, kondisi, dan situasi berlangsungnya suatu peristiwa. Waktu membantu menjelaskan kapan peristiwa berlangsung, urutannya, serta hubungannya dengan peristiwa sebelum atau sesudahnya.",
+                "key_jawaban": "- Ruang berkaitan dengan tempat.\n- Ruang berkaitan dengan kondisi/situasi.\n- Waktu berkaitan dengan kapan peristiwa berlangsung.\n- Waktu membantu memahami urutan atau hubungan antarperistiwa."
+            },
+            {
+                "soal": "Perhatikan contoh berikut: Pada 10 November 2025, siswa kelas X mengikuti kegiatan peringatan Hari Pahlawan di aula sekolah bersama guru. Tentukan unsur manusia, ruang, dan waktu dalam kegiatan tersebut!",
+                "jawaban_ekspektasi": "Manusia dalam contoh tersebut adalah siswa kelas X dan guru. Ruangnya adalah aula sekolah. Waktunya adalah 10 November 2025.",
+                "key_jawaban": "- Manusia → siswa kelas X dan/atau guru.\n- Ruang → aula sekolah.\n- Waktu → 10 November 2025."
+            },
+            {
+                "soal": "Dua peristiwa dapat berlangsung pada tempat yang berbeda dan memiliki kondisi sosial, budaya, geografis, atau ekonomi yang berbeda. Mengapa kondisi tempat tersebut perlu diperhatikan ketika mempelajari sejarah?",
+                "jawaban_ekspektasi": "Kondisi tempat perlu diperhatikan karena situasi sosial, budaya, geografis, atau ekonomi dapat membantu menjelaskan latar berlangsungnya suatu peristiwa. Dengan memahami kondisi ruang, peristiwa dapat dipahami dengan lebih jelas dan tidak hanya berdasarkan nama lokasinya.",
+                "key_jawaban": "- Kondisi ruang membantu menjelaskan latar peristiwa.\n- Ruang tidak hanya berupa nama lokasi.\n- Kondisi dapat berupa sosial/budaya/geografis/ekonomi.\n- Membantu memahami peristiwa dengan lebih jelas."
+            },
+            {
+                "soal": "Sebuah sekolah didirikan oleh beberapa tokoh masyarakat pada tahun 2005 di sebuah desa. Jelaskan bagaimana contoh tersebut dapat dipahami melalui unsur manusia, ruang, dan waktu!",
+                "jawaban_ekspektasi": "Unsur manusia ditunjukkan oleh tokoh masyarakat yang mendirikan sekolah. Unsur ruang ditunjukkan oleh desa sebagai tempat berlangsungnya peristiwa. Unsur waktu ditunjukkan oleh tahun 2005. Ketiga unsur tersebut bersama-sama membantu menjelaskan siapa yang terlibat, di mana, dan kapan peristiwa berlangsung.",
+                "key_jawaban": "- Manusia → tokoh masyarakat.\n- Ruang → desa/tempat sekolah didirikan.\n- Waktu → tahun 2005.\n- Menjelaskan bahwa ketiganya bersama-sama membantu memahami peristiwa."
+            }
+        ]
+    },
+    {
+        "urutan": 5,
+        "soal": [
+            {
+                "soal": "Apa yang dimaksud dengan cara berpikir diakronik dalam sejarah?",
+                "jawaban_ekspektasi": "Cara berpikir diakronik adalah cara memahami suatu peristiwa sejarah dengan melihat proses dan dinamika peristiwa tersebut dalam rentang waktu dari masa ke masa.",
+                "key_jawaban": "- Cara memahami peristiwa sejarah.\n- Melihat proses dan dinamika.\n- Berlangsung dalam rentang waktu.\n- Dilihat dari masa ke masa."
+            },
+            {
+                "soal": "Sebutkan empat ciri cara berpikir diakronik yang telah kamu pelajari!",
+                "jawaban_ekspektasi": "Cara berpikir diakronik memiliki ciri memanjang dalam waktu, ruang kajiannya lebih terbatas, memperhatikan proses dan dinamika peristiwa, serta dapat disajikan secara kronologis.",
+                "key_jawaban": "- Memanjang dalam waktu.\n- Ruang kajiannya lebih terbatas.\n- Memperhatikan proses dan dinamika.\n- Dapat disajikan secara kronologis."
+            },
+            {
+                "soal": "Sebutkan empat bentuk dinamika yang dapat diperhatikan ketika menggunakan cara berpikir diakronik!",
+                "jawaban_ekspektasi": "Dinamika yang dapat diperhatikan meliputi perkembangan, perubahan, kesinambungan, dan pengulangan.",
+                "key_jawaban": "- Perkembangan.\n- Perubahan.\n- Kesinambungan.\n- Pengulangan."
+            },
+            {
+                "soal": "Bagaimana karakter waktu dan ruang dalam cara berpikir diakronik?",
+                "jawaban_ekspektasi": "Cara berpikir diakronik memanjang dalam waktu, sedangkan ruang kajiannya lebih terbatas.",
+                "key_jawaban": "- Waktu memanjang/panjang.\n- Ruang lebih terbatas."
+            },
+            {
+                "soal": "Sebutkan tiga kata kunci utama untuk memahami cara berpikir diakronik!",
+                "jawaban_ekspektasi": "Tiga kata kunci utama cara berpikir diakronik adalah rentang waktu, proses dan dinamika, serta perkembangan atau perubahan.",
+                "key_jawaban": "- Rentang waktu.\n- Proses dan dinamika.\n- Perkembangan/perubahan."
+            },
+            {
+                "soal": "Jelaskan dengan bahasamu sendiri bagaimana cara memahami suatu peristiwa menggunakan cara berpikir diakronik!",
+                "jawaban_ekspektasi": "Suatu peristiwa dipahami secara diakronik dengan melihat perjalanan atau prosesnya dari masa ke masa dalam rentang waktu tertentu. Melalui cara tersebut, kita dapat mengetahui perkembangan, perubahan, kesinambungan, atau pengulangan yang terjadi.",
+                "key_jawaban": "- Melihat peristiwa dari masa ke masa.\n- Memperhatikan rentang waktu.\n- Memahami proses/dinamika.\n- Melihat perkembangan, perubahan, kesinambungan, atau pengulangan."
+            },
+            {
+                "soal": "Apa yang dimaksud dengan pernyataan bahwa cara berpikir diakronik “memanjang dalam waktu”? Jelaskan!",
+                "jawaban_ekspektasi": "Memanjang dalam waktu berarti suatu peristiwa dipelajari melalui perjalanan atau prosesnya dalam rentang waktu tertentu, mulai dari keadaan sebelumnya hingga perkembangan atau perubahan yang terjadi kemudian.",
+                "key_jawaban": "- Mencakup rentang waktu.\n- Melihat perjalanan peristiwa.\n- Memperhatikan keadaan dari masa sebelumnya ke masa berikutnya.\n- Menunjukkan perkembangan/perubahan."
+            },
+            {
+                "soal": "Mengapa cara berpikir diakronik dikatakan memiliki ruang kajian yang lebih terbatas?",
+                "jawaban_ekspektasi": "Cara berpikir diakronik lebih memusatkan perhatian pada perjalanan suatu peristiwa dalam rentang waktu yang panjang sehingga ruang atau wilayah yang dikaji biasanya lebih terbatas agar proses dan perubahan dapat dipahami dengan jelas.",
+                "key_jawaban": "- Fokus utama terdapat pada perjalanan dalam waktu.\n- Rentang waktu relatif panjang.\n- Ruang/wilayah kajian lebih terbatas.\n- Tujuannya agar proses atau perubahan dapat dipahami."
+            },
+            {
+                "soal": "Perhatikan contoh berikut: Sebuah sekolah didirikan pada tahun 2000. Pada tahun 2010 jumlah siswanya bertambah, pada tahun 2020 fasilitas sekolah berkembang, dan pada tahun 2026 sekolah menggunakan berbagai media pembelajaran digital. Apakah contoh tersebut menunjukkan cara berpikir diakronik? Jelaskan alasannya!",
+                "jawaban_ekspektasi": "Ya. Contoh tersebut menggunakan cara berpikir diakronik karena melihat perkembangan sekolah dari tahun 2000 hingga 2026 dalam rentang waktu tertentu dan menunjukkan perubahan yang terjadi dari masa ke masa.",
+                "key_jawaban": "- Menjawab ya/diakronik.\n- Terdapat rentang waktu 2000–2026.\n- Melihat perjalanan sekolah dari masa ke masa.\n- Menunjukkan perkembangan/perubahan."
+            },
+            {
+                "soal": "Perhatikan dua pembahasan berikut: A. Perkembangan sebuah sekolah sejak didirikan tahun 2000 hingga tahun 2026. B. Keadaan fasilitas, guru, dan siswa di sekolah tersebut pada tahun 2026. Manakah yang lebih menunjukkan cara berpikir diakronik? Jelaskan alasannya!",
+                "jawaban_ekspektasi": "Pembahasan A lebih menunjukkan cara berpikir diakronik karena mempelajari perkembangan sekolah dalam rentang waktu dari tahun 2000 hingga 2026. Pembahasan tersebut berfokus pada proses dan perubahan dari masa ke masa.",
+                "key_jawaban": "- Memilih A.\n- Mencakup rentang waktu 2000–2026.\n- Melihat proses/perjalanan dari masa ke masa.\n- Menunjukkan perkembangan atau perubahan."
+            },
+            {
+                "soal": "Mengapa proses dan perubahan dari masa ke masa menjadi bagian penting dalam cara berpikir diakronik?",
+                "jawaban_ekspektasi": "Proses dan perubahan penting karena cara berpikir diakronik tidak hanya melihat satu keadaan pada satu waktu, tetapi mengikuti perjalanan peristiwa dalam rentang waktu sehingga perkembangan dan perubahan yang terjadi dapat dipahami.",
+                "key_jawaban": "- Diakronik melihat perjalanan peristiwa.\n- Tidak hanya melihat satu keadaan pada satu waktu.\n- Memperhatikan rentang waktu.\n- Membantu memahami perkembangan/perubahan."
+            },
+            {
+                "soal": "Seseorang hanya menuliskan tahun 2000, 2010, 2020, dan 2026 tanpa menjelaskan apa yang berkembang atau berubah. Apakah penjelasan tersebut sudah cukup untuk menunjukkan cara berpikir diakronik? Jelaskan!",
+                "jawaban_ekspektasi": "Belum cukup. Tahun-tahun tersebut menunjukkan urutan atau rentang waktu, tetapi cara berpikir diakronik juga perlu memperhatikan proses dan dinamika yang terjadi, seperti perkembangan atau perubahan dari satu masa ke masa berikutnya.",
+                "key_jawaban": "- Menjawab belum/tidak cukup.\n- Tahun hanya menunjukkan urutan/rentang waktu.\n- Diakronik perlu melihat proses dan dinamika.\n- Perlu menjelaskan perkembangan atau perubahan."
+            },
+            {
+                "soal": "Mengapa peristiwa yang dipelajari secara diakronik dapat disajikan secara kronologis?",
+                "jawaban_ekspektasi": "Peristiwa diakronik dapat disajikan secara kronologis karena perjalanan peristiwa berlangsung dalam rentang waktu. Penyajian dari waktu paling awal menuju waktu berikutnya membantu melihat proses, perkembangan, dan perubahan secara lebih jelas.",
+                "key_jawaban": "- Diakronik berkaitan dengan rentang waktu.\n- Kronologis berarti penyajian berdasarkan urutan waktu.\n- Urutan waktu membantu memahami proses.\n- Membantu melihat perkembangan/perubahan."
+            },
+            {
+                "soal": "Perhatikan contoh berikut: “Perubahan Sosial dalam Masyarakat Agraris Madura 1850–1940.” Jelaskan dua ciri cara berpikir diakronik yang tampak pada contoh tersebut!",
+                "jawaban_ekspektasi": "Contoh tersebut menunjukkan cara berpikir diakronik karena memiliki rentang waktu yang panjang, yaitu 1850–1940, dan ruang kajiannya dibatasi pada wilayah Madura. Kajian tersebut juga mengarah pada perubahan masyarakat dalam rentang waktu tersebut.",
+                "key_jawaban": "- Rentang waktu 1850–1940.\n- Rentang waktunya panjang/memanjang dalam waktu.\n- Ruang kajian terbatas pada Madura.\n- Membahas perubahan masyarakat."
+            },
+            {
+                "soal": "Dalam cara berpikir diakronik, kita dapat melihat perkembangan, perubahan, kesinambungan, dan pengulangan. Jelaskan secara singkat maksud dari keempat hal tersebut!",
+                "jawaban_ekspektasi": "Perkembangan berarti suatu keadaan mengalami kemajuan atau perkembangan dari masa ke masa. Perubahan berarti terdapat keadaan yang berbeda dibandingkan sebelumnya. Kesinambungan berarti ada unsur yang tetap berlanjut dari masa sebelumnya. Pengulangan berarti terdapat keadaan atau pola yang kembali terjadi pada masa yang berbeda.",
+                "key_jawaban": "- Perkembangan → proses berkembang dari masa ke masa.\n- Perubahan → muncul keadaan yang berbeda dari sebelumnya.\n- Kesinambungan → sesuatu tetap berlanjut.\n- Pengulangan → keadaan/pola serupa terjadi kembali."
+            }
+        ]
+    },
+    {
+        "urutan": 6,
+        "soal": [
+            {
+                "soal": "Apa yang dimaksud dengan kronologi dalam sejarah?",
+                "jawaban_ekspektasi": "Kronologi adalah penyusunan atau pengaturan berbagai kejadian berdasarkan urutan waktu terjadinya, dari waktu yang lebih awal menuju waktu yang lebih akhir.",
+                "key_jawaban": "- Penyusunan/pengaturan kejadian.\n- Berdasarkan urutan waktu.\n- Dari waktu paling awal menuju waktu berikutnya/terakhir."
+            },
+            {
+                "soal": "Apa yang dimaksud dengan penyajian kronologis?",
+                "jawaban_ekspektasi": "Penyajian kronologis adalah penyampaian kejadian atau peristiwa sesuai dengan urutan waktunya.",
+                "key_jawaban": "- Berkaitan dengan penyajian peristiwa.\n- Disusun sesuai urutan waktu."
+            },
+            {
+                "soal": "Apa arti kata chronos yang berkaitan dengan istilah kronologi?",
+                "jawaban_ekspektasi": "Kata chronos berarti waktu.",
+                "key_jawaban": "- Chronos.\n- Berarti waktu."
+            },
+            {
+                "soal": "Dalam penyusunan kronologi, peristiwa diurutkan mulai dari waktu yang bagaimana?",
+                "jawaban_ekspektasi": "Peristiwa disusun mulai dari waktu yang paling awal menuju waktu yang paling akhir.",
+                "key_jawaban": "- Dimulai dari waktu paling awal.\n- Dilanjutkan menuju waktu paling akhir."
+            },
+            {
+                "soal": "Sebutkan empat langkah sederhana untuk menyusun peristiwa secara kronologis!",
+                "jawaban_ekspektasi": "Langkahnya adalah menentukan kejadian yang akan disusun, mencatat waktu setiap kejadian, mengurutkannya dari yang paling awal ke paling akhir, lalu memeriksa kembali urutan tersebut.",
+                "key_jawaban": "- Menentukan kejadian.\n- Mencatat tanggal/tahun atau waktunya.\n- Mengurutkan dari awal ke akhir.\n- Memeriksa kembali urutan."
+            },
+            {
+                "soal": "Jelaskan dengan bahasamu sendiri apa yang dimaksud dengan kronologi dan apa kegunaannya dalam mempelajari sejarah!",
+                "jawaban_ekspektasi": "Kronologi adalah penyusunan berbagai kejadian berdasarkan urutan waktunya. Kronologi membantu kita mengetahui kejadian mana yang berlangsung lebih dahulu dan mana yang berlangsung sesudahnya sehingga rangkaian suatu peristiwa lebih mudah dipahami.",
+                "key_jawaban": "- Penyusunan berdasarkan waktu.\n- Menentukan kejadian lebih awal.\n- Menentukan kejadian berikutnya.\n- Membantu memahami rangkaian peristiwa."
+            },
+            {
+                "soal": "Jelaskan perbedaan antara kronologi dan kronologis!",
+                "jawaban_ekspektasi": "Kronologi merupakan urutan atau pengaturan berbagai kejadian berdasarkan waktu, sedangkan kronologis menunjukkan cara penyajian suatu peristiwa yang mengikuti urutan waktu tersebut.",
+                "key_jawaban": "- Kronologi → urutan/pengaturan kejadian.\n- Kronologi berdasarkan waktu.\n- Kronologis → cara penyajian.\n- Penyajian mengikuti urutan waktu."
+            },
+            {
+                "soal": "Perhatikan kejadian berikut: Tahun 2022 sekolah membangun laboratorium komputer. Tahun 2005 sekolah didirikan. Tahun 2015 jumlah ruang kelas bertambah. Tahun 2026 sekolah menggunakan media pembelajaran berbasis web. Susunlah kejadian tersebut secara kronologis!",
+                "jawaban_ekspektasi": "Urutan yang benar adalah: Tahun 2005 sekolah didirikan. Tahun 2015 jumlah ruang kelas bertambah. Tahun 2022 sekolah membangun laboratorium komputer. Tahun 2026 sekolah menggunakan media pembelajaran berbasis web.",
+                "key_jawaban": "- 2005 berada pertama.\n- 2015 berada kedua.\n- 2022 berada ketiga.\n- 2026 berada terakhir."
+            },
+            {
+                "soal": "Perhatikan tiga kejadian berikut: 1 Juli 1953: Bank Indonesia mulai menjalankan tugasnya berdasarkan undang-undang. Desember 1949: Belanda mengakui kedaulatan Indonesia dalam bentuk Republik Indonesia Serikat. 17 Agustus 1950: Indonesia kembali menjadi Negara Kesatuan Republik Indonesia. Susunlah ketiga kejadian tersebut secara kronologis!",
+                "jawaban_ekspektasi": "Urutannya adalah: Desember 1949: pengakuan kedaulatan dan terbentuknya RIS. 17 Agustus 1950: Indonesia kembali menjadi NKRI. 1 Juli 1953: Bank Indonesia mulai menjalankan tugas berdasarkan undang-undang.",
+                "key_jawaban": "- Desember 1949 sebagai kejadian pertama.\n- 17 Agustus 1950 sebagai kejadian kedua.\n- 1 Juli 1953 sebagai kejadian ketiga."
+            },
+            {
+                "soal": "Mengapa suatu peristiwa sejarah perlu disusun berdasarkan urutan waktu yang benar?",
+                "jawaban_ekspektasi": "Urutan waktu yang benar membantu kita memahami kejadian mana yang berlangsung terlebih dahulu dan kejadian mana yang terjadi kemudian. Dengan demikian, rangkaian peristiwa dapat dipahami dengan lebih jelas dan tidak tertukar.",
+                "key_jawaban": "- Mengetahui kejadian yang lebih dahulu.\n- Mengetahui kejadian berikutnya.\n- Memahami rangkaian peristiwa.\n- Menghindari kekeliruan urutan."
+            },
+            {
+                "soal": "Apa yang dapat terjadi jika suatu peristiwa sejarah diceritakan tidak sesuai dengan urutan waktunya? Jelaskan!",
+                "jawaban_ekspektasi": "Jika tidak disusun sesuai urutan waktu, rangkaian peristiwa dapat menjadi membingungkan. Kita dapat keliru menentukan kejadian yang terjadi lebih dahulu dan sesudahnya sehingga hubungan antar kejadian lebih sulit dipahami.",
+                "key_jawaban": "- Rangkaian peristiwa menjadi membingungkan.\n- Sulit menentukan kejadian awal dan berikutnya.\n- Urutan kejadian dapat tertukar.\n- Hubungan antar kejadian menjadi lebih sulit dipahami."
+            },
+            {
+                "soal": "Jelaskan hubungan antara kronologi dan cara berpikir diakronik!",
+                "jawaban_ekspektasi": "Cara berpikir diakronik digunakan untuk memahami proses dan dinamika suatu peristiwa dalam rentang waktu. Kronologi membantu menyusun kejadian-kejadian di dalam proses tersebut berdasarkan urutan waktunya sehingga perjalanan peristiwa lebih mudah dipahami.",
+                "key_jawaban": "- Diakronik melihat proses/dinamika.\n- Diakronik berlangsung dalam rentang waktu.\n- Kronologi menyusun kejadian berdasarkan waktu.\n- Kronologi membantu memahami perjalanan peristiwa diakronik."
+            },
+            {
+                "soal": "Mengapa kronologi tidak sama dengan cara berpikir diakronik? Jelaskan!",
+                "jawaban_ekspektasi": "Kronologi berfungsi mengatur atau menyusun kejadian berdasarkan urutan waktu, sedangkan cara berpikir diakronik digunakan untuk memahami proses dan dinamika suatu peristiwa dari masa ke masa. Kronologi dapat membantu penyajian diakronik, tetapi keduanya memiliki fungsi yang berbeda.",
+                "key_jawaban": "- Kronologi → mengatur urutan waktu.\n- Diakronik → memahami proses/dinamika.\n- Diakronik melihat perjalanan dari masa ke masa.\n- Kronologi membantu diakronik tetapi bukan konsep yang sama.\n- Ini penting supaya pemahaman dari Modul 5 tetap konsisten."
+            },
+            {
+                "soal": "Perhatikan dua penyajian berikut: A. 2000 sekolah didirikan → 2010 jumlah siswa bertambah → 2020 fasilitas berkembang. B. 2020 fasilitas berkembang → 2000 sekolah didirikan → 2010 jumlah siswa bertambah. Manakah yang disajikan secara kronologis? Jelaskan alasannya!",
+                "jawaban_ekspektasi": "Penyajian A bersifat kronologis karena kejadian disusun berdasarkan urutan waktu dari tahun paling awal, yaitu 2000, kemudian 2010, dan terakhir 2020.",
+                "key_jawaban": "- Memilih A.\n- Dimulai dari 2000.\n- Dilanjutkan 2010.\n- Berakhir pada 2020/urut dari awal ke akhir."
+            },
+            {
+                "soal": "Seorang siswa ingin menceritakan perkembangan sekolahnya dari awal berdiri hingga sekarang. Mengapa ia sebaiknya menyusun kejadian-kejadian tersebut secara kronologis?",
+                "jawaban_ekspektasi": "Penyusunan kronologis membantu siswa menempatkan setiap kejadian berdasarkan waktunya sehingga perjalanan sekolah dari awal berdiri sampai sekarang dapat dipahami secara teratur dan tidak tertukar.",
+                "key_jawaban": "- Kejadian disusun berdasarkan waktu.\n- Dimulai dari kejadian lebih awal.\n- Menunjukkan perjalanan menuju masa berikutnya.\n- Membuat rangkaian perkembangan lebih mudah dipahami."
+            }
+        ]
+    },
+    {
+        "urutan": 7,
+        "soal": [
+            {
+                "soal": "Apa yang dimaksud dengan cara berpikir sinkronik dalam sejarah?",
+                "jawaban_ekspektasi": "Cara berpikir sinkronik adalah cara memahami suatu peristiwa atau keadaan pada waktu yang relatif terbatas dengan memperhatikan berbagai aspek dan hubungan antarfaktor yang terjadi pada masa tersebut.",
+                "key_jawaban": "- Memahami peristiwa/keadaan.\n- Waktu relatif terbatas.\n- Memperhatikan berbagai aspek/kondisi.\n- Memperhatikan hubungan antarfaktor."
+            },
+            {
+                "soal": "Sebutkan empat ciri cara berpikir sinkronik yang telah kamu pelajari!",
+                "jawaban_ekspektasi": "Ciri cara berpikir sinkronik adalah waktu kajian relatif terbatas, ruang kajian dapat lebih luas, memperhatikan berbagai aspek atau kondisi, serta memperhatikan hubungan antarfaktor dalam suatu keadaan.",
+                "key_jawaban": "- Waktu relatif terbatas.\n- Ruang kajian lebih luas.\n- Memperhatikan berbagai aspek/kondisi.\n- Memperhatikan hubungan antarfaktor."
+            },
+            {
+                "soal": "Sebutkan empat aspek yang dapat diperhatikan ketika menggunakan cara berpikir sinkronik!",
+                "jawaban_ekspektasi": "Aspek yang dapat diperhatikan antara lain politik, sosial, ekonomi, dan budaya.",
+                "key_jawaban": "- Politik.\n- Sosial.\n- Ekonomi.\n- Budaya."
+            },
+            {
+                "soal": "Bagaimana karakter waktu dalam cara berpikir sinkronik?",
+                "jawaban_ekspektasi": "Cara berpikir sinkronik mempelajari suatu keadaan dalam waktu yang relatif terbatas.",
+                "key_jawaban": "- Waktu relatif terbatas.\n- Berfokus pada keadaan pada suatu masa/periode tertentu."
+            },
+            {
+                "soal": "Jelaskan dengan bahasamu sendiri bagaimana suatu peristiwa dapat dipahami menggunakan cara berpikir sinkronik!",
+                "jawaban_ekspektasi": "Suatu peristiwa dipahami secara sinkronik dengan memusatkan perhatian pada keadaan dalam waktu yang relatif terbatas, kemudian melihat berbagai aspek seperti politik, sosial, ekonomi, atau budaya serta hubungan di antara aspek-aspek tersebut.",
+                "key_jawaban": "- Berfokus pada suatu keadaan/periode.\n- Waktu relatif terbatas.\n- Memperhatikan berbagai aspek/kondisi.\n- Memperhatikan hubungan antaraspek."
+            },
+            {
+                "soal": "Apa yang dimaksud dengan pernyataan bahwa cara berpikir sinkronik memiliki waktu yang relatif terbatas?",
+                "jawaban_ekspektasi": "Artinya, kajian sinkronik berfokus pada suatu waktu atau periode tertentu dan tidak mengikuti perjalanan suatu peristiwa dalam rentang waktu yang panjang. Pada waktu tersebut, keadaan dipahami secara lebih mendalam melalui berbagai aspek.",
+                "key_jawaban": "- Berfokus pada waktu/periode tertentu.\n- Tidak mengikuti rentang waktu panjang.\n- Memahami keadaan pada masa tersebut.\n- Memperhatikan berbagai aspek."
+            },
+            {
+                "soal": "Mengapa cara berpikir sinkronik memperhatikan berbagai aspek seperti politik, sosial, ekonomi, dan budaya?",
+                "jawaban_ekspektasi": "Berbagai aspek tersebut diperhatikan agar keadaan pada suatu masa dapat dipahami secara lebih lengkap. Kondisi politik, sosial, ekonomi, dan budaya dapat saling berkaitan dalam membentuk situasi masyarakat pada masa tersebut.",
+                "key_jawaban": "- Berbagai aspek membantu memahami keadaan.\n- Memberikan gambaran yang lebih lengkap.\n- Aspek-aspek dapat saling berkaitan.\n- Membantu memahami konteks masyarakat pada suatu masa."
+            },
+            {
+                "soal": "Perhatikan contoh berikut: Seorang siswa mempelajari keadaan Indonesia pada tahun 1945 dengan memperhatikan kondisi politik, sosial, ekonomi, dan kehidupan masyarakat pada saat itu. Apakah contoh tersebut menunjukkan cara berpikir sinkronik? Jelaskan alasannya!",
+                "jawaban_ekspektasi": "Ya. Contoh tersebut menunjukkan cara berpikir sinkronik karena berfokus pada keadaan Indonesia dalam waktu yang relatif terbatas, yaitu tahun 1945, serta memperhatikan berbagai aspek seperti politik, sosial, dan ekonomi.",
+                "key_jawaban": "- Menjawab ya/sinkronik.\n- Berfokus pada tahun 1945.\n- Waktunya relatif terbatas.\n- Memperhatikan berbagai aspek/kondisi."
+            },
+            {
+                "soal": "Perhatikan dua pembahasan berikut: A. Perkembangan kehidupan masyarakat Indonesia dari tahun 1945 hingga 2025. B. Kondisi politik, sosial, ekonomi, dan budaya masyarakat Indonesia pada tahun 1945. Manakah yang lebih menunjukkan cara berpikir sinkronik? Jelaskan alasannya!",
+                "jawaban_ekspektasi": "Pembahasan B lebih menunjukkan cara berpikir sinkronik karena berfokus pada keadaan dalam waktu yang relatif terbatas, yaitu tahun 1945, dan memperhatikan berbagai aspek kehidupan pada masa tersebut.",
+                "key_jawaban": "- Memilih B.\n- Berfokus pada satu waktu/periode terbatas.\n- Membahas berbagai aspek.\n- Bertujuan memahami keadaan/konteks pada masa tersebut."
+            },
+            {
+                "soal": "Mengapa ruang kajian dalam cara berpikir sinkronik dapat lebih luas dibandingkan rentang waktunya?",
+                "jawaban_ekspektasi": "Karena sinkronik berfokus pada keadaan dalam waktu yang relatif terbatas, kajiannya dapat mencakup berbagai kondisi, wilayah, kelompok, atau aspek kehidupan pada masa tersebut agar situasinya dapat dipahami dengan lebih lengkap.",
+                "key_jawaban": "- Waktu kajian relatif terbatas.\n- Ruang/cakupan dapat lebih luas.\n- Dapat mencakup berbagai kondisi/wilayah/aspek.\n- Bertujuan memahami situasi pada masa tersebut."
+            },
+            {
+                "soal": "Mengapa dalam cara berpikir sinkronik berbagai aspek tidak cukup hanya disebutkan satu per satu?",
+                "jawaban_ekspektasi": "Karena cara berpikir sinkronik juga memperhatikan hubungan antara berbagai faktor. Kondisi politik, sosial, ekonomi, atau budaya dapat saling memengaruhi sehingga hubungan tersebut membantu menjelaskan keadaan masyarakat secara lebih utuh.",
+                "key_jawaban": "- Tidak hanya menyebutkan aspek.\n- Perlu melihat hubungan antarfaktor.\n- Faktor-faktor dapat saling memengaruhi/berkaitan.\n- Hubungan tersebut membantu memahami keadaan secara lebih utuh."
+            },
+            {
+                "soal": "Pada suatu masa, kondisi ekonomi masyarakat sedang sulit sehingga memengaruhi kehidupan sosial masyarakat. Jelaskan bagaimana contoh tersebut sesuai dengan cara berpikir sinkronik!",
+                "jawaban_ekspektasi": "Contoh tersebut sesuai dengan cara berpikir sinkronik karena menunjukkan hubungan antara dua aspek dalam suatu keadaan, yaitu kondisi ekonomi dan kehidupan sosial. Hubungan tersebut membantu menjelaskan situasi masyarakat pada masa yang sedang dikaji.",
+                "key_jawaban": "- Terdapat aspek ekonomi.\n- Terdapat aspek sosial.\n- Kedua aspek saling berkaitan.\n- Hubungan keduanya membantu memahami keadaan suatu masa."
+            },
+            {
+                "soal": "Perhatikan pembahasan berikut: “Kondisi masyarakat sebuah kota pada tahun 2025 ditinjau dari pekerjaan penduduk, pendidikan, kondisi ekonomi, dan kehidupan sosial.” Jelaskan dua ciri sinkronik yang tampak pada contoh tersebut!",
+                "jawaban_ekspektasi": "Contoh tersebut menunjukkan cara berpikir sinkronik karena kajiannya berfokus pada waktu yang relatif terbatas, yaitu tahun 2025, dan membahas berbagai aspek kehidupan masyarakat seperti pekerjaan, pendidikan, ekonomi, dan sosial.",
+                "key_jawaban": "- Waktu dibatasi pada tahun 2025.\n- Waktu kajian relatif terbatas.\n- Membahas berbagai aspek/kondisi.\n- Bertujuan memahami keadaan masyarakat pada masa tersebut."
+            },
+            {
+                "soal": "Apa manfaat menggunakan cara berpikir sinkronik ketika mempelajari keadaan masyarakat pada suatu masa?",
+                "jawaban_ekspektasi": "Cara berpikir sinkronik membantu memahami keadaan masyarakat secara lebih lengkap pada suatu masa dengan melihat berbagai kondisi serta hubungan antara faktor politik, sosial, ekonomi, budaya, atau faktor lain yang berkaitan.",
+                "key_jawaban": "- Membantu memahami keadaan pada suatu masa.\n- Memperhatikan berbagai kondisi/aspek.\n- Memperhatikan hubungan antarfaktor.\n- Memberikan pemahaman konteks yang lebih lengkap."
+            }
+        ]
+    },
+    {
+        "urutan": 8,
+        "soal": [
+            {
+                "soal": "Sebutkan fokus utama cara berpikir diakronik dan cara berpikir sinkronik!",
+                "jawaban_ekspektasi": "Cara berpikir diakronik berfokus pada proses dan dinamika suatu peristiwa dari masa ke masa, sedangkan cara berpikir sinkronik berfokus pada keadaan atau konteks suatu masa melalui berbagai aspek dan hubungan antarfaktor.",
+                "key_jawaban": "- Diakronik → proses/dinamika.\n- Diakronik → dari masa ke masa.\n- Sinkronik → keadaan/konteks suatu masa.\n- Sinkronik → berbagai aspek/hubungan antarfaktor."
+            },
+            {
+                "soal": "Bagaimana perbedaan penggunaan waktu dalam cara berpikir diakronik dan sinkronik?",
+                "jawaban_ekspektasi": "Diakronik memiliki rentang waktu yang lebih panjang atau memanjang dalam waktu, sedangkan sinkronik menggunakan waktu yang relatif lebih terbatas.",
+                "key_jawaban": "- Diakronik → waktu memanjang/lebih panjang.\n- Sinkronik → waktu relatif terbatas."
+            },
+            {
+                "soal": "Bagaimana perbedaan ruang kajian dalam cara berpikir diakronik dan sinkronik?",
+                "jawaban_ekspektasi": "Cara berpikir diakronik memiliki ruang kajian yang lebih terbatas, sedangkan cara berpikir sinkronik dapat memiliki cakupan ruang yang lebih luas.",
+                "key_jawaban": "- Diakronik → ruang lebih terbatas.\n- Sinkronik → ruang/cakupan lebih luas."
+            },
+            {
+                "soal": "Sebutkan tiga kata kunci yang menunjukkan cara berpikir diakronik!",
+                "jawaban_ekspektasi": "Kata kunci diakronik antara lain rentang waktu, proses dan dinamika, serta perkembangan atau perubahan.",
+                "key_jawaban": "- Rentang waktu.\n- Proses/dinamika.\n- Perkembangan/perubahan."
+            },
+            {
+                "soal": "Sebutkan empat kata kunci yang menunjukkan cara berpikir sinkronik!",
+                "jawaban_ekspektasi": "Kata kunci sinkronik adalah waktu relatif terbatas, berbagai aspek atau kondisi, hubungan antarfaktor, dan konteks suatu masa.",
+                "key_jawaban": "- Waktu relatif terbatas.\n- Berbagai aspek/kondisi.\n- Hubungan antarfaktor.\n- Konteks suatu masa."
+            },
+            {
+                "soal": "Jelaskan dengan bahasamu sendiri perbedaan utama antara cara berpikir diakronik dan cara berpikir sinkronik!",
+                "jawaban_ekspektasi": "Diakronik memahami suatu peristiwa dengan melihat proses dan perkembangannya dari masa ke masa dalam rentang waktu tertentu. Sinkronik memahami keadaan pada waktu yang relatif terbatas dengan memperhatikan berbagai aspek dan hubungan antarfaktor pada masa tersebut.",
+                "key_jawaban": "- Diakronik melihat proses/perkembangan.\n- Diakronik berlangsung dari masa ke masa.\n- Sinkronik berfokus pada waktu relatif terbatas.\n- Sinkronik memperhatikan berbagai aspek dan hubungan antarfaktor."
+            },
+            {
+                "soal": "Jelaskan perbedaan diakronik dan sinkronik berdasarkan waktu dan ruang kajiannya!",
+                "jawaban_ekspektasi": "Diakronik cenderung memanjang dalam waktu tetapi memiliki ruang kajian yang lebih terbatas. Sinkronik menggunakan waktu yang relatif terbatas tetapi ruang atau cakupan kajiannya dapat lebih luas.",
+                "key_jawaban": "- Diakronik → waktu memanjang.\n- Diakronik → ruang lebih terbatas.\n- Sinkronik → waktu relatif terbatas.\n- Sinkronik → ruang/cakupan dapat lebih luas."
+            },
+            {
+                "soal": "Perhatikan contoh berikut: “Perkembangan sebuah sekolah sejak berdiri tahun 2000, penambahan ruang kelas tahun 2010, pembangunan laboratorium tahun 2020, hingga penggunaan media digital tahun 2026.” Apakah pembahasan tersebut termasuk diakronik atau sinkronik? Jelaskan!",
+                "jawaban_ekspektasi": "Pembahasan tersebut termasuk diakronik karena mengikuti perkembangan sekolah dalam rentang waktu dari tahun 2000 hingga 2026 serta memperhatikan proses dan perubahan yang terjadi dari masa ke masa.",
+                "key_jawaban": "- Menentukan diakronik.\n- Terdapat rentang waktu 2000–2026.\n- Mengikuti perjalanan dari masa ke masa.\n- Menunjukkan perkembangan/perubahan."
+            },
+            {
+                "soal": "Perhatikan contoh berikut: “Keadaan Indonesia pada tahun 1945 ditinjau dari kondisi politik, sosial, ekonomi, dan budaya masyarakat.” Apakah pembahasan tersebut termasuk diakronik atau sinkronik? Jelaskan!",
+                "jawaban_ekspektasi": "Pembahasan tersebut termasuk sinkronik karena berfokus pada keadaan Indonesia dalam waktu yang relatif terbatas, yaitu tahun 1945, dan memperhatikan berbagai aspek kehidupan masyarakat pada masa tersebut.",
+                "key_jawaban": "- Menentukan sinkronik.\n- Berfokus pada tahun 1945.\n- Waktu relatif terbatas.\n- Memperhatikan berbagai aspek/kondisi."
+            },
+            {
+                "soal": "Perhatikan dua pembahasan berikut: A. Perkembangan ekonomi Indonesia dari tahun 2000 sampai 2025. B. Kondisi ekonomi, sosial, dan kehidupan masyarakat Indonesia pada tahun 2025. Tentukan mana yang lebih menunjukkan diakronik dan mana yang menunjukkan sinkronik, lalu jelaskan alasannya!",
+                "jawaban_ekspektasi": "A termasuk diakronik karena mempelajari perkembangan ekonomi dalam rentang waktu 2000–2025. B termasuk sinkronik karena berfokus pada keadaan tahun 2025 dan membahas beberapa aspek yang berkaitan pada masa tersebut.",
+                "key_jawaban": "- A → diakronik.\n- A → melihat perkembangan dalam rentang waktu.\n- B → sinkronik.\n- B → waktu terbatas dan membahas berbagai aspek."
+            },
+            {
+                "soal": "Apakah sebuah pembahasan yang mencantumkan tahun secara otomatis dapat disebut diakronik? Jelaskan!",
+                "jawaban_ekspektasi": "Tidak. Adanya tahun saja tidak otomatis membuat suatu pembahasan menjadi diakronik. Penentu utamanya adalah fokus kajian. Jika pembahasan melihat proses dan perkembangan dari masa ke masa, maka bersifat diakronik. Jika berfokus pada keadaan dalam waktu terbatas melalui berbagai aspek, maka bersifat sinkronik.",
+                "key_jawaban": "- Menjawab tidak.\n- Tahun bukan satu-satunya penentu.\n- Diakronik ditentukan oleh fokus pada proses/perkembangan.\n- Sinkronik ditentukan oleh fokus pada keadaan/aspek pada waktu terbatas."
+            },
+            {
+                "soal": "Apakah objek yang sama dapat dipelajari menggunakan cara berpikir diakronik maupun sinkronik? Jelaskan menggunakan contoh sebuah sekolah!",
+                "jawaban_ekspektasi": "Ya. Sebuah sekolah dapat dipelajari secara diakronik jika fokusnya pada perkembangan sekolah dari tahun ke tahun. Sekolah yang sama dapat dipelajari secara sinkronik jika fokusnya pada keadaan sekolah pada satu masa tertentu, misalnya kondisi siswa, guru, fasilitas, dan kegiatan pembelajaran pada tahun 2026.",
+                "key_jawaban": "- Menjawab ya.\n- Diakronik → perkembangan sekolah dari masa ke masa.\n- Sinkronik → keadaan sekolah pada satu waktu.\n- Sinkronik memperhatikan beberapa aspek/kondisi."
+            },
+            {
+                "soal": "Perhatikan dua pertanyaan berikut: A. “Bagaimana perkembangan penggunaan teknologi di sekolah dari tahun 2005 sampai 2025?” B. “Bagaimana kondisi penggunaan teknologi, kemampuan siswa, dan fasilitas sekolah pada tahun 2025?” Tentukan cara berpikir yang digunakan pada masing-masing pertanyaan dan jelaskan!",
+                "jawaban_ekspektasi": "Pertanyaan A menggunakan cara berpikir diakronik karena melihat perkembangan teknologi dalam rentang waktu 2005–2025. Pertanyaan B menggunakan cara berpikir sinkronik karena berfokus pada keadaan tahun 2025 dengan memperhatikan beberapa aspek yang berkaitan.",
+                "key_jawaban": "- A → diakronik.\n- A → perkembangan dalam rentang waktu.\n- B → sinkronik.\n- B → waktu terbatas dan berbagai aspek."
+            },
+            {
+                "soal": "Apa perbedaan pemahaman yang diperoleh ketika suatu peristiwa dipelajari secara diakronik dan secara sinkronik?",
+                "jawaban_ekspektasi": "Pendekatan diakronik membantu memahami bagaimana suatu peristiwa berkembang dan berubah dari masa ke masa. Pendekatan sinkronik membantu memahami keadaan atau konteks suatu masa melalui berbagai aspek dan hubungan antarfaktor.",
+                "key_jawaban": "- Diakronik membantu melihat proses.\n- Diakronik membantu melihat perkembangan/perubahan.\n- Sinkronik membantu memahami keadaan/konteks.\n- Sinkronik memperhatikan aspek dan hubungan antarfaktor."
+            },
+            {
+                "soal": "Seorang siswa mengatakan: “Semua pembahasan yang hanya mencantumkan satu tahun pasti sinkronik, sedangkan semua pembahasan yang mencantumkan beberapa tahun pasti diakronik.” Apakah pernyataan tersebut tepat? Jelaskan!",
+                "jawaban_ekspektasi": "Pernyataan tersebut tidak sepenuhnya tepat. Jumlah tahun yang dicantumkan bukan satu-satunya penentu. Yang lebih penting adalah fokus kajiannya. Diakronik menekankan proses dan dinamika dari masa ke masa, sedangkan sinkronik menekankan keadaan pada waktu relatif terbatas melalui berbagai aspek dan hubungan antarfaktor.",
+                "key_jawaban": "- Menyatakan bahwa pernyataan tersebut tidak tepat/tidak sepenuhnya tepat.\n- Jumlah tahun bukan penentu utama.\n- Diakronik → proses/dinamika dari masa ke masa.\n- Sinkronik → keadaan, berbagai aspek, dan hubungan antarfaktor pada waktu terbatas"
+            }
+        ]
+    }
+]
