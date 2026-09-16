@@ -1,6 +1,5 @@
 import { Head } from '@inertiajs/react';
 import { Card, CardContent } from '@/components/ui/card';
-import AppLayout from '@/layouts/app-layout';
 import siswa from '@/routes/siswa';
 
 type ReviewItem = {
@@ -23,15 +22,7 @@ export default function SiswaRiwayatShow({
     review: ReviewItem[];
 }) {
     return (
-        <AppLayout
-            breadcrumbs={[
-                { title: 'Riwayat', href: siswa.riwayat.index() },
-                {
-                    title: modul.nama_modul,
-                    href: siswa.riwayat.show(modul.id),
-                },
-            ]}
-        >
+        <>
             <Head title={`Riwayat - ${modul.nama_modul}`} />
             <div className="flex flex-1 flex-col gap-4 p-4">
                 <h1 className="text-xl font-semibold">
@@ -61,6 +52,16 @@ export default function SiswaRiwayatShow({
                     ))}
                 </div>
             </div>
-        </AppLayout>
+        </>
     );
 }
+
+SiswaRiwayatShow.layout = (page: { modul: Modul }) => ({
+    breadcrumbs: [
+        { title: 'Riwayat', href: siswa.riwayat.index() },
+        {
+            title: page.modul.nama_modul,
+            href: siswa.riwayat.show(page.modul.id),
+        },
+    ],
+});

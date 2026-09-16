@@ -1,7 +1,6 @@
 import { Head, Link } from '@inertiajs/react';
 import { BookText } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import AppLayout from '@/layouts/app-layout';
 import guru from '@/routes/guru';
 
 type Modul = {
@@ -13,9 +12,7 @@ type Modul = {
 
 export default function GuruModulIndex({ modul }: { modul: Modul[] }) {
     return (
-        <AppLayout
-            breadcrumbs={[{ title: 'Kelola Kuis', href: guru.modul.index() }]}
-        >
+        <>
             <Head title="Kelola Kuis" />
             <div className="flex flex-1 flex-col gap-4 p-4">
                 <div>
@@ -45,6 +42,10 @@ export default function GuruModulIndex({ modul }: { modul: Modul[] }) {
                     ))}
                 </div>
             </div>
-        </AppLayout>
+        </>
     );
 }
+
+GuruModulIndex.layout = {
+    breadcrumbs: [{ title: 'Kelola Kuis', href: guru.modul.index() }],
+};

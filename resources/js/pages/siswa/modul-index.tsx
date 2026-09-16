@@ -2,7 +2,6 @@ import { Head, Link } from '@inertiajs/react';
 import { BookOpenCheck, CircleDashed } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import AppLayout from '@/layouts/app-layout';
 import siswa from '@/routes/siswa';
 
 type Modul = {
@@ -14,9 +13,7 @@ type Modul = {
 
 export default function SiswaModulIndex({ modul }: { modul: Modul[] }) {
     return (
-        <AppLayout
-            breadcrumbs={[{ title: 'Modul', href: siswa.modul.index() }]}
-        >
+        <>
             <Head title="Modul" />
             <div className="flex flex-1 flex-col gap-4 p-4">
                 <div>
@@ -58,6 +55,10 @@ export default function SiswaModulIndex({ modul }: { modul: Modul[] }) {
                     ))}
                 </div>
             </div>
-        </AppLayout>
+        </>
     );
 }
+
+SiswaModulIndex.layout = {
+    breadcrumbs: [{ title: 'Modul', href: siswa.modul.index() }],
+};

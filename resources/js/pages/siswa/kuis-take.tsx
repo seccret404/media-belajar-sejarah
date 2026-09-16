@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
-import AppLayout from '@/layouts/app-layout';
 import siswa from '@/routes/siswa';
 
 type Soal = {
@@ -65,13 +64,7 @@ export default function SiswaKuisTake({
     }, []);
 
     return (
-        <AppLayout
-            breadcrumbs={[
-                { title: 'Modul', href: siswa.modul.index() },
-                { title: modul.nama_modul, href: siswa.modul.show(modul.id) },
-                { title: 'Kuis', href: siswa.kuis.create(modul.id) },
-            ]}
-        >
+        <>
             <Head title={`Kuis - ${modul.nama_modul}`} />
             <div className="flex flex-1 flex-col gap-4 p-4">
                 <div>
@@ -122,6 +115,14 @@ export default function SiswaKuisTake({
                     </Button>
                 </form>
             </div>
-        </AppLayout>
+        </>
     );
 }
+
+SiswaKuisTake.layout = (page: { modul: Modul }) => ({
+    breadcrumbs: [
+        { title: 'Modul', href: siswa.modul.index() },
+        { title: page.modul.nama_modul, href: siswa.modul.show(page.modul.id) },
+        { title: 'Kuis', href: siswa.kuis.create(page.modul.id) },
+    ],
+});

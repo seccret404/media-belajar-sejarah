@@ -1,7 +1,6 @@
 import { Head, Link } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import AppLayout from '@/layouts/app-layout';
 import siswa from '@/routes/siswa';
 
 type ReviewItem = {
@@ -28,12 +27,7 @@ export default function SiswaModulShow({
     review: ReviewItem[];
 }) {
     return (
-        <AppLayout
-            breadcrumbs={[
-                { title: 'Modul', href: siswa.modul.index() },
-                { title: modul.nama_modul, href: siswa.modul.show(modul.id) },
-            ]}
-        >
+        <>
             <Head title={modul.nama_modul} />
             <div className="flex flex-1 flex-col gap-4 p-4">
                 <div className="flex items-center justify-between">
@@ -82,6 +76,13 @@ export default function SiswaModulShow({
                     </div>
                 )}
             </div>
-        </AppLayout>
+        </>
     );
 }
+
+SiswaModulShow.layout = (page: { modul: Modul }) => ({
+    breadcrumbs: [
+        { title: 'Modul', href: siswa.modul.index() },
+        { title: page.modul.nama_modul, href: siswa.modul.show(page.modul.id) },
+    ],
+});

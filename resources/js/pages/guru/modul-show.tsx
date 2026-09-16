@@ -1,5 +1,4 @@
-import { useForm } from '@inertiajs/react';
-import { Head } from '@inertiajs/react';
+import { Head, useForm } from '@inertiajs/react';
 import { Plus, Trash2 } from 'lucide-react';
 import { FormEventHandler } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -7,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import AppLayout from '@/layouts/app-layout';
 import guru from '@/routes/guru';
 
 type Kuis = {
@@ -73,12 +71,7 @@ export default function GuruModulShow({ modul }: { modul: Modul }) {
     };
 
     return (
-        <AppLayout
-            breadcrumbs={[
-                { title: 'Kelola Kuis', href: guru.modul.index() },
-                { title: modul.nama_modul, href: guru.modul.show(modul.id) },
-            ]}
-        >
+        <>
             <Head title={`Kelola Kuis - ${modul.nama_modul}`} />
             <form onSubmit={submit} className="flex flex-1 flex-col gap-4 p-4">
                 <div className="flex items-center justify-between">
@@ -178,6 +171,13 @@ export default function GuruModulShow({ modul }: { modul: Modul }) {
                     <Plus /> Tambah Soal
                 </Button>
             </form>
-        </AppLayout>
+        </>
     );
 }
+
+GuruModulShow.layout = (page: { modul: Modul }) => ({
+    breadcrumbs: [
+        { title: 'Kelola Kuis', href: guru.modul.index() },
+        { title: page.modul.nama_modul, href: guru.modul.show(page.modul.id) },
+    ],
+});
