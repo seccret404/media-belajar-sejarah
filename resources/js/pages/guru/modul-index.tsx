@@ -1,5 +1,5 @@
 import { Head, Link } from '@inertiajs/react';
-import { BookText } from 'lucide-react';
+import { BookText, ClipboardList } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import guru from '@/routes/guru';
 
@@ -23,17 +23,25 @@ export default function GuruModulIndex({ modul }: { modul: Modul[] }) {
                 </div>
 
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                    {modul.map((item) => (
-                        <Link key={item.id} href={guru.modul.show(item.id)}>
-                            <Card className="hover:border-primary/50 transition-colors">
+                    {modul.map((item, i) => (
+                        <Link
+                            key={item.id}
+                            href={guru.modul.show(item.id)}
+                            className="animate-in fade-in-0 slide-in-from-bottom-2 fill-mode-backwards"
+                            style={{ animationDelay: `${i * 60}ms` }}
+                        >
+                            <Card className="group hover:border-primary/50 h-full transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg">
                                 <CardHeader>
-                                    <div className="flex items-center gap-2">
-                                        <BookText className="text-muted-foreground size-5" />
+                                    <div className="flex items-center gap-3">
+                                        <div className="bg-primary/10 text-primary group-hover:bg-primary/15 flex size-10 shrink-0 items-center justify-center rounded-lg transition-colors">
+                                            <BookText className="size-5" />
+                                        </div>
                                         <CardTitle>{item.nama_modul}</CardTitle>
                                     </div>
                                 </CardHeader>
                                 <CardContent>
-                                    <p className="text-muted-foreground text-sm">
+                                    <p className="text-muted-foreground flex items-center gap-1.5 text-sm">
+                                        <ClipboardList className="size-4" />
                                         {item.kuis_count} soal
                                     </p>
                                 </CardContent>

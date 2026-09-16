@@ -10,10 +10,19 @@ export default function Welcome() {
     return (
         <>
             <Head title="Selamat Datang" />
-            <div className="bg-background flex min-h-screen flex-col items-center justify-center p-6">
-                <Card className="w-full max-w-md text-center">
+            <div className="bg-background relative flex min-h-screen flex-col items-center justify-center overflow-hidden p-6">
+                <div
+                    aria-hidden
+                    className="bg-primary/20 animate-float pointer-events-none absolute -top-20 -left-20 size-72 rounded-full blur-3xl"
+                />
+                <div
+                    aria-hidden
+                    className="bg-secondary/20 animate-float-delayed pointer-events-none absolute -right-20 -bottom-20 size-80 rounded-full blur-3xl"
+                />
+
+                <Card className="animate-in fade-in-0 zoom-in-95 relative w-full max-w-md text-center shadow-lg duration-500">
                     <CardContent className="flex flex-col items-center gap-6 pt-10 pb-10">
-                        <div className="bg-primary text-primary-foreground flex size-14 items-center justify-center rounded-xl">
+                        <div className="from-primary to-primary/70 text-primary-foreground animate-float flex size-14 items-center justify-center rounded-xl bg-gradient-to-br shadow-md">
                             <BookOpen className="size-7" />
                         </div>
 

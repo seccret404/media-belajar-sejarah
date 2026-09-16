@@ -1,5 +1,8 @@
 import { Head, Link } from '@inertiajs/react';
+import { History } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { scoreBadgeClass } from '@/lib/utils';
 import siswa from '@/routes/siswa';
 
 type Modul = {
@@ -23,25 +26,37 @@ export default function SiswaRiwayatIndex({ modul }: { modul: Modul[] }) {
                 </div>
 
                 {modul.length === 0 && (
-                    <p className="text-muted-foreground text-sm">
-                        Kamu belum mengerjakan kuis apapun.
-                    </p>
+                    <div className="text-muted-foreground flex flex-col items-center justify-center gap-3 rounded-xl border border-dashed py-16 text-center">
+                        <div className="bg-muted flex size-12 items-center justify-center rounded-full">
+                            <History className="size-6" />
+                        </div>
+                        <p className="text-sm">
+                            Kamu belum mengerjakan kuis apapun.
+                        </p>
+                    </div>
                 )}
 
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                    {modul.map((item) => (
-                        <Link key={item.id} href={siswa.riwayat.show(item.id)}>
-                            <Card className="hover:border-primary/50 transition-colors">
+                    {modul.map((item, i) => (
+                        <Link
+                            key={item.id}
+                            href={siswa.riwayat.show(item.id)}
+                            className="animate-in fade-in-0 slide-in-from-bottom-2 fill-mode-backwards"
+                            style={{ animationDelay: `${i * 60}ms` }}
+                        >
+                            <Card className="hover:border-primary/50 h-full transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg">
                                 <CardHeader>
                                     <CardTitle>{item.nama_modul}</CardTitle>
                                 </CardHeader>
-                                <CardContent>
+                                <CardContent className="flex items-center justify-between">
                                     <p className="text-muted-foreground text-sm">
                                         {item.jumlah_soal} soal dikerjakan
                                     </p>
-                                    <p className="text-sm font-medium">
-                                        Skor: {item.skor}
-                                    </p>
+                                    <Badge
+                                        className={scoreBadgeClass(item.skor)}
+                                    >
+                                        Skor {item.skor}
+                                    </Badge>
                                 </CardContent>
                             </Card>
                         </Link>

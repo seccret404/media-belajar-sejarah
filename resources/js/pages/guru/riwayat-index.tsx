@@ -1,5 +1,7 @@
 import { Head, router } from '@inertiajs/react';
+import { Inbox, Search } from 'lucide-react';
 import { FormEventHandler, useState } from 'react';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
     Dialog,
@@ -17,6 +19,16 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import guru from '@/routes/guru';
+import { scoreBadgeClass } from '@/lib/utils';
+
+function initials(name: string) {
+    return name
+        .split(' ')
+        .filter(Boolean)
+        .slice(0, 2)
+        .map((part) => part[0]?.toUpperCase())
+        .join('');
+}
 
 type DetailItem = {
     soal: string;
@@ -72,19 +84,22 @@ export default function GuruRiwayatIndex({
                         <label className="text-sm font-medium">
                             Cari nama atau angkatan
                         </label>
-                        <Input
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            placeholder="Nama siswa atau tahun angkatan"
-                            className="w-64"
-                        />
+                        <div className="relative">
+                            <Search className="text-muted-foreground pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2" />
+                            <Input
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                                placeholder="Nama siswa atau tahun angkatan"
+                                className="w-64 pl-8"
+                            />
+                        </div>
                     </div>
                     <Button type="submit" variant="secondary">
                         Cari
                     </Button>
                 </form>
 
-                <div className="rounded-xl border">
+                <div className="overflow-hidden rounded-xl border">
                     <Table>
                         <TableHeader>
                             <TableRow>
@@ -98,20 +113,43 @@ export default function GuruRiwayatIndex({
                         <TableBody>
                             {riwayat.length === 0 && (
                                 <TableRow>
-                                    <TableCell
-                                        colSpan={5}
-                                        className="text-muted-foreground text-center"
-                                    >
-                                        Belum ada siswa yang mengerjakan kuis.
+                                    <TableCell colSpan={5} className="h-40">
+                                        <div className="text-muted-foreground flex flex-col items-center justify-center gap-2 text-center">
+                                            <div className="bg-muted flex size-12 items-center justify-center rounded-full">
+                                                <Inbox className="size-6" />
+                                            </div>
+                                            <p className="text-sm">
+                                                Belum ada siswa yang mengerjakan
+                                                kuis.
+                                            </p>
+                                        </div>
                                     </TableCell>
                                 </TableRow>
                             )}
                             {riwayat.map((item) => (
-                                <TableRow key={item.id}>
-                                    <TableCell>{item.nama}</TableCell>
+                                <TableRow
+                                    key={item.id}
+                                    className="hover:bg-muted/50 transition-colors"
+                                >
+                                    <TableCell>
+                                        <div className="flex items-center gap-2.5">
+                                            <div className="bg-primary/10 text-primary flex size-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold">
+                                                {initials(item.nama)}
+                                            </div>
+                                            {item.nama}
+                                        </div>
+                                    </TableCell>
                                     <TableCell>{item.angkatan}</TableCell>
                                     <TableCell>{item.modul}</TableCell>
-                                    <TableCell>{item.skor}</TableCell>
+                                    <TableCell>
+                                        <Badge
+                                            className={scoreBadgeClass(
+                                                item.skor,
+                                            )}
+                                        >
+                                            {item.skor}
+                                        </Badge>
+                                    </TableCell>
                                     <TableCell>
                                         <Button
                                             variant="outline"
@@ -134,9 +172,13 @@ export default function GuruRiwayatIndex({
             >
                 <DialogContent className="max-h-[80vh] overflow-y-auto sm:max-w-2xl">
                     <DialogHeader>
-                        <DialogTitle>
-                            {detail?.nama} - {detail?.modul} - Skor{' '}
-                            {detail?.skor}
+                        <DialogTitle className="flex flex-wrap items-center gap-2">
+                            {detail?.nama} - {detail?.modul}
+                            {detail && (
+                                <Badge className={scoreBadgeClass(detail.skor)}>
+                                    Skor {detail.skor}
+                                </Badge>
+                            )}
                         </DialogTitle>
                     </DialogHeader>
                     <div className="flex flex-col gap-4">
@@ -151,11 +193,13 @@ export default function GuruRiwayatIndex({
                                 <p className="text-muted-foreground mt-2 text-sm whitespace-pre-wrap">
                                     Jawaban: {item.jawaban || '(kosong)'}
                                 </p>
-                                <p className="mt-1 text-sm font-medium">
-                                    Skor: {item.skor}
-                                </p>
+                                <Badge
+                                    className={`mt-2 ${scoreBadgeClass(item.skor)}`}
+                                >
+                                    Skor {item.skor}
+                                </Badge>
                                 {item.review_ai && (
-                                    <p className="text-muted-foreground mt-1 text-sm italic">
+                                    <p className="text-muted-foreground mt-2 text-sm italic">
                                         Review AI: {item.review_ai}
                                     </p>
                                 )}

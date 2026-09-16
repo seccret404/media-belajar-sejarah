@@ -10,3 +10,13 @@ export function cn(...inputs: ClassValue[]) {
 export function toUrl(url: NonNullable<InertiaLinkProps['href']>): string {
     return typeof url === 'string' ? url : url.url;
 }
+
+export function scoreBadgeClass(skor: number): string {
+    if (skor >= 80) {
+        return 'border-transparent bg-green-100 text-green-700 dark:bg-green-500/15 dark:text-green-400';
+    }
+    if (skor >= 60) {
+        return 'border-transparent bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-400';
+    }
+    return 'border-transparent bg-red-100 text-red-700 dark:bg-red-500/15 dark:text-red-400';
+}

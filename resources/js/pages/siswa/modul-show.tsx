@@ -1,6 +1,14 @@
 import { Head, Link } from '@inertiajs/react';
-import { ChevronLeft, ChevronRight, Lightbulb } from 'lucide-react';
+import {
+    AlertTriangle,
+    ChevronLeft,
+    ChevronRight,
+    FileText,
+    Lightbulb,
+    Target,
+} from 'lucide-react';
 import { useState } from 'react';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
@@ -11,6 +19,7 @@ import {
     DialogHeader,
     DialogTitle,
 } from '@/components/ui/dialog';
+import { scoreBadgeClass } from '@/lib/utils';
 import siswa from '@/routes/siswa';
 
 type ReviewItem = {
@@ -75,14 +84,27 @@ export default function SiswaModulShow({
             <div className="flex flex-1 flex-col gap-4 p-4">
                 <h1 className="text-xl font-semibold">{modul.nama_modul}</h1>
 
-                <Card className="flex min-h-100 flex-col">
+                <div className="bg-muted h-1.5 w-full overflow-hidden rounded-full">
+                    <div
+                        className="bg-primary h-full rounded-full transition-all duration-300 ease-out"
+                        style={{
+                            width: `${((index + 1) / slides.length) * 100}%`,
+                        }}
+                    />
+                </div>
+
+                <Card className="flex min-h-100 flex-col shadow-sm">
                     <CardContent className="flex flex-1 flex-col pt-6">
-                        <div className="flex-1">
+                        <div
+                            key={index}
+                            className="animate-in fade-in-0 slide-in-from-right-2 flex-1 duration-300"
+                        >
                             {slide.type === 'intro' ? (
                                 <div className="flex flex-col gap-4">
                                     {slide.tujuan_pembelajaran.length > 0 && (
                                         <div>
-                                            <p className="text-sm font-semibold">
+                                            <p className="flex items-center gap-2 text-sm font-semibold">
+                                                <Target className="text-primary size-4" />
                                                 Tujuan Pembelajaran
                                             </p>
                                             <ul className="mt-2 list-disc space-y-1 pl-5 text-sm">
@@ -98,7 +120,9 @@ export default function SiswaModulShow({
                                     )}
                                     {slide.pertanyaan_pemantik && (
                                         <div className="border-primary/30 bg-primary/5 flex gap-3 rounded-lg border p-4">
-                                            <Lightbulb className="text-primary size-5 shrink-0" />
+                                            <div className="bg-primary/10 text-primary flex size-9 shrink-0 items-center justify-center rounded-full">
+                                                <Lightbulb className="size-5" />
+                                            </div>
                                             <div>
                                                 <p className="text-sm font-semibold">
                                                     Pertanyaan Pemantik
@@ -112,7 +136,8 @@ export default function SiswaModulShow({
                                 </div>
                             ) : (
                                 <div>
-                                    <h2 className="mb-3 text-lg font-semibold">
+                                    <h2 className="mb-3 flex items-center gap-2 text-lg font-semibold">
+                                        <FileText className="text-primary size-5" />
                                         {slide.judul}
                                     </h2>
                                     <p className="text-muted-foreground text-sm whitespace-pre-wrap">
@@ -161,7 +186,11 @@ export default function SiswaModulShow({
                     <div className="flex flex-col gap-4">
                         <h2 className="text-lg font-semibold">Review Kuis</h2>
                         {review.map((item, i) => (
-                            <Card key={i}>
+                            <Card
+                                key={i}
+                                className="animate-in fade-in-0 slide-in-from-bottom-1 fill-mode-backwards"
+                                style={{ animationDelay: `${i * 60}ms` }}
+                            >
                                 <CardContent className="pt-6">
                                     <p className="text-sm font-medium">
                                         {i + 1}. {item.soal}
@@ -170,11 +199,13 @@ export default function SiswaModulShow({
                                         Jawaban kamu:{' '}
                                         {item.jawaban || '(kosong)'}
                                     </p>
-                                    <p className="mt-1 text-sm font-medium">
-                                        Skor: {item.skor}
-                                    </p>
+                                    <Badge
+                                        className={`mt-2 ${scoreBadgeClass(item.skor)}`}
+                                    >
+                                        Skor {item.skor}
+                                    </Badge>
                                     {item.review_ai && (
-                                        <p className="text-muted-foreground mt-1 text-sm italic">
+                                        <p className="text-muted-foreground mt-2 text-sm italic">
                                             Review AI: {item.review_ai}
                                         </p>
                                     )}
@@ -188,6 +219,9 @@ export default function SiswaModulShow({
             <Dialog open={confirmOpen} onOpenChange={setConfirmOpen}>
                 <DialogContent>
                     <DialogHeader>
+                        <div className="mb-1 flex size-10 items-center justify-center rounded-full bg-amber-100 text-amber-600 dark:bg-amber-500/15 dark:text-amber-400">
+                            <AlertTriangle className="size-5" />
+                        </div>
                         <DialogTitle>Mulai kerjakan kuis?</DialogTitle>
                         <DialogDescription>
                             Setelah kuis dimulai, kamu tidak bisa kembali ke

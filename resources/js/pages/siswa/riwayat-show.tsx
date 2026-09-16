@@ -1,5 +1,7 @@
 import { Head } from '@inertiajs/react';
+import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
+import { scoreBadgeClass } from '@/lib/utils';
 import siswa from '@/routes/siswa';
 
 type ReviewItem = {
@@ -31,7 +33,11 @@ export default function SiswaRiwayatShow({
 
                 <div className="flex flex-col gap-4">
                     {review.map((item, index) => (
-                        <Card key={index}>
+                        <Card
+                            key={index}
+                            className="animate-in fade-in-0 slide-in-from-bottom-1 fill-mode-backwards"
+                            style={{ animationDelay: `${index * 60}ms` }}
+                        >
                             <CardContent className="pt-6">
                                 <p className="text-sm font-medium">
                                     {index + 1}. {item.soal}
@@ -39,11 +45,13 @@ export default function SiswaRiwayatShow({
                                 <p className="text-muted-foreground mt-2 text-sm whitespace-pre-wrap">
                                     Jawaban kamu: {item.jawaban || '(kosong)'}
                                 </p>
-                                <p className="mt-1 text-sm font-medium">
-                                    Skor: {item.skor}
-                                </p>
+                                <Badge
+                                    className={`mt-2 ${scoreBadgeClass(item.skor)}`}
+                                >
+                                    Skor {item.skor}
+                                </Badge>
                                 {item.review_ai && (
-                                    <p className="text-muted-foreground mt-1 text-sm italic">
+                                    <p className="text-muted-foreground mt-2 text-sm italic">
                                         Review AI: {item.review_ai}
                                     </p>
                                 )}

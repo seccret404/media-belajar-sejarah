@@ -84,19 +84,30 @@ export default function GuruModulShow({ modul }: { modul: Modul }) {
                             ini.
                         </p>
                     </div>
-                    <Button type="submit" disabled={processing}>
+                    <Button
+                        type="submit"
+                        disabled={processing}
+                        className="shadow-sm"
+                    >
                         Simpan Kuis
                     </Button>
                 </div>
 
                 <div className="flex flex-col gap-4">
                     {data.soal.map((row, index) => (
-                        <Card key={row.id ?? `new-${index}`}>
+                        <Card
+                            key={row.id ?? `new-${index}`}
+                            className="animate-in fade-in-0 slide-in-from-bottom-1 fill-mode-backwards border-l-primary/40 border-l-4"
+                            style={{ animationDelay: `${index * 40}ms` }}
+                        >
                             <CardHeader className="flex-row items-center justify-between">
-                                <CardTitle className="text-base">
+                                <CardTitle className="flex items-center gap-2 text-base">
+                                    <span className="bg-primary/10 text-primary flex size-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold">
+                                        {index + 1}
+                                    </span>
                                     Soal {index + 1}
                                     {row.history_user_count > 0 && (
-                                        <span className="text-muted-foreground ml-2 text-xs font-normal">
+                                        <span className="text-muted-foreground ml-1 text-xs font-normal">
                                             (sudah dikerjakan{' '}
                                             {row.history_user_count} siswa)
                                         </span>

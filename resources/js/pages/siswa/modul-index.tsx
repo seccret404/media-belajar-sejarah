@@ -24,17 +24,30 @@ export default function SiswaModulIndex({ modul }: { modul: Modul[] }) {
                 </div>
 
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                    {modul.map((item) => (
-                        <Link key={item.id} href={siswa.modul.show(item.id)}>
-                            <Card className="hover:border-primary/50 transition-colors">
+                    {modul.map((item, i) => (
+                        <Link
+                            key={item.id}
+                            href={siswa.modul.show(item.id)}
+                            className="animate-in fade-in-0 slide-in-from-bottom-2 fill-mode-backwards"
+                            style={{ animationDelay: `${i * 60}ms` }}
+                        >
+                            <Card className="group hover:border-primary/50 h-full transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg">
                                 <CardHeader>
                                     <div className="flex items-center justify-between gap-2">
                                         <CardTitle>{item.nama_modul}</CardTitle>
-                                        {item.selesai ? (
-                                            <BookOpenCheck className="size-5 text-green-600" />
-                                        ) : (
-                                            <CircleDashed className="text-muted-foreground size-5" />
-                                        )}
+                                        <div
+                                            className={
+                                                item.selesai
+                                                    ? 'flex size-9 shrink-0 items-center justify-center rounded-full bg-green-100 text-green-600 dark:bg-green-500/15 dark:text-green-400'
+                                                    : 'bg-muted text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary flex size-9 shrink-0 items-center justify-center rounded-full transition-colors'
+                                            }
+                                        >
+                                            {item.selesai ? (
+                                                <BookOpenCheck className="size-5" />
+                                            ) : (
+                                                <CircleDashed className="size-5" />
+                                            )}
+                                        </div>
                                     </div>
                                 </CardHeader>
                                 <CardContent>
