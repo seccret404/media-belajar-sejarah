@@ -1,4 +1,5 @@
 import { Head, Link } from '@inertiajs/react';
+import { Lightbulb } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import siswa from '@/routes/siswa';
@@ -10,11 +11,18 @@ type ReviewItem = {
     review_ai: string | null;
 };
 
+type Section = {
+    judul: string;
+    konten: string;
+};
+
 type Modul = {
     id: number;
     nama_modul: string;
     urutan: number;
-    konten: string | null;
+    tujuan_pembelajaran: string[];
+    pertanyaan_pemantik: string | null;
+    sections: Section[];
 };
 
 export default function SiswaModulShow({
@@ -43,11 +51,57 @@ export default function SiswaModulShow({
                     )}
                 </div>
 
-                <Card>
-                    <CardContent className="prose dark:prose-invert max-w-none pt-6 whitespace-pre-wrap">
-                        {modul.konten || 'Belum ada konten untuk modul ini.'}
-                    </CardContent>
-                </Card>
+                {modul.tujuan_pembelajaran.length > 0 && (
+                    <Card>
+                        <CardContent className="pt-6">
+                            <p className="text-sm font-semibold">
+                                Tujuan Pembelajaran
+                            </p>
+                            <ul className="mt-2 list-disc space-y-1 pl-5 text-sm">
+                                {modul.tujuan_pembelajaran.map((tujuan, i) => (
+                                    <li key={i}>{tujuan}</li>
+                                ))}
+                            </ul>
+                        </CardContent>
+                    </Card>
+                )}
+
+                {modul.pertanyaan_pemantik && (
+                    <Card className="border-primary/30 bg-primary/5">
+                        <CardContent className="flex gap-3 pt-6">
+                            <Lightbulb className="text-primary size-5 shrink-0" />
+                            <div>
+                                <p className="text-sm font-semibold">
+                                    Pertanyaan Pemantik
+                                </p>
+                                <p className="text-muted-foreground mt-1 text-sm">
+                                    {modul.pertanyaan_pemantik}
+                                </p>
+                            </div>
+                        </CardContent>
+                    </Card>
+                )}
+
+                {modul.sections.length === 0 && (
+                    <Card>
+                        <CardContent className="text-muted-foreground pt-6 text-sm">
+                            Belum ada konten untuk modul ini.
+                        </CardContent>
+                    </Card>
+                )}
+
+                {modul.sections.map((section, i) => (
+                    <Card key={i}>
+                        <CardContent className="pt-6">
+                            <h2 className="mb-2 font-semibold">
+                                {section.judul}
+                            </h2>
+                            <p className="text-muted-foreground text-sm whitespace-pre-wrap">
+                                {section.konten}
+                            </p>
+                        </CardContent>
+                    </Card>
+                ))}
 
                 {selesai && (
                     <div className="flex flex-col gap-4">

@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('nama_modul');
             $table->unsignedTinyInteger('urutan')->unique();
-            $table->longText('konten')->nullable();
             $table->timestamps();
         });
     }

@@ -17,13 +17,9 @@ class ModulFactory extends Factory
      */
     public function definition(): array
     {
-        /** @var list<string> $paragraphs */
-        $paragraphs = fake()->paragraphs(5);
-
         return [
             'nama_modul' => 'Modul '.fake()->unique()->randomLetter(),
             'urutan' => fake()->unique()->numberBetween(1, 8),
-            'konten' => implode("\n\n", $paragraphs),
         ];
     }
 }

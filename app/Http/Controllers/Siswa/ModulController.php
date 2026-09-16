@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Siswa;
 use App\Http\Controllers\Controller;
 use App\Models\HistoryUser;
 use App\Models\Modul;
+use App\Services\ModulContent;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -52,8 +53,15 @@ class ModulController extends Controller
                 'review_ai' => $history->review_ai,
             ]);
 
+        $materi = ModulContent::forUrutan($modul->urutan);
+
         return Inertia::render('siswa/modul-show', [
-            'modul' => $modul->only(['id', 'nama_modul', 'urutan', 'konten']),
+            'modul' => [
+                ...$modul->only(['id', 'nama_modul', 'urutan']),
+                'tujuan_pembelajaran' => $materi['tujuan_pembelajaran'] ?? [],
+                'pertanyaan_pemantik' => $materi['pertanyaan_pemantik'] ?? null,
+                'sections' => $materi['sections'] ?? [],
+            ],
             'selesai' => $history->isNotEmpty(),
             'review' => $history,
         ]);

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable(['nama_modul', 'urutan', 'konten'])]
+#[Fillable(['nama_modul', 'urutan'])]
 class Modul extends Model
 {
     /** @use HasFactory<ModulFactory> */

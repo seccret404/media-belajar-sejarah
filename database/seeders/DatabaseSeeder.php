@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Kuis;
 use App\Models\Modul;
 use App\Models\User;
+use App\Services\ModulContent;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -27,12 +28,10 @@ class DatabaseSeeder extends Seeder
             'email' => 'siswa@example.com',
         ]);
 
-        $namaModul = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
-
-        foreach ($namaModul as $urutan => $huruf) {
+        foreach (ModulContent::all() as $materi) {
             $modul = Modul::factory()->create([
-                'nama_modul' => "Modul {$huruf}",
-                'urutan' => $urutan + 1,
+                'nama_modul' => $materi['judul'],
+                'urutan' => $materi['urutan'],
             ]);
 
             Kuis::factory(8)->create([
