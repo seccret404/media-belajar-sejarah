@@ -23,7 +23,9 @@ class ModulController extends Controller
     public function show(Modul $modul): Response
     {
         $modul->load([
-            'kuis' => fn ($query) => $query->withCount('historyUser')->orderBy('id'),
+            'kuis' => fn ($query) => $query
+                ->withCount(['historyUser' => fn ($query) => $query->whereNotNull('jawaban')])
+                ->orderBy('id'),
         ]);
 
         return Inertia::render('guru/modul-show', [

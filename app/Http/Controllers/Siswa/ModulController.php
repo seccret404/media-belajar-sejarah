@@ -18,6 +18,7 @@ class ModulController extends Controller
 
         $selesaiModulIds = HistoryUser::query()
             ->where('id_user', $userId)
+            ->whereNotNull('jawaban')
             ->distinct()
             ->pluck('id_modul');
 
@@ -43,6 +44,7 @@ class ModulController extends Controller
         $history = HistoryUser::query()
             ->where('id_user', $userId)
             ->where('id_modul', $modul->id)
+            ->whereNotNull('jawaban')
             ->with('kuis')
             ->orderBy('id')
             ->get()

@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Siswa;
 
 use App\Http\Controllers\Controller;
 use App\Models\HistoryUser;
-use App\Models\Kuis;
 use App\Models\Modul;
 use App\Services\Grading\GradingService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
@@ -22,84 +22,84 @@ class KuisController extends Controller
     {
         $userId = (int) Auth::id();
 
-        $sudahDikerjakan = HistoryUser::query()
-            ->where('id_user', $userId)
-            ->where('id_modul', $modul->id)
-            ->exists();
+        $rows = $this->attemptRows($userId, $modul);
 
-        if ($sudahDikerjakan) {
-            return redirect()->route('siswa.modul.show', $modul);
+        if ($rows->isNotEmpty()) {
+            if ($rows->contains(fn (HistoryUser $row) => $row->jawaban !== null)) {
+                return redirect()->route('siswa.modul.show', $modul);
+            }
+        } else {
+            $kuisIds = $modul->kuis()->inRandomOrder()->limit(self::JUMLAH_SOAL)->pluck('id');
+
+            foreach ($kuisIds as $kuisId) {
+                HistoryUser::create([
+                    'id_user' => $userId,
+                    'id_modul' => $modul->id,
+                    'id_kuis' => $kuisId,
+                ]);
+            }
+
+            $rows = $this->attemptRows($userId, $modul);
         }
-
-        $sessionKey = $this->sessionKey($modul, $userId);
-        $soalIds = session($sessionKey);
-
-        if (! $soalIds) {
-            $soalIds = $modul->kuis()->inRandomOrder()->limit(self::JUMLAH_SOAL)->pluck('id')->all();
-            session([$sessionKey => $soalIds]);
-        }
-
-        $soal = Kuis::query()
-            ->whereIn('id', $soalIds)
-            ->get(['id', 'soal'])
-            ->sortBy(fn (Kuis $kuis) => array_search($kuis->id, $soalIds));
 
         return Inertia::render('siswa/kuis-take', [
             'modul' => $modul->only(['id', 'nama_modul']),
-            'soal' => $soal->values(),
+            'soal' => $rows->map(fn (HistoryUser $row) => [
+                'id' => $row->kuis->id,
+                'soal' => $row->kuis->soal,
+            ])->values(),
         ]);
     }
 
     public function store(Request $request, Modul $modul, GradingService $gradingService): RedirectResponse
     {
         $userId = (int) Auth::id();
-        $sessionKey = $this->sessionKey($modul, $userId);
-        $soalIds = session($sessionKey, []);
+        $rows = $this->attemptRows($userId, $modul);
 
-        abort_if(empty($soalIds), 409, 'Sesi kuis tidak ditemukan. Silakan ambil kuis kembali.');
+        abort_if($rows->isEmpty(), 409, 'Kuis belum diambil. Silakan ambil kuis kembali.');
+        abort_if(
+            $rows->contains(fn (HistoryUser $row) => $row->jawaban !== null),
+            409,
+            'Kuis ini sudah dikumpulkan sebelumnya.',
+        );
 
         $validated = $request->validate([
             'jawaban' => ['nullable', 'array'],
             'jawaban.*' => ['nullable', 'string'],
         ]);
+
         /** @var array<int, string|null> $jawabanInput */
         $jawabanInput = $validated['jawaban'] ?? [];
         $jawaban = collect($jawabanInput);
 
-        DB::transaction(function () use ($soalIds, $jawaban, $modul, $userId, $gradingService) {
-            $soalList = Kuis::whereIn('id', $soalIds)->get()->keyBy('id');
+        DB::transaction(function () use ($rows, $jawaban, $gradingService) {
+            foreach ($rows as $row) {
+                $jawabanSiswa = (string) $jawaban->get($row->id_kuis, '');
+                $hasil = $gradingService->grade($row->kuis, $jawabanSiswa);
 
-            foreach ($soalIds as $kuisId) {
-                $kuis = $soalList->get($kuisId);
-
-                if (! $kuis) {
-                    continue;
-                }
-
-                $jawabanSiswa = (string) $jawaban->get($kuisId, '');
-                $hasil = $gradingService->grade($kuis, $jawabanSiswa);
-
-                HistoryUser::updateOrCreate(
-                    ['id_user' => $userId, 'id_kuis' => $kuisId],
-                    [
-                        'id_modul' => $modul->id,
-                        'jawaban' => $jawabanSiswa,
-                        'skor' => $hasil->skor,
-                        'review_ai' => $hasil->review,
-                    ],
-                );
+                $row->update([
+                    'jawaban' => $jawabanSiswa,
+                    'skor' => $hasil->skor,
+                    'review_ai' => $hasil->review,
+                ]);
             }
         });
-
-        session()->forget($sessionKey);
 
         Inertia::flash('toast', ['type' => 'success', 'message' => 'Kuis berhasil dikumpulkan.']);
 
         return redirect()->route('siswa.modul.show', $modul);
     }
 
-    protected function sessionKey(Modul $modul, int $userId): string
+    /**
+     * @return Collection<int, HistoryUser>
+     */
+    protected function attemptRows(int $userId, Modul $modul): Collection
     {
-        return "kuis_attempt.{$userId}.{$modul->id}";
+        return HistoryUser::query()
+            ->where('id_user', $userId)
+            ->where('id_modul', $modul->id)
+            ->orderBy('id')
+            ->with('kuis')
+            ->get();
     }
 }

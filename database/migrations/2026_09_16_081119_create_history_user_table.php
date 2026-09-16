@@ -16,8 +16,11 @@ return new class extends Migration
             $table->foreignId('id_user')->constrained('users')->cascadeOnDelete();
             $table->foreignId('id_modul')->constrained('modul')->cascadeOnDelete();
             $table->foreignId('id_kuis')->constrained('kuis')->cascadeOnDelete();
-            $table->text('jawaban');
-            $table->unsignedTinyInteger('skor');
+            // jawaban/skor stay null from the moment a soal is assigned to a student
+            // until they actually submit — that's what distinguishes an in-progress
+            // attempt from a completed one.
+            $table->text('jawaban')->nullable();
+            $table->unsignedTinyInteger('skor')->nullable();
             $table->text('review_ai')->nullable();
             $table->timestamps();
 

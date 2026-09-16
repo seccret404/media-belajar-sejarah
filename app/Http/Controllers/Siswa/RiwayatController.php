@@ -16,8 +16,14 @@ class RiwayatController extends Controller
         $userId = (int) Auth::id();
 
         $modul = Modul::query()
-            ->whereHas('historyUser', fn ($query) => $query->where('id_user', $userId))
-            ->with(['historyUser' => fn ($query) => $query->where('id_user', $userId)])
+            ->whereHas('historyUser', fn ($query) => $query
+                ->where('id_user', $userId)
+                ->whereNotNull('jawaban'),
+            )
+            ->with(['historyUser' => fn ($query) => $query
+                ->where('id_user', $userId)
+                ->whereNotNull('jawaban'),
+            ])
             ->orderBy('urutan')
             ->get()
             ->map(fn (Modul $modul) => [
@@ -41,6 +47,7 @@ class RiwayatController extends Controller
         $review = HistoryUser::query()
             ->where('id_user', $userId)
             ->where('id_modul', $modul->id)
+            ->whereNotNull('jawaban')
             ->with('kuis')
             ->orderBy('id')
             ->get()

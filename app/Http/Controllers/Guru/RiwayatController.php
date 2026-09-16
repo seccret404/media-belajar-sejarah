@@ -15,6 +15,7 @@ class RiwayatController extends Controller
         $search = $request->string('search')->trim()->toString();
 
         $riwayat = HistoryUser::query()
+            ->whereNotNull('jawaban')
             ->whereHas('user', fn ($query) => $query->where('role', 'siswa'))
             ->when($search !== '', fn ($query) => $query->whereHas('user', function ($query) use ($search) {
                 $query->where('name', 'like', "%{$search}%")
