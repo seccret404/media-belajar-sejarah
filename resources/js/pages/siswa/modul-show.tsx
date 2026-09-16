@@ -1,13 +1,18 @@
 import { Head, Link } from '@inertiajs/react';
 import {
     AlertTriangle,
+    ArrowRight,
+    BookMarked,
     ChevronLeft,
     ChevronRight,
+    Eye,
     FileText,
     Lightbulb,
+    type LucideIcon,
+    Sparkles,
     Target,
 } from 'lucide-react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -19,7 +24,14 @@ import {
     DialogHeader,
     DialogTitle,
 } from '@/components/ui/dialog';
-import { scoreBadgeClass } from '@/lib/utils';
+import {
+    type CalloutTone,
+    type ContentBlock,
+    parseArrowLine,
+    parseSectionContent,
+    splitVisualLines,
+} from '@/lib/modul-content';
+import { cn, scoreBadgeClass } from '@/lib/utils';
 import siswa from '@/routes/siswa';
 
 type ReviewItem = {
@@ -51,6 +63,159 @@ type Slide =
       }
     | { type: 'section'; judul: string; konten: string };
 
+const SECTION_ACCENTS = [
+    'bg-blue-100 text-blue-600 dark:bg-blue-500/15 dark:text-blue-400',
+    'bg-purple-100 text-purple-600 dark:bg-purple-500/15 dark:text-purple-400',
+    'bg-emerald-100 text-emerald-600 dark:bg-emerald-500/15 dark:text-emerald-400',
+    'bg-rose-100 text-rose-600 dark:bg-rose-500/15 dark:text-rose-400',
+    'bg-amber-100 text-amber-600 dark:bg-amber-500/15 dark:text-amber-400',
+];
+
+const CALLOUT_STYLES: Record<
+    CalloutTone,
+    { icon: LucideIcon; box: string; iconBox: string }
+> = {
+    tip: {
+        icon: BookMarked,
+        box: 'border-amber-200 bg-amber-50 dark:border-amber-500/30 dark:bg-amber-500/10',
+        iconBox:
+            'bg-amber-100 text-amber-600 dark:bg-amber-500/15 dark:text-amber-400',
+    },
+    fact: {
+        icon: Sparkles,
+        box: 'border-violet-200 bg-violet-50 dark:border-violet-500/30 dark:bg-violet-500/10',
+        iconBox:
+            'bg-violet-100 text-violet-600 dark:bg-violet-500/15 dark:text-violet-400',
+    },
+    example: {
+        icon: Eye,
+        box: 'border-teal-200 bg-teal-50 dark:border-teal-500/30 dark:bg-teal-500/10',
+        iconBox:
+            'bg-teal-100 text-teal-600 dark:bg-teal-500/15 dark:text-teal-400',
+    },
+};
+
+function TextLines({ text, className }: { text: string; className?: string }) {
+    const lines = splitVisualLines(text);
+
+    return (
+        <div className={cn('space-y-1.5', className)}>
+            {lines.map((line, i) => {
+                const arrow = parseArrowLine(line);
+
+                if (arrow) {
+                    return (
+                        <div
+                            key={i}
+                            className="flex flex-wrap items-baseline gap-x-1.5"
+                        >
+                            <span className="text-foreground font-semibold">
+                                {arrow.term}
+                            </span>
+                            <ArrowRight className="text-muted-foreground size-3.5 shrink-0 self-center" />
+                            <span>{arrow.text}</span>
+                        </div>
+                    );
+                }
+
+                return <p key={i}>{line}</p>;
+            })}
+        </div>
+    );
+}
+
+function SectionBlock({ block }: { block: ContentBlock }) {
+    if (block.type === 'callout') {
+        const style = CALLOUT_STYLES[block.tone];
+        const Icon = style.icon;
+
+        return (
+            <div className={cn('flex gap-3 rounded-lg border p-4', style.box)}>
+                <div
+                    className={cn(
+                        'flex size-9 shrink-0 items-center justify-center rounded-full',
+                        style.iconBox,
+                    )}
+                >
+                    <Icon className="size-5" />
+                </div>
+                <div className="flex-1 space-y-2">
+                    <p className="text-sm font-semibold">{block.title}</p>
+                    <div className="space-y-2 text-sm">
+                        {block.lines.map((line, i) => (
+                            <TextLines key={i} text={line} />
+                        ))}
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    if (block.type === 'timeline') {
+        return (
+            <div className="relative flex flex-col gap-5 py-1">
+                <span className="bg-border absolute top-4 bottom-4 left-4 w-px" />
+                {block.items.map((item, i) => (
+                    <div key={i} className="relative flex items-center gap-3">
+                        <span className="bg-primary text-primary-foreground relative z-10 flex size-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold">
+                            {item.year}
+                        </span>
+                        <p className="text-muted-foreground text-sm">
+                            {item.text}
+                        </p>
+                    </div>
+                ))}
+            </div>
+        );
+    }
+
+    if (block.type === 'list') {
+        return (
+            <div>
+                {block.heading && (
+                    <p className="mb-2 text-sm font-semibold">
+                        {block.heading}
+                    </p>
+                )}
+                <ul className="space-y-1.5 text-sm">
+                    {block.items.map((item, i) => (
+                        <li key={i} className="flex gap-2">
+                            <span className="bg-primary mt-2 size-1.5 shrink-0 rounded-full" />
+                            <span className="text-muted-foreground">
+                                {item}
+                            </span>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        );
+    }
+
+    return (
+        <div>
+            {block.label && (
+                <p className="text-sm font-semibold">{block.label}</p>
+            )}
+            <TextLines
+                text={block.text}
+                className="text-muted-foreground text-sm"
+            />
+        </div>
+    );
+}
+
+function SectionSlideContent({ konten }: { konten: string }) {
+    const blocks = useMemo(() => parseSectionContent(konten), [konten]);
+
+    return (
+        <div className="flex flex-col gap-4">
+            {blocks.map((block, i) => (
+                <SectionBlock key={i} block={block} />
+            ))}
+        </div>
+    );
+}
+
 export default function SiswaModulShow({
     modul,
     selesai,
@@ -77,6 +242,8 @@ export default function SiswaModulShow({
     const slide = slides[index];
     const isFirst = index === 0;
     const isLast = index === slides.length - 1;
+    const sectionIndex = index - 1;
+    const accent = SECTION_ACCENTS[sectionIndex % SECTION_ACCENTS.length];
 
     return (
         <>
@@ -135,14 +302,29 @@ export default function SiswaModulShow({
                                     )}
                                 </div>
                             ) : (
-                                <div>
-                                    <h2 className="mb-3 flex items-center gap-2 text-lg font-semibold">
-                                        <FileText className="text-primary size-5" />
+                                <div className="relative">
+                                    <span className="text-foreground/5 pointer-events-none absolute -top-4 right-0 text-8xl font-black select-none">
+                                        {String(sectionIndex + 1).padStart(
+                                            2,
+                                            '0',
+                                        )}
+                                    </span>
+                                    <h2 className="relative mb-4 flex items-center gap-2 text-lg font-semibold">
+                                        <span
+                                            className={cn(
+                                                'flex size-9 shrink-0 items-center justify-center rounded-lg',
+                                                accent,
+                                            )}
+                                        >
+                                            <FileText className="size-5" />
+                                        </span>
                                         {slide.judul}
                                     </h2>
-                                    <p className="text-muted-foreground text-sm whitespace-pre-wrap">
-                                        {slide.konten}
-                                    </p>
+                                    <div className="relative">
+                                        <SectionSlideContent
+                                            konten={slide.konten}
+                                        />
+                                    </div>
                                 </div>
                             )}
                         </div>
