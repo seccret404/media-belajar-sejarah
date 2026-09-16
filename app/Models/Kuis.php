@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\KuisFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 #[Fillable(['id_modul', 'soal', 'jawaban_ekspektasi', 'key_jawaban'])]
 class Kuis extends Model
 {
-    /** @use HasFactory<\Database\Factories\KuisFactory> */
+    /** @use HasFactory<KuisFactory> */
     use HasFactory;
 
     protected $table = 'kuis';

@@ -1,5 +1,5 @@
-import { Link } from '@inertiajs/react';
-import { BookOpen, FolderGit2, LayoutGrid } from 'lucide-react';
+import { Link, usePage } from '@inertiajs/react';
+import { BookOpen, ClipboardList, FolderGit2, History } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
@@ -14,13 +14,33 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
-import type { NavItem } from '@/types';
+import guru from '@/routes/guru';
+import siswa from '@/routes/siswa';
+import type { Auth, NavItem } from '@/types';
 
-const mainNavItems: NavItem[] = [
+const guruNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
-        href: dashboard(),
-        icon: LayoutGrid,
+        title: 'Kelola Kuis',
+        href: guru.modul.index(),
+        icon: ClipboardList,
+    },
+    {
+        title: 'Riwayat Kuis',
+        href: guru.riwayat.index(),
+        icon: History,
+    },
+];
+
+const siswaNavItems: NavItem[] = [
+    {
+        title: 'Modul',
+        href: siswa.modul.index(),
+        icon: BookOpen,
+    },
+    {
+        title: 'Riwayat',
+        href: siswa.riwayat.index(),
+        icon: History,
     },
 ];
 
@@ -38,6 +58,10 @@ const footerNavItems: NavItem[] = [
 ];
 
 export function AppSidebar() {
+    const { auth } = usePage<{ auth: Auth }>().props;
+    const mainNavItems =
+        auth.user.role === 'guru' ? guruNavItems : siswaNavItems;
+
     return (
         <Sidebar collapsible="icon" variant="inset">
             <SidebarHeader>

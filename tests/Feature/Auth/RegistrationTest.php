@@ -31,9 +31,11 @@ class RegistrationTest extends TestCase
             'email' => 'test@example.com',
             'password' => 'password',
             'password_confirmation' => 'password',
+            'angkatan' => now()->year,
         ]);
 
         $this->assertAuthenticated();
+        $this->assertSame('siswa', $this->app['auth']->user()->role);
         $response->assertRedirect(route('dashboard', absolute: false));
     }
 }

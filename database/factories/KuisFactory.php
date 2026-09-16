@@ -18,11 +18,14 @@ class KuisFactory extends Factory
      */
     public function definition(): array
     {
+        /** @var list<string> $words */
+        $words = fake()->words(5);
+
         return [
             'id_modul' => Modul::factory(),
             'soal' => fake()->sentence(10).'?',
             'jawaban_ekspektasi' => fake()->paragraph(),
-            'key_jawaban' => implode(', ', fake()->words(5)),
+            'key_jawaban' => implode(', ', $words),
         ];
     }
 }

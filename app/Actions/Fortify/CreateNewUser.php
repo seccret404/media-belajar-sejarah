@@ -22,12 +22,15 @@ class CreateNewUser implements CreatesNewUsers
         Validator::make($input, [
             ...$this->profileRules(),
             'password' => $this->passwordRules(),
+            'angkatan' => ['required', 'integer', 'min:2000', 'max:'.(now()->year + 1)],
         ])->validate();
 
         return User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => $input['password'],
+            'role' => 'siswa',
+            'angkatan' => $input['angkatan'],
         ]);
     }
 }
