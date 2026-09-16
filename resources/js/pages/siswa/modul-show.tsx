@@ -3,6 +3,14 @@ import { ChevronLeft, ChevronRight, Lightbulb } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from '@/components/ui/dialog';
 import siswa from '@/routes/siswa';
 
 type ReviewItem = {
@@ -56,6 +64,7 @@ export default function SiswaModulShow({
     ];
 
     const [index, setIndex] = useState(0);
+    const [confirmOpen, setConfirmOpen] = useState(false);
     const slide = slides[index];
     const isFirst = index === 0;
     const isLast = index === slides.length - 1;
@@ -129,12 +138,11 @@ export default function SiswaModulShow({
 
                             {isLast ? (
                                 !selesai && (
-                                    <Button asChild>
-                                        <Link
-                                            href={siswa.kuis.create(modul.id)}
-                                        >
-                                            Ambil Kuis
-                                        </Link>
+                                    <Button
+                                        type="button"
+                                        onClick={() => setConfirmOpen(true)}
+                                    >
+                                        Ambil Kuis
                                     </Button>
                                 )
                             ) : (
@@ -176,6 +184,35 @@ export default function SiswaModulShow({
                     </div>
                 )}
             </div>
+
+            <Dialog open={confirmOpen} onOpenChange={setConfirmOpen}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Mulai kerjakan kuis?</DialogTitle>
+                        <DialogDescription>
+                            Setelah kuis dimulai, kamu tidak bisa kembali ke
+                            halaman modul sebelum mengumpulkan jawaban.
+                            Berpindah tab atau keluar dari halaman kuis akan
+                            membuat kuis otomatis terkumpul dengan jawaban yang
+                            sudah kamu isi sejauh itu.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter>
+                        <Button
+                            type="button"
+                            variant="outline"
+                            onClick={() => setConfirmOpen(false)}
+                        >
+                            Batal
+                        </Button>
+                        <Button asChild>
+                            <Link href={siswa.kuis.create(modul.id)}>
+                                Ya, Mulai Kuis
+                            </Link>
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
         </>
     );
 }
