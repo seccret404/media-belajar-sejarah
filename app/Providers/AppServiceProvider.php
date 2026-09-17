@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Services\Grading\GradingService;
+use App\Services\Grading\OllamaGradingService;
 use App\Services\Grading\PendingGradingService;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Date;
@@ -17,7 +18,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(GradingService::class, PendingGradingService::class);
+        $this->app->bind(GradingService::class, function ($app) {
+            if (filled(config('services.ollama.key'))) {
+                return $app->make(OllamaGradingService::class);
+            }
+
+            return $app->make(PendingGradingService::class);
+        });
     }
 
     /**

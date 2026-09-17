@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'ollama' => [
+        'url' => env('OLLAMA_URL'),
+        'key' => env('OLLAMA_API_KEY'),
+        'model' => env('OLLAMA_MODEL'),
+    ],
+
 ];

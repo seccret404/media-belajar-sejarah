@@ -72,15 +72,25 @@ class KuisController extends Controller
         $jawabanInput = $validated['jawaban'] ?? [];
         $jawaban = collect($jawabanInput);
 
-        DB::transaction(function () use ($rows, $jawaban, $gradingService) {
-            foreach ($rows as $row) {
-                $jawabanSiswa = (string) $jawaban->get($row->id_kuis, '');
-                $hasil = $gradingService->grade($row->kuis, $jawabanSiswa);
+        // Grade every answer before opening a transaction: AI grading calls
+        // an external service and can be slow, so we don't want to hold a
+        // database transaction open for the duration of several HTTP calls.
+        $hasilPerBaris = $rows->map(function (HistoryUser $row) use ($jawaban, $gradingService) {
+            $jawabanSiswa = (string) $jawaban->get($row->id_kuis, '');
 
-                $row->update([
-                    'jawaban' => $jawabanSiswa,
-                    'skor' => $hasil->skor,
-                    'review_ai' => $hasil->review,
+            return [
+                'row' => $row,
+                'jawaban' => $jawabanSiswa,
+                'hasil' => $gradingService->grade($row->kuis, $jawabanSiswa),
+            ];
+        });
+
+        DB::transaction(function () use ($hasilPerBaris) {
+            foreach ($hasilPerBaris as $item) {
+                $item['row']->update([
+                    'jawaban' => $item['jawaban'],
+                    'skor' => $item['hasil']->skor,
+                    'review_ai' => $item['hasil']->review,
                 ]);
             }
         });
