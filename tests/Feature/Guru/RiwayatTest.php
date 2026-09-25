@@ -83,7 +83,7 @@ class RiwayatTest extends TestCase
         $this->assertSame(85, $history->fresh()->skor);
     }
 
-    public function test_guru_cannot_overwrite_a_skor_that_is_already_final(): void
+    public function test_guru_can_update_a_skor_that_is_already_final(): void
     {
         $guru = User::factory()->guru()->create();
         $modul = Modul::factory()->create();
@@ -97,12 +97,13 @@ class RiwayatTest extends TestCase
             'skor' => 70,
         ]);
 
-        $this->actingAs($guru)->put(
+        $response = $this->actingAs($guru)->put(
             route('guru.riwayat.update', [$siswa->id, $modul->id]),
             ['skor' => [$kuis->id => 40]],
-        )->assertNotFound();
+        );
 
-        $this->assertSame(70, $history->fresh()->skor);
+        $response->assertSessionHasNoErrors()->assertRedirect();
+        $this->assertSame(40, $history->fresh()->skor);
     }
 
     public function test_guru_can_filter_riwayat_with_a_single_search_field(): void

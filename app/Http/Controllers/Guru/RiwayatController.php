@@ -72,11 +72,12 @@ class RiwayatController extends Controller
             'skor.*' => ['required', 'integer', 'min:0', 'max:100'],
         ]);
 
+        // Guru can add or revise a skor at any time, even after a
+        // submission was already fully graded.
         $rows = HistoryUser::query()
             ->where('id_user', $idUser)
             ->where('id_modul', $idModul)
             ->whereNotNull('jawaban')
-            ->whereNull('skor')
             ->whereIn('id_kuis', array_keys($validated['skor']))
             ->get();
 

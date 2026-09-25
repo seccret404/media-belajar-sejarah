@@ -54,14 +54,14 @@ per modul (card grid)               • edit soal / jawaban guru /          suda
                                                                           • tombol Detail ─► dialog
                                                                             tiap soal: jawaban +
                                                                             feedback AI + input
-                                                                            skor manual (soal yang
-                                                                            belum dinilai) atau
-                                                                            skor final (read-only)
+                                                                            skor manual (selalu
+                                                                            bisa diisi/diubah,
+                                                                            prefilled kalau sudah
+                                                                            pernah dinilai)
                                                                           • "Simpan Skor" (PUT) —
-                                                                            hanya bisa isi skor
-                                                                            untuk baris yang masih
-                                                                            null, tidak bisa
-                                                                            menimpa skor final
+                                                                            guru bebas menambah
+                                                                            atau merevisi skor
+                                                                            kapan pun
 ```
 
 Catatan penting:
@@ -163,15 +163,17 @@ POST /siswa/modul/{modul}/kuis  (jawaban[] per id soal)
 
 Tahap 2 — Penilaian guru
 ─────────────────────────
-Guru buka /guru/riwayat-kuis, klik baris berstatus "Perlu Ditinjau" ─►
-dialog per soal: baca jawaban + feedback AI, input skor (0-100) ─►
+Guru buka /guru/riwayat-kuis, klik baris manapun (baik yang berstatus
+"Perlu Ditinjau" maupun yang sudah punya skor) ─► dialog per soal:
+baca jawaban + feedback AI, input/ubah skor (0-100) ─►
 PUT /guru/riwayat-kuis/{idUser}/{idModul} {skor: {id_kuis: nilai}}
       │
-      ├─ Hanya baris yang skor-nya masih NULL yang bisa diisi (baris
-      │   yang sudah final tidak bisa ditimpa lewat endpoint ini)
+      ├─ Guru bebas menambah skor baru ATAU mengubah skor yang sudah
+      │   final kapan pun — endpoint ini tidak membedakan keduanya
       │
-      └─ Setelah tersimpan, siswa langsung melihat skor final tersebut
-          di halaman modul & riwayatnya (badge warna berdasarkan skor)
+      └─ Setelah tersimpan, siswa langsung melihat skor (baru atau
+          revisi) tersebut di halaman modul & riwayatnya (badge warna
+          berdasarkan skor)
 ```
 
 ### 4.4 Riwayat

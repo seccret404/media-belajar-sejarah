@@ -57,8 +57,17 @@ export default function GuruRiwayatIndex({
     const [processing, setProcessing] = useState(false);
 
     useEffect(() => {
-        setSkorInput({});
-    }, [detail?.id]);
+        if (!detail) return;
+
+        setSkorInput(
+            Object.fromEntries(
+                detail.detail.map((item) => [
+                    item.id_kuis,
+                    item.skor === null ? '' : String(item.skor),
+                ]),
+            ),
+        );
+    }, [detail]);
 
     const applyFilters: FormEventHandler = (e) => {
         e.preventDefault();
@@ -87,7 +96,7 @@ export default function GuruRiwayatIndex({
 
     const belumLengkap =
         detail?.detail.some(
-            (item) => item.skor === null && !skorInput[item.id_kuis]?.trim(),
+            (item) => !skorInput[item.id_kuis]?.trim(),
         ) ?? true;
 
     return (
@@ -245,48 +254,37 @@ export default function GuruRiwayatIndex({
                                     <AiReviewNote text={item.review_ai} />
                                 )}
 
-                                {item.skor !== null ? (
-                                    <SkorBadge skor={item.skor} className="mt-2" />
-                                ) : (
-                                    <div className="mt-3 grid gap-1.5">
-                                        <Label
-                                            htmlFor={`skor-${item.id_kuis}`}
-                                        >
-                                            Skor (0-100)
-                                        </Label>
-                                        <Input
-                                            id={`skor-${item.id_kuis}`}
-                                            type="number"
-                                            min={0}
-                                            max={100}
-                                            required
-                                            className="w-28"
-                                            value={
-                                                skorInput[item.id_kuis] ?? ''
-                                            }
-                                            onChange={(e) =>
-                                                setSkorInput((prev) => ({
-                                                    ...prev,
-                                                    [item.id_kuis]:
-                                                        e.target.value,
-                                                }))
-                                            }
-                                        />
-                                    </div>
-                                )}
+                                <div className="mt-3 grid gap-1.5">
+                                    <Label htmlFor={`skor-${item.id_kuis}`}>
+                                        Skor (0-100)
+                                    </Label>
+                                    <Input
+                                        id={`skor-${item.id_kuis}`}
+                                        type="number"
+                                        min={0}
+                                        max={100}
+                                        required
+                                        className="w-28"
+                                        value={skorInput[item.id_kuis] ?? ''}
+                                        onChange={(e) =>
+                                            setSkorInput((prev) => ({
+                                                ...prev,
+                                                [item.id_kuis]: e.target.value,
+                                            }))
+                                        }
+                                    />
+                                </div>
                             </div>
                         ))}
 
-                        {detail?.status === 'menunggu' && (
-                            <DialogFooter>
-                                <Button
-                                    type="submit"
-                                    disabled={processing || belumLengkap}
-                                >
-                                    Simpan Skor
-                                </Button>
-                            </DialogFooter>
-                        )}
+                        <DialogFooter>
+                            <Button
+                                type="submit"
+                                disabled={processing || belumLengkap}
+                            >
+                                Simpan Skor
+                            </Button>
+                        </DialogFooter>
                     </form>
                 </DialogContent>
             </Dialog>
