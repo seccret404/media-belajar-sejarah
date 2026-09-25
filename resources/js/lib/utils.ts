@@ -11,6 +11,15 @@ export function toUrl(url: NonNullable<InertiaLinkProps['href']>): string {
     return typeof url === 'string' ? url : url.url;
 }
 
+export function initials(name: string): string {
+    return name
+        .split(' ')
+        .filter(Boolean)
+        .slice(0, 2)
+        .map((part) => part[0]?.toUpperCase())
+        .join('');
+}
+
 export function scoreBadgeClass(skor: number): string {
     if (skor >= 80) {
         return 'border-transparent bg-green-100 text-green-700 dark:bg-green-500/15 dark:text-green-400';

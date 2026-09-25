@@ -1,5 +1,5 @@
 import { Head, router } from '@inertiajs/react';
-import { ShieldAlert } from 'lucide-react';
+import { Bot, ShieldAlert } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -24,6 +24,7 @@ export default function SiswaKuisTake({
     soal: Soal[];
 }) {
     const [jawaban, setJawaban] = useState<Record<number, string>>({});
+    const [submitting, setSubmitting] = useState(false);
     const jawabanRef = useRef(jawaban);
     const submittedRef = useRef(false);
     const terjawab = soal.filter((item) =>
@@ -38,6 +39,7 @@ export default function SiswaKuisTake({
         }
 
         submittedRef.current = true;
+        setSubmitting(true);
 
         router.post(
             siswa.kuis.store(modul.id).url,
@@ -45,6 +47,7 @@ export default function SiswaKuisTake({
             {
                 onError: () => {
                     submittedRef.current = false;
+                    setSubmitting(false);
                 },
             },
         );
@@ -131,17 +134,42 @@ export default function SiswaKuisTake({
                                     }
                                     placeholder="Tulis jawabanmu di sini"
                                     className="min-h-32"
+                                    disabled={submitting}
                                     required
                                 />
                             </CardContent>
                         </Card>
                     ))}
 
-                    <Button type="submit" className="self-start shadow-sm">
+                    <Button
+                        type="submit"
+                        className="self-start shadow-sm"
+                        disabled={submitting}
+                    >
                         Kumpulkan Kuis
                     </Button>
                 </form>
             </div>
+
+            {submitting && (
+                <div className="bg-background/80 animate-in fade-in-0 fixed inset-0 z-50 flex flex-col items-center justify-center gap-4 backdrop-blur-sm duration-300">
+                    <div className="relative flex size-16 items-center justify-center">
+                        <span className="bg-primary/20 absolute inset-0 animate-ping rounded-full" />
+                        <div className="bg-primary text-primary-foreground relative flex size-16 items-center justify-center rounded-full shadow-lg">
+                            <Bot className="size-8" />
+                        </div>
+                    </div>
+                    <div className="text-center">
+                        <p className="text-base font-semibold">
+                            Sedang menilai jawabanmu...
+                        </p>
+                        <p className="text-muted-foreground mt-1 max-w-xs text-sm">
+                            AI sedang membaca dan memberi skor tiap jawaban.
+                            Mohon tunggu sebentar, jangan tutup halaman ini.
+                        </p>
+                    </div>
+                </div>
+            )}
         </>
     );
 }

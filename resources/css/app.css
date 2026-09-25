@@ -95,6 +95,12 @@
     --sidebar-accent-foreground: oklch(0.978 0.002 17.195);
     --sidebar-border: oklch(0.38 0.06 254);
     --sidebar-ring: oklch(0.545 0.111 254.079);
+
+    /* Status colors for score meters/charts — validated for CVD safety and
+       contrast against the light surface via the dataviz palette validator. */
+    --chart-good: #15803d;
+    --chart-warning: #f59e0b;
+    --chart-critical: #dc2626;
 }
 
 .dark {
@@ -130,6 +136,12 @@
     --sidebar-accent-foreground: oklch(0.978 0.002 17.195);
     --sidebar-border: oklch(0.38 0.06 254);
     --sidebar-ring: oklch(0.545 0.111 254.079);
+
+    /* Re-stepped against the dark surface, not a flip of the light values —
+       see the dataviz palette validator output for this exact triple. */
+    --chart-good: #15803d;
+    --chart-warning: #d97706;
+    --chart-critical: #be123c;
 }
 
 @layer base {

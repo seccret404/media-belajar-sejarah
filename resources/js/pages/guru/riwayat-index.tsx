@@ -1,6 +1,7 @@
 import { Head, router } from '@inertiajs/react';
 import { Inbox, Search } from 'lucide-react';
 import { FormEventHandler, useState } from 'react';
+import { AiReviewNote } from '@/components/ai-review-note';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -19,16 +20,7 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import guru from '@/routes/guru';
-import { scoreBadgeClass } from '@/lib/utils';
-
-function initials(name: string) {
-    return name
-        .split(' ')
-        .filter(Boolean)
-        .slice(0, 2)
-        .map((part) => part[0]?.toUpperCase())
-        .join('');
-}
+import { initials, scoreBadgeClass } from '@/lib/utils';
 
 type DetailItem = {
     soal: string;
@@ -199,9 +191,7 @@ export default function GuruRiwayatIndex({
                                     Skor {item.skor}
                                 </Badge>
                                 {item.review_ai && (
-                                    <p className="text-muted-foreground mt-2 text-sm italic">
-                                        Review AI: {item.review_ai}
-                                    </p>
+                                    <AiReviewNote text={item.review_ai} />
                                 )}
                             </div>
                         ))}

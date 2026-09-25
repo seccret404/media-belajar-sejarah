@@ -16,21 +16,23 @@ class DashboardTest extends TestCase
         $response->assertRedirect(route('login'));
     }
 
-    public function test_siswa_is_redirected_to_modul_index()
+    public function test_siswa_sees_the_siswa_dashboard()
     {
         $user = User::factory()->siswa()->create();
         $this->actingAs($user);
 
         $response = $this->get(route('dashboard'));
-        $response->assertRedirect(route('siswa.modul.index'));
+        $response->assertOk();
+        $this->assertSame('siswa/dashboard', $response->inertiaPage()['component']);
     }
 
-    public function test_guru_is_redirected_to_kelola_kuis()
+    public function test_guru_sees_the_guru_dashboard()
     {
         $user = User::factory()->guru()->create();
         $this->actingAs($user);
 
         $response = $this->get(route('dashboard'));
-        $response->assertRedirect(route('guru.modul.index'));
+        $response->assertOk();
+        $this->assertSame('guru/dashboard', $response->inertiaPage()['component']);
     }
 }

@@ -1,5 +1,10 @@
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, ClipboardList, History } from 'lucide-react';
+import {
+    BookOpen,
+    ClipboardList,
+    History,
+    LayoutDashboard,
+} from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
@@ -19,6 +24,11 @@ import type { Auth, NavItem } from '@/types';
 
 const guruNavItems: NavItem[] = [
     {
+        title: 'Dashboard',
+        href: dashboard(),
+        icon: LayoutDashboard,
+    },
+    {
         title: 'Kelola Kuis',
         href: guru.modul.index(),
         icon: ClipboardList,
@@ -31,6 +41,11 @@ const guruNavItems: NavItem[] = [
 ];
 
 const siswaNavItems: NavItem[] = [
+    {
+        title: 'Dashboard',
+        href: dashboard(),
+        icon: LayoutDashboard,
+    },
     {
         title: 'Modul',
         href: siswa.modul.index(),

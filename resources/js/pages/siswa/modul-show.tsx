@@ -13,6 +13,7 @@ import {
     Target,
 } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { AiReviewNote } from '@/components/ai-review-note';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -387,9 +388,7 @@ export default function SiswaModulShow({
                                         Skor {item.skor}
                                     </Badge>
                                     {item.review_ai && (
-                                        <p className="text-muted-foreground mt-2 text-sm italic">
-                                            Review AI: {item.review_ai}
-                                        </p>
+                                        <AiReviewNote text={item.review_ai} />
                                     )}
                                 </CardContent>
                             </Card>
