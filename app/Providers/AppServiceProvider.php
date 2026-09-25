@@ -8,6 +8,7 @@ use App\Services\Grading\PendingGradingService;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 
@@ -40,6 +41,13 @@ class AppServiceProvider extends ServiceProvider
      */
     protected function configureDefaults(): void
     {
+        // Some MySQL/MariaDB hosts still default to the older InnoDB row
+        // format (no innodb_large_prefix), which caps indexed keys at 767
+        // bytes — too small for a utf8mb4 varchar(255) unique index. Capping
+        // the default migration string length keeps unique/indexed columns
+        // (e.g. users.email) under that limit everywhere.
+        Schema::defaultStringLength(191);
+
         Date::use(CarbonImmutable::class);
 
         DB::prohibitDestructiveCommands(
