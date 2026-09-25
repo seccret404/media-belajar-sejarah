@@ -41,31 +41,33 @@ export function DeveloperInfoDialog() {
                     <span className="hidden sm:inline">Info Pengembang</span>
                 </Button>
             </DialogTrigger>
-            <DialogContent className="overflow-hidden p-0 sm:max-w-md [&_[data-slot=dialog-close]]:text-white [&_[data-slot=dialog-close]]:opacity-90 [&_[data-slot=dialog-close]]:hover:bg-white/10 [&_[data-slot=dialog-close]]:hover:opacity-100">
+            <DialogContent className="overflow-hidden sm:max-w-md">
                 <DialogTitle className="sr-only">Info Pengembang</DialogTitle>
 
-                {/* Aurora banner */}
-                <div className="relative h-28 overflow-hidden bg-gradient-to-br from-blue-600 via-indigo-600 to-violet-700">
-                    <div className="absolute -top-8 -left-6 size-32 rounded-full bg-sky-400/40 blur-2xl" />
-                    <div className="absolute top-2 -right-4 size-28 rounded-full bg-fuchsia-400/30 blur-2xl" />
-                    <div className="absolute bottom-0 left-1/3 size-24 rounded-full bg-emerald-300/20 blur-2xl" />
-                    <div className="absolute inset-0 opacity-10 [background-image:radial-gradient(white_1px,transparent_1px)] [background-size:18px_18px]" />
-                    <Sparkles className="absolute top-4 right-14 size-4 animate-pulse text-white/50" />
-                    <Sparkles className="absolute top-10 right-24 size-3 text-white/30" />
-                    <Sparkles className="absolute bottom-3 left-8 size-3 text-white/30" />
-                </div>
+                {/* Scattered decorative blobs instead of a solid banner */}
+                <div className="absolute -top-10 -left-10 size-32 rounded-full bg-blue-400/20 blur-3xl dark:bg-blue-500/10" />
+                <div className="absolute -top-8 -right-12 size-32 rounded-full bg-amber-300/25 blur-3xl dark:bg-amber-400/10" />
+                <div className="bg-emerald-300/15 absolute right-10 bottom-0 size-24 rounded-full blur-3xl dark:bg-emerald-400/10" />
 
-                <div className="-mt-14 flex flex-col items-center px-6 pb-6 text-center">
-                    <div className="animate-in zoom-in-50 fade-in-0 rounded-full bg-gradient-to-br from-blue-500 via-indigo-500 to-violet-500 p-1 shadow-xl">
-                        <img
-                            src={developerPhoto}
-                            alt="Foto Rahmi Isnaini"
-                            className="border-background size-28 rounded-full border-4 object-cover"
-                        />
+                <div className="relative flex flex-col items-center text-center">
+                    {/* Tilted photo card */}
+                    <div className="animate-in zoom-in-50 fade-in-0 relative">
+                        <div className="from-primary rotate-[-4deg] rounded-2xl bg-gradient-to-br to-blue-700 p-1.5 shadow-lg">
+                            <img
+                                src={developerPhoto}
+                                alt="Foto Rahmi Isnaini"
+                                className="size-32 rounded-xl object-cover"
+                                style={{ objectPosition: '50% 42%' }}
+                            />
+                        </div>
+                        <div className="bg-background ring-primary/20 absolute -right-3 -bottom-2 flex size-9 items-center justify-center rounded-full shadow-md ring-2">
+                            <GraduationCap className="text-primary size-4" />
+                        </div>
+                        <Sparkles className="text-primary/50 absolute -top-3 -left-4 size-4" />
                     </div>
 
                     <div
-                        className="animate-in fade-in-0 slide-in-from-bottom-2 fill-mode-backwards mt-3"
+                        className="animate-in fade-in-0 slide-in-from-bottom-2 fill-mode-backwards mt-4"
                         style={{ animationDelay: '80ms' }}
                     >
                         <h2 className="text-xl font-bold">Rahmi Isnaini</h2>
