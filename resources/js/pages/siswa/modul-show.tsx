@@ -304,13 +304,13 @@ export default function SiswaModulShow({
                                 </div>
                             ) : (
                                 <div className="relative">
-                                    <span className="text-foreground/5 pointer-events-none absolute -top-4 right-0 text-8xl font-black select-none">
+                                    <span className="text-foreground/5 pointer-events-none absolute -top-4 right-0 hidden text-8xl font-black select-none sm:block">
                                         {String(sectionIndex + 1).padStart(
                                             2,
                                             '0',
                                         )}
                                     </span>
-                                    <h2 className="relative mb-4 flex items-center gap-2 text-lg font-semibold">
+                                    <h2 className="relative mb-4 flex items-center gap-2 text-lg font-semibold sm:pr-20">
                                         <span
                                             className={cn(
                                                 'flex size-9 shrink-0 items-center justify-center rounded-lg',

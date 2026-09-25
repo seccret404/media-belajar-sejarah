@@ -82,7 +82,7 @@ export default function GuruRiwayatIndex({
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
                                 placeholder="Nama siswa atau tahun angkatan"
-                                className="w-64 pl-8"
+                                className="w-64 max-w-full pl-8"
                             />
                         </div>
                     </div>
@@ -91,71 +91,102 @@ export default function GuruRiwayatIndex({
                     </Button>
                 </form>
 
-                <div className="overflow-hidden rounded-xl border">
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead>Nama</TableHead>
-                                <TableHead>Angkatan</TableHead>
-                                <TableHead>Modul</TableHead>
-                                <TableHead>Skor</TableHead>
-                                <TableHead />
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {riwayat.length === 0 && (
+                {riwayat.length === 0 && (
+                    <div className="text-muted-foreground flex flex-col items-center justify-center gap-2 rounded-xl border py-16 text-center">
+                        <div className="bg-muted flex size-12 items-center justify-center rounded-full">
+                            <Inbox className="size-6" />
+                        </div>
+                        <p className="text-sm">
+                            Belum ada siswa yang mengerjakan kuis.
+                        </p>
+                    </div>
+                )}
+
+                {/* Mobile: stacked cards instead of a horizontally-cramped table */}
+                {riwayat.length > 0 && (
+                    <div className="flex flex-col gap-2 md:hidden">
+                        {riwayat.map((item) => (
+                            <button
+                                key={item.id}
+                                type="button"
+                                onClick={() => setDetail(item)}
+                                className="hover:bg-muted/50 flex items-center gap-3 rounded-xl border p-3 text-left transition-colors"
+                            >
+                                <div className="bg-primary/10 text-primary flex size-9 shrink-0 items-center justify-center rounded-full text-xs font-semibold">
+                                    {initials(item.nama)}
+                                </div>
+                                <div className="min-w-0 flex-1">
+                                    <p className="truncate text-sm font-medium">
+                                        {item.nama}
+                                    </p>
+                                    <p className="text-muted-foreground truncate text-xs">
+                                        {item.modul}
+                                        {item.angkatan
+                                            ? ` · Angkatan ${item.angkatan}`
+                                            : ''}
+                                    </p>
+                                </div>
+                                <Badge className={scoreBadgeClass(item.skor)}>
+                                    {item.skor}
+                                </Badge>
+                            </button>
+                        ))}
+                    </div>
+                )}
+
+                {/* Desktop: full table */}
+                {riwayat.length > 0 && (
+                    <div className="hidden overflow-hidden rounded-xl border md:block">
+                        <Table>
+                            <TableHeader>
                                 <TableRow>
-                                    <TableCell colSpan={5} className="h-40">
-                                        <div className="text-muted-foreground flex flex-col items-center justify-center gap-2 text-center">
-                                            <div className="bg-muted flex size-12 items-center justify-center rounded-full">
-                                                <Inbox className="size-6" />
-                                            </div>
-                                            <p className="text-sm">
-                                                Belum ada siswa yang mengerjakan
-                                                kuis.
-                                            </p>
-                                        </div>
-                                    </TableCell>
+                                    <TableHead>Nama</TableHead>
+                                    <TableHead>Angkatan</TableHead>
+                                    <TableHead>Modul</TableHead>
+                                    <TableHead>Skor</TableHead>
+                                    <TableHead />
                                 </TableRow>
-                            )}
-                            {riwayat.map((item) => (
-                                <TableRow
-                                    key={item.id}
-                                    className="hover:bg-muted/50 transition-colors"
-                                >
-                                    <TableCell>
-                                        <div className="flex items-center gap-2.5">
-                                            <div className="bg-primary/10 text-primary flex size-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold">
-                                                {initials(item.nama)}
+                            </TableHeader>
+                            <TableBody>
+                                {riwayat.map((item) => (
+                                    <TableRow
+                                        key={item.id}
+                                        className="hover:bg-muted/50 transition-colors"
+                                    >
+                                        <TableCell>
+                                            <div className="flex items-center gap-2.5">
+                                                <div className="bg-primary/10 text-primary flex size-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold">
+                                                    {initials(item.nama)}
+                                                </div>
+                                                {item.nama}
                                             </div>
-                                            {item.nama}
-                                        </div>
-                                    </TableCell>
-                                    <TableCell>{item.angkatan}</TableCell>
-                                    <TableCell>{item.modul}</TableCell>
-                                    <TableCell>
-                                        <Badge
-                                            className={scoreBadgeClass(
-                                                item.skor,
-                                            )}
-                                        >
-                                            {item.skor}
-                                        </Badge>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Button
-                                            variant="outline"
-                                            size="sm"
-                                            onClick={() => setDetail(item)}
-                                        >
-                                            Detail
-                                        </Button>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </div>
+                                        </TableCell>
+                                        <TableCell>{item.angkatan}</TableCell>
+                                        <TableCell>{item.modul}</TableCell>
+                                        <TableCell>
+                                            <Badge
+                                                className={scoreBadgeClass(
+                                                    item.skor,
+                                                )}
+                                            >
+                                                {item.skor}
+                                            </Badge>
+                                        </TableCell>
+                                        <TableCell>
+                                            <Button
+                                                variant="outline"
+                                                size="sm"
+                                                onClick={() => setDetail(item)}
+                                            >
+                                                Detail
+                                            </Button>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </div>
+                )}
             </div>
 
             <Dialog
