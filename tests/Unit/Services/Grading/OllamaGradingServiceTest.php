@@ -28,65 +28,44 @@ class OllamaGradingServiceTest extends TestCase
         ]);
     }
 
-    public function test_returns_parsed_score_and_review_on_success(): void
+    public function test_returns_the_reviews_plain_text_on_success(): void
     {
         Http::fake([
             'ollama.test/*' => Http::response([
-                'message' => [
-                    'content' => json_encode(['skor' => 85, 'review' => 'Jawaban cukup baik.']),
-                ],
+                'message' => ['content' => 'Jawaban kamu sudah cukup tepat, coba tambahkan contoh.'],
             ]),
         ]);
 
         $hasil = (new OllamaGradingService)->grade($this->kuis(), 'Sejarah adalah ilmu masa lalu.');
 
-        $this->assertSame(85, $hasil->skor);
-        $this->assertSame('Jawaban cukup baik.', $hasil->review);
+        $this->assertSame('Jawaban kamu sudah cukup tepat, coba tambahkan contoh.', $hasil->review);
     }
 
-    public function test_clamps_score_outside_zero_to_hundred(): void
+    public function test_strips_wrapping_quotes_and_markdown_fences(): void
     {
         Http::fake([
             'ollama.test/*' => Http::response([
-                'message' => [
-                    'content' => json_encode(['skor' => 150, 'review' => 'Sempurna.']),
-                ],
+                'message' => ['content' => "```\n\"Kamu sudah menjawab dengan baik.\"\n```"],
             ]),
         ]);
 
         $hasil = (new OllamaGradingService)->grade($this->kuis(), 'Jawaban.');
 
-        $this->assertSame(100, $hasil->skor);
+        $this->assertSame('Kamu sudah menjawab dengan baik.', $hasil->review);
     }
 
-    public function test_extracts_json_surrounded_by_extra_text(): void
+    public function test_falls_back_when_response_is_empty(): void
     {
         Http::fake([
-            'ollama.test/*' => Http::response([
-                'message' => [
-                    'content' => "Here is the result:\n{\"skor\": 70, \"review\": \"Lumayan.\"}\nThanks.",
-                ],
-            ]),
+            'ollama.test/*' => Http::response(['message' => ['content' => '']]),
         ]);
 
         $hasil = (new OllamaGradingService)->grade($this->kuis(), 'Jawaban.');
 
-        $this->assertSame(70, $hasil->skor);
-        $this->assertSame('Lumayan.', $hasil->review);
-    }
-
-    public function test_falls_back_when_response_is_not_valid_json(): void
-    {
-        Http::fake([
-            'ollama.test/*' => Http::response([
-                'message' => ['content' => 'bukan json sama sekali'],
-            ]),
-        ]);
-
-        $hasil = (new OllamaGradingService)->grade($this->kuis(), 'Jawaban.');
-
-        $this->assertSame(0, $hasil->skor);
-        $this->assertNotEmpty($hasil->review);
+        $this->assertSame(
+            'Penilaian otomatis gagal diproses. Jawaban ini perlu ditinjau ulang oleh guru.',
+            $hasil->review,
+        );
     }
 
     public function test_falls_back_when_http_request_fails(): void
@@ -97,7 +76,6 @@ class OllamaGradingServiceTest extends TestCase
 
         $hasil = (new OllamaGradingService)->grade($this->kuis(), 'Jawaban.');
 
-        $this->assertSame(0, $hasil->skor);
         $this->assertNotEmpty($hasil->review);
     }
 }

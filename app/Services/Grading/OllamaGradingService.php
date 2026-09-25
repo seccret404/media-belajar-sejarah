@@ -8,8 +8,10 @@ use Illuminate\Support\Facades\Log;
 use Throwable;
 
 /**
- * Grades a student's essay answer by asking a hosted Ollama model to
- * compare it against the teacher's expected answer and answer key.
+ * Writes feedback on a student's essay answer by asking a hosted Ollama
+ * model to compare it against the teacher's expected answer and answer
+ * key. It does not grade — a guru reads this feedback and decides the
+ * final skor themselves.
  */
 class OllamaGradingService implements GradingService
 {
@@ -22,7 +24,6 @@ class OllamaGradingService implements GradingService
                 ->post((string) config('services.ollama.url'), [
                     'model' => config('services.ollama.model'),
                     'stream' => false,
-                    'format' => 'json',
                     'messages' => [
                         ['role' => 'system', 'content' => $this->systemPrompt()],
                         ['role' => 'user', 'content' => $this->userPrompt($kuis, $jawabanSiswa)],
@@ -30,20 +31,18 @@ class OllamaGradingService implements GradingService
                 ])
                 ->throw();
 
-            $content = (string) data_get($response->json(), 'message.content', '');
-            $result = $this->parseResult($content);
+            $review = $this->cleanReview((string) data_get($response->json(), 'message.content', ''));
 
-            if ($result !== null) {
-                return $result;
+            if ($review !== '') {
+                return new GradingResult(review: $review);
             }
 
-            Log::warning('Penilaian AI: respons tidak dapat diproses.', ['content' => $content]);
+            Log::warning('Penilaian AI: respons kosong.');
         } catch (Throwable $e) {
             Log::error('Penilaian AI gagal.', ['error' => $e->getMessage()]);
         }
 
         return new GradingResult(
-            skor: 0,
             review: 'Penilaian otomatis gagal diproses. Jawaban ini perlu ditinjau ulang oleh guru.',
         );
     }
@@ -51,13 +50,15 @@ class OllamaGradingService implements GradingService
     protected function systemPrompt(): string
     {
         return <<<'PROMPT'
-            Kamu adalah asisten guru sejarah yang menilai jawaban esai singkat siswa SMA.
-            Nilai jawaban siswa dari 0 sampai 100 berdasarkan seberapa lengkap dan tepat jawaban
-            tersebut dibandingkan dengan jawaban guru dan poin-poin kunci yang diharapkan.
-            Berikan juga catatan singkat (1-2 kalimat, berbahasa Indonesia, sapa siswa dengan "kamu")
-            yang membangun dan membantu siswa memperbaiki jawabannya.
-            Balas HANYA dalam format JSON, tanpa teks lain, dengan struktur persis:
-            {"skor": <angka 0-100>, "review": "<catatan singkat>"}
+            Kamu adalah asisten guru sejarah yang membantu memeriksa jawaban esai
+            singkat siswa SMA. Bandingkan jawaban siswa dengan jawaban guru dan
+            poin-poin kunci yang diharapkan, lalu tulis catatan singkat (1-2 kalimat,
+            berbahasa Indonesia, sapa siswa dengan "kamu") yang membangun: sebutkan
+            apa yang sudah tepat dan apa yang masih kurang atau bisa ditambahkan.
+            Catatan ini HANYA bahan pertimbangan untuk guru — kamu TIDAK menentukan
+            skor atau nilai akhir, jadi jangan menyebutkan angka skor sama sekali.
+            Balas HANYA dengan catatan tersebut sebagai teks polos, tanpa JSON, tanpa
+            tanda kutip, dan tanpa embel-embel lain.
             PROMPT;
     }
 
@@ -77,27 +78,16 @@ class OllamaGradingService implements GradingService
             PROMPT;
     }
 
-    protected function parseResult(string $content): ?GradingResult
+    /**
+     * Models sometimes ignore the "plain text only" instruction and wrap
+     * the note in quotes or a markdown code fence — strip that defensively.
+     */
+    protected function cleanReview(string $content): string
     {
         $content = trim($content);
-        $data = json_decode($content, true);
+        $content = preg_replace('/^```[a-z]*\n?|\n?```$/i', '', $content) ?? $content;
+        $content = trim($content, " \t\n\r\0\x0B\"'");
 
-        if (! is_array($data) && preg_match('/\{.*\}/s', $content, $matches)) {
-            $data = json_decode($matches[0], true);
-        }
-
-        if (! is_array($data) || ! isset($data['skor'], $data['review'])) {
-            return null;
-        }
-
-        $skor = (int) round((float) $data['skor']);
-        $skor = max(0, min(100, $skor));
-
-        $review = trim((string) $data['review']);
-        if ($review === '') {
-            return null;
-        }
-
-        return new GradingResult(skor: $skor, review: $review);
+        return trim($content);
     }
 }

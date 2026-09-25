@@ -144,9 +144,10 @@ POST /siswa/modul/{modul}/kuis  (jawaban[] per id soal)
       │        ├─ Kalau OLLAMA_API_KEY dikonfigurasi:
       │        │     → OllamaGradingService: kirim soal + jawaban guru +
       │        │       key_jawaban + jawaban siswa ke model AI (Ollama Cloud)
-      │        │     → AI balas JSON {"skor": 0-100, "review": "..."}
-      │        │       (skor dari AI ini dibuang — hanya "review" dipakai)
-      │        │     → kalau gagal/response rusak → fallback pesan
+      │        │     → AI balas teks polos berisi catatan feedback saja
+      │        │       (prompt eksplisit melarang AI menyebutkan angka
+      │        │       skor sama sekali — lihat §7)
+      │        │     → kalau gagal/response kosong → fallback pesan
       │        │       "penilaian otomatis gagal diproses"
       │        │
       │        └─ Kalau API key kosong:
@@ -231,4 +232,4 @@ memisahkan "sudah dikumpulkan" dari "sudah dinilai guru". `review_ai` diisi otom
 - Provider: **Ollama Cloud** (`https://ollama.com/api/chat`), diatur lewat `OLLAMA_URL`, `OLLAMA_API_KEY`, `OLLAMA_MODEL` di `.env`.
 - Kalau `OLLAMA_API_KEY` kosong → otomatis pakai `PendingGradingService` (feedback placeholder "penilaian AI belum diaktifkan") — ini juga yang dipakai saat menjalankan test suite, supaya test tetap cepat dan tidak bergantung koneksi internet.
 - Model aktif saat ini: `gpt-oss:20b`.
-- **AI sama sekali tidak menyentuh kolom `skor`** — lihat §4.3. Skor yang dikembalikan AI di response JSON-nya dibuang begitu saja; hanya field `review` yang disimpan (ke `review_ai`).
+- **AI sama sekali tidak menyentuh kolom `skor`** — lihat §4.3. Prompt sistemnya (`OllamaGradingService::systemPrompt()`) secara eksplisit menginstruksikan AI untuk hanya menulis catatan feedback teks polos (bukan JSON, bukan angka skor); hasilnya langsung disimpan ke `review_ai`.
