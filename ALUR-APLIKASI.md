@@ -21,8 +21,7 @@ Dibangun di atas Laravel Fortify. Semua teks UI sudah dalam Bahasa Indonesia.
 /  (welcome)
  ├─ Masuk ───────► /login
  │                   ├─ email + password + "ingat saya"
- │                   ├─ lupa password? ──► /forgot-password ─(email berisi link)─► /reset-password/{token} ──► login ulang
- │                   └─ (kalau 2FA aktif) ──► /two-factor-challenge
+ │                   └─ lupa password? ──► /forgot-password ─(email berisi link)─► /reset-password/{token} ──► login ulang
  └─ Daftar sebagai siswa ─► /register
                      ├─ nama, email, angkatan (tahun masuk), password
                      └─ auto-login sebagai siswa setelah submit
@@ -33,7 +32,7 @@ Setelah login sukses → redirect ke `/dashboard` → `DashboardController` meng
 - `role = guru` → `route('guru.modul.index')` (Kelola Kuis)
 - `role = siswa` → `route('siswa.modul.index')` (Modul Belajar)
 
-Menu **Pengaturan** (ikon avatar di sidebar) tersedia untuk kedua role: Profil, Keamanan (ganti password, 2FA, passkey), Tampilan (light/dark, default light).
+Menu **Pengaturan** (ikon avatar di sidebar) tersedia untuk kedua role: Profil (nama, email), Tampilan (light/dark, default light). Tidak ada menu ganti password/2FA/passkey maupun hapus akun sendiri — reset password hanya lewat alur "lupa password" di atas.
 
 ## 3. Alur Guru
 
@@ -44,18 +43,32 @@ Kelola Kuis (index)                Kelola Kuis (per modul)              Riwayat 
 Daftar 8 modul + jumlah soal   ──►  Form daftar soal esai:                Tabel semua siswa yang
 per modul (card grid)               • edit soal / jawaban guru /          sudah submit kuis:
                                        key jawaban                        • cari nama / angkatan
-                                     • tambah soal baru                   • kolom skor (badge warna:
-                                     • hapus soal (hanya kalau              hijau ≥80, kuning ≥60,
-                                       belum pernah dikerjakan               merah <60)
-                                       siswa manapun)                     • tombol Detail ─► dialog
-                                     • simpan (PUT, replace soal            berisi tiap jawaban +
-                                       yang dihapus dari form)              skor + review AI
+                                     • tambah soal baru                   • badge status: "Perlu
+                                     • hapus soal (hanya kalau              Ditinjau" (amber, belum
+                                       belum pernah dikerjakan               ada skor) atau skor
+                                       siswa manapun)                       final (badge warna:
+                                     • simpan (PUT, replace soal            hijau ≥80, kuning ≥60,
+                                       yang dihapus dari form)              merah <60)
+                                                                          • baris "Perlu Ditinjau"
+                                                                            selalu tampil di atas
+                                                                          • tombol Detail ─► dialog
+                                                                            tiap soal: jawaban +
+                                                                            feedback AI + input
+                                                                            skor manual (soal yang
+                                                                            belum dinilai) atau
+                                                                            skor final (read-only)
+                                                                          • "Simpan Skor" (PUT) —
+                                                                            hanya bisa isi skor
+                                                                            untuk baris yang masih
+                                                                            null, tidak bisa
+                                                                            menimpa skor final
 ```
 
 Catatan penting:
 
 - Data **materi bacaan modul** (judul, tujuan pembelajaran, isi per bagian) **tidak** dikelola dari UI guru — itu berasal dari file statis `resources/data/modul-materi.json` yang dibaca lewat `App\Services\ModulContent`. Guru hanya mengelola **soal kuis** (tabel `kuis`), bukan materinya.
 - Riwayat Kuis hanya menampilkan siswa yang **sudah submit** (`jawaban IS NOT NULL`) — pengerjaan yang masih "in-progress" (soal sudah diacak tapi belum dikumpulkan) tidak muncul di sini maupun di daftar modul selesai.
+- **AI tidak menentukan skor final** — AI hanya memberi feedback teks (`review_ai`) sebagai bahan pertimbangan. Guru yang membaca feedback itu dan menginput skor (0-100) secara manual per soal. Lihat §4.3 untuk detail alurnya.
 
 ## 4. Alur Siswa
 
@@ -112,9 +125,15 @@ Halaman Kerjakan Kuis:
   • tombol "Kumpulkan Kuis" (submit manual)
 ```
 
-### 4.3 Submit & Penilaian Otomatis
+### 4.3 Submit, Feedback AI, dan Penilaian Guru
+
+AI **tidak** menentukan skor akhir. Alurnya dipecah jadi dua tahap terpisah:
+siswa submit → AI kasih feedback (langsung terlihat siswa) → **guru** yang
+baca feedback itu dan input skor manual → skor final baru muncul ke siswa.
 
 ```
+Tahap 1 — Submit siswa
+───────────────────────
 POST /siswa/modul/{modul}/kuis  (jawaban[] per id soal)
       │
       ├─ Tolak (409) kalau kuis belum diambil, atau sudah pernah disubmit
@@ -126,19 +145,33 @@ POST /siswa/modul/{modul}/kuis  (jawaban[] per id soal)
       │        │     → OllamaGradingService: kirim soal + jawaban guru +
       │        │       key_jawaban + jawaban siswa ke model AI (Ollama Cloud)
       │        │     → AI balas JSON {"skor": 0-100, "review": "..."}
-      │        │     → kalau gagal/response rusak → fallback skor 0 +
-      │        │       pesan "perlu ditinjau ulang oleh guru"
+      │        │       (skor dari AI ini dibuang — hanya "review" dipakai)
+      │        │     → kalau gagal/response rusak → fallback pesan
+      │        │       "penilaian otomatis gagal diproses"
       │        │
       │        └─ Kalau API key kosong:
-      │              → PendingGradingService: skor 0, "penilaian AI belum
+      │              → PendingGradingService: "penilaian AI belum
       │                diaktifkan" (placeholder, dipakai saat testing)
       │
-      ├─ Simpan jawaban + skor + review_ai ke history_user (1 transaksi
-      │   DB singkat, terpisah dari pemanggilan AI yang bisa lambat)
+      ├─ Simpan jawaban + review_ai ke history_user — skor TETAP NULL
+      │   (1 transaksi DB singkat, terpisah dari pemanggilan AI yang
+      │   bisa lambat)
       │
-      └─ Redirect ke /siswa/modul/{modul} → sekarang menampilkan
-          bagian "Review Kuis": tiap soal + jawaban siswa + skor
-          (badge warna) + catatan AI
+      └─ Redirect ke /siswa/modul/{modul} → bagian "Review Kuis":
+          tiap soal + jawaban siswa + feedback AI + badge "Perlu
+          Ditinjau" (skor belum ada)
+
+Tahap 2 — Penilaian guru
+─────────────────────────
+Guru buka /guru/riwayat-kuis, klik baris berstatus "Perlu Ditinjau" ─►
+dialog per soal: baca jawaban + feedback AI, input skor (0-100) ─►
+PUT /guru/riwayat-kuis/{idUser}/{idModul} {skor: {id_kuis: nilai}}
+      │
+      ├─ Hanya baris yang skor-nya masih NULL yang bisa diisi (baris
+      │   yang sudah final tidak bisa ditimpa lewat endpoint ini)
+      │
+      └─ Setelah tersimpan, siswa langsung melihat skor final tersebut
+          di halaman modul & riwayatnya (badge warna berdasarkan skor)
 ```
 
 ### 4.4 Riwayat
@@ -147,9 +180,12 @@ POST /siswa/modul/{modul}/kuis  (jawaban[] per id soal)
 /siswa/riwayat                       /siswa/riwayat/{modul}
 ──────────────────────                ──────────────────────────
 Daftar modul yang sudah                Detail per soal: pertanyaan,
-dikerjakan + skor rata-rata            jawaban siswa, skor, review AI
-(badge warna hijau/kuning/merah)        (read-only, sama seperti bagian
-Kalau belum ada yang dikerjakan:        review di halaman modul)
+dikerjakan + status:                   jawaban siswa, skor (atau badge
+• skor rata-rata (badge warna)           "Perlu Ditinjau"), review AI
+  kalau semua soal sudah dinilai         (read-only, sama seperti bagian
+• "Perlu Ditinjau" kalau masih ada       review di halaman modul)
+  soal yang belum diberi skor guru
+Kalau belum ada yang dikerjakan:
 tampil empty state (ikon + pesan)
 ```
 
@@ -159,9 +195,12 @@ tampil empty state (ikon + pesan)
 | -------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `modul`        | `id`, `nama_modul`, `urutan`                                                                      | Hanya metadata; **materi bacaan** ada di `resources/data/modul-materi.json` (di-load via `ModulContent`, di-cache)                                                 |
 | `kuis`         | `id_modul`, `soal`, `jawaban_ekspektasi`, `key_jawaban`                                           | Bank soal esai per modul; diisi awal dari `resources/data/kuis-evaluasi.json`, bisa diedit guru                                                                    |
-| `history_user` | `id_user`, `id_modul`, `id_kuis`, `jawaban` (nullable), `skor` (nullable), `review_ai` (nullable) | Satu baris = satu soal yang ditugaskan ke satu siswa. `jawaban IS NULL` = soal sudah diacak/ditugaskan tapi **belum dikumpulkan**. Unique per `(id_user, id_kuis)` |
+| `history_user` | `id_user`, `id_modul`, `id_kuis`, `jawaban` (nullable), `skor` (nullable), `review_ai` (nullable) | Satu baris = satu soal yang ditugaskan ke satu siswa. `jawaban IS NULL` = soal sudah diacak/ditugaskan tapi **belum dikumpulkan**. `skor IS NULL` (padahal `jawaban` sudah terisi) = sudah dikumpulkan tapi **belum dinilai guru**. Unique per `(id_user, id_kuis)` |
 
-Alasan `jawaban`/`skor` nullable: memisahkan status "kuis sudah diacak untuk siswa ini" (baris dibuat) dari "kuis sudah dikumpulkan" (baris terisi) — inilah dasar dari semua logic "belum vs sudah dikerjakan" di seluruh aplikasi.
+Alasan `jawaban`/`skor` nullable: keduanya independen dan masing-masing menandai satu transisi status —
+`jawaban` memisahkan "kuis sudah diacak untuk siswa ini" dari "kuis sudah dikumpulkan", sementara `skor`
+memisahkan "sudah dikumpulkan" dari "sudah dinilai guru". `review_ai` diisi otomatis begitu siswa submit
+(independen dari `skor`), sedangkan `skor` hanya diisi lewat input manual guru di Riwayat Kuis.
 
 ## 6. Ringkasan Route
 
@@ -176,17 +215,18 @@ Alasan `jawaban`/`skor` nullable: memisahkan status "kuis sudah diacak untuk sis
 | GET              | `/guru/kelola-kuis`         | `guru.modul.index`                       | Daftar modul (guru)          |
 | GET/PUT          | `/guru/kelola-kuis/{modul}` | `guru.modul.show` / `guru.modul.update`  | Kelola soal per modul        |
 | GET              | `/guru/riwayat-kuis`        | `guru.riwayat.index`                     | Riwayat semua siswa          |
+| PUT              | `/guru/riwayat-kuis/{idUser}/{idModul}` | `guru.riwayat.update`        | Input skor manual per soal   |
 | GET              | `/siswa/modul`              | `siswa.modul.index`                      | Daftar modul (siswa)         |
 | GET              | `/siswa/modul/{modul}`      | `siswa.modul.show`                       | Slide materi + review kuis   |
 | GET/POST         | `/siswa/modul/{modul}/kuis` | `siswa.kuis.create` / `siswa.kuis.store` | Ambil & submit kuis          |
 | GET              | `/siswa/riwayat`            | `siswa.riwayat.index`                    | Riwayat pribadi              |
 | GET              | `/siswa/riwayat/{modul}`    | `siswa.riwayat.show`                     | Detail riwayat per modul     |
-| GET/PATCH/DELETE | `/settings/profile`         | `profile.edit` / `.update` / `.destroy`  | Pengaturan profil            |
-| GET/PUT          | `/settings/security`        | `security.edit` / `user-password.update` | Password, 2FA, passkey       |
+| GET/PATCH        | `/settings/profile`         | `profile.edit` / `.update`               | Pengaturan profil            |
 | GET              | `/settings/appearance`      | `appearance.edit`                        | Tema tampilan                |
 
 ## 7. Konfigurasi Penilaian AI
 
 - Provider: **Ollama Cloud** (`https://ollama.com/api/chat`), diatur lewat `OLLAMA_URL`, `OLLAMA_API_KEY`, `OLLAMA_MODEL` di `.env`.
-- Kalau `OLLAMA_API_KEY` kosong → otomatis pakai `PendingGradingService` (skor 0 semua, menunggu penilaian manual) — ini juga yang dipakai saat menjalankan test suite, supaya test tetap cepat dan tidak bergantung koneksi internet.
+- Kalau `OLLAMA_API_KEY` kosong → otomatis pakai `PendingGradingService` (feedback placeholder "penilaian AI belum diaktifkan") — ini juga yang dipakai saat menjalankan test suite, supaya test tetap cepat dan tidak bergantung koneksi internet.
 - Model aktif saat ini: `gpt-oss:20b`.
+- **AI sama sekali tidak menyentuh kolom `skor`** — lihat §4.3. Skor yang dikembalikan AI di response JSON-nya dibuang begitu saja; hanya field `review` yang disimpan (ke `review_ai`).

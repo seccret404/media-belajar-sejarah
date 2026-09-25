@@ -8,9 +8,9 @@ import {
 } from 'lucide-react';
 import { ScoreMeterList } from '@/components/dashboard/score-meter-list';
 import { StatCard } from '@/components/dashboard/stat-card';
-import { Badge } from '@/components/ui/badge';
+import { SkorBadge } from '@/components/skor-badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { initials, scoreBadgeClass } from '@/lib/utils';
+import { initials } from '@/lib/utils';
 import { dashboard } from '@/routes';
 
 type SkorModul = {
@@ -22,7 +22,7 @@ type SkorModul = {
 type Aktivitas = {
     nama: string;
     modul: string;
-    skor: number;
+    skor: number | null;
     waktu: string;
 };
 
@@ -142,13 +142,10 @@ export default function GuruDashboard({
                                                     {item.modul} · {item.waktu}
                                                 </p>
                                             </div>
-                                            <Badge
-                                                className={scoreBadgeClass(
-                                                    item.skor,
-                                                )}
-                                            >
-                                                {item.skor}
-                                            </Badge>
+                                            <SkorBadge
+                                                skor={item.skor}
+                                                label={false}
+                                            />
                                         </div>
                                     ))}
                                 </div>

@@ -51,6 +51,9 @@ class ModulController extends Controller
             ->map(fn (HistoryUser $history) => [
                 'soal' => $history->kuis->soal,
                 'jawaban' => $history->jawaban,
+                // skor stays null until a guru reads the AI feedback and
+                // sets the final grade; the feedback itself is visible to
+                // the student right away.
                 'skor' => $history->skor,
                 'review_ai' => $history->review_ai,
             ]);

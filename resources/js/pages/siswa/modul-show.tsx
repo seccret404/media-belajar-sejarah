@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { AiReviewNote } from '@/components/ai-review-note';
-import { Badge } from '@/components/ui/badge';
+import { SkorBadge } from '@/components/skor-badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import {
@@ -32,13 +32,13 @@ import {
     parseSectionContent,
     splitVisualLines,
 } from '@/lib/modul-content';
-import { cn, scoreBadgeClass } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 import siswa from '@/routes/siswa';
 
 type ReviewItem = {
     soal: string;
     jawaban: string;
-    skor: number;
+    skor: number | null;
     review_ai: string | null;
 };
 
@@ -382,11 +382,10 @@ export default function SiswaModulShow({
                                         Jawaban kamu:{' '}
                                         {item.jawaban || '(kosong)'}
                                     </p>
-                                    <Badge
-                                        className={`mt-2 ${scoreBadgeClass(item.skor)}`}
-                                    >
-                                        Skor {item.skor}
-                                    </Badge>
+                                    <SkorBadge
+                                        skor={item.skor}
+                                        className="mt-2"
+                                    />
                                     {item.review_ai && (
                                         <AiReviewNote text={item.review_ai} />
                                     )}

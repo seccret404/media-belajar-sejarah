@@ -1,14 +1,13 @@
 import { Head } from '@inertiajs/react';
 import { AiReviewNote } from '@/components/ai-review-note';
-import { Badge } from '@/components/ui/badge';
+import { SkorBadge } from '@/components/skor-badge';
 import { Card, CardContent } from '@/components/ui/card';
-import { scoreBadgeClass } from '@/lib/utils';
 import siswa from '@/routes/siswa';
 
 type ReviewItem = {
     soal: string;
     jawaban: string;
-    skor: number;
+    skor: number | null;
     review_ai: string | null;
 };
 
@@ -46,11 +45,7 @@ export default function SiswaRiwayatShow({
                                 <p className="text-muted-foreground mt-2 text-sm whitespace-pre-wrap">
                                     Jawaban kamu: {item.jawaban || '(kosong)'}
                                 </p>
-                                <Badge
-                                    className={`mt-2 ${scoreBadgeClass(item.skor)}`}
-                                >
-                                    Skor {item.skor}
-                                </Badge>
+                                <SkorBadge skor={item.skor} className="mt-2" />
                                 {item.review_ai && (
                                     <AiReviewNote text={item.review_ai} />
                                 )}

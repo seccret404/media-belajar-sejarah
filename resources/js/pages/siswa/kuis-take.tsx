@@ -161,11 +161,13 @@ export default function SiswaKuisTake({
                     </div>
                     <div className="text-center">
                         <p className="text-base font-semibold">
-                            Sedang menilai jawabanmu...
+                            Sedang mengumpulkan jawabanmu...
                         </p>
                         <p className="text-muted-foreground mt-1 max-w-xs text-sm">
-                            AI sedang membaca dan memberi skor tiap jawaban.
-                            Mohon tunggu sebentar, jangan tutup halaman ini.
+                            AI sedang membaca jawabanmu untuk bahan
+                            pertimbangan guru. Skor akan muncul setelah guru
+                            menilai. Mohon tunggu sebentar, jangan tutup
+                            halaman ini.
                         </p>
                     </div>
                 </div>

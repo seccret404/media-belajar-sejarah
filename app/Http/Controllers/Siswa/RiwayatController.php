@@ -26,13 +26,18 @@ class RiwayatController extends Controller
             ])
             ->orderBy('urutan')
             ->get()
-            ->map(fn (Modul $modul) => [
-                'id' => $modul->id,
-                'nama_modul' => $modul->nama_modul,
-                'urutan' => $modul->urutan,
-                'jumlah_soal' => $modul->historyUser->count(),
-                'skor' => (int) round($modul->historyUser->avg('skor') ?? 0),
-            ])
+            ->map(function (Modul $modul) {
+                $sudahDinilai = $modul->historyUser->every(fn (HistoryUser $h) => $h->skor !== null);
+
+                return [
+                    'id' => $modul->id,
+                    'nama_modul' => $modul->nama_modul,
+                    'urutan' => $modul->urutan,
+                    'jumlah_soal' => $modul->historyUser->count(),
+                    'status' => $sudahDinilai ? 'selesai' : 'menunggu',
+                    'skor' => $sudahDinilai ? (int) round($modul->historyUser->avg('skor')) : null,
+                ];
+            })
             ->values();
 
         return Inertia::render('siswa/riwayat-index', [

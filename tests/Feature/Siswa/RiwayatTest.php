@@ -46,4 +46,31 @@ class RiwayatTest extends TestCase
             ->get(route('siswa.riwayat.show', $modul))
             ->assertNotFound();
     }
+
+    public function test_ungraded_submission_hides_skor_but_still_shows_ai_feedback(): void
+    {
+        $siswa = User::factory()->siswa()->create();
+        $modul = Modul::factory()->create();
+        $kuis = Kuis::factory()->create(['id_modul' => $modul->id]);
+
+        HistoryUser::factory()->create([
+            'id_user' => $siswa->id,
+            'id_modul' => $modul->id,
+            'id_kuis' => $kuis->id,
+            'skor' => null,
+            'review_ai' => 'Feedback AI untuk bahan pertimbangan siswa.',
+        ]);
+
+        $index = $this->actingAs($siswa)->get(route('siswa.riwayat.index'));
+        $modulProp = collect($index->inertiaProps('modul'))->firstWhere('id', $modul->id);
+
+        $this->assertSame('menunggu', $modulProp['status']);
+        $this->assertNull($modulProp['skor']);
+
+        $show = $this->actingAs($siswa)->get(route('siswa.riwayat.show', $modul));
+        $review = $show->inertiaProps('review');
+
+        $this->assertNull($review[0]['skor']);
+        $this->assertSame('Feedback AI untuk bahan pertimbangan siswa.', $review[0]['review_ai']);
+    }
 }

@@ -85,11 +85,13 @@ class KuisController extends Controller
             ];
         });
 
+        // The AI's job stops at feedback: it does not set the final skor.
+        // A guru reads this review and decides the skor themselves (see
+        // Guru\RiwayatController::update()), so skor stays null here.
         DB::transaction(function () use ($hasilPerBaris) {
             foreach ($hasilPerBaris as $item) {
                 $item['row']->update([
                     'jawaban' => $item['jawaban'],
-                    'skor' => $item['hasil']->skor,
                     'review_ai' => $item['hasil']->review,
                 ]);
             }

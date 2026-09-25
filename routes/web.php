@@ -19,6 +19,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::put('kelola-kuis/{modul}', [GuruModulController::class, 'update'])->name('modul.update');
 
         Route::get('riwayat-kuis', [GuruRiwayatController::class, 'index'])->name('riwayat.index');
+        Route::put('riwayat-kuis/{idUser}/{idModul}', [GuruRiwayatController::class, 'update'])->name('riwayat.update');
     });
 
     Route::middleware('role:siswa')->prefix('siswa')->name('siswa.')->group(function () {

@@ -39,18 +39,26 @@ class DashboardController extends Controller
             ->get()
             ->groupBy(fn (HistoryUser $history) => "{$history->id_user}-{$history->id_modul}");
 
-        $rataRataSkor = $selesai->isEmpty()
+        // Only rows a guru has actually graded count toward score averages —
+        // a submission still waiting for review has skor === null.
+        $dinilai = $selesai->flatten()->whereNotNull('skor');
+
+        $rataRataSkor = $dinilai->isEmpty()
             ? 0
-            : (int) round($selesai->flatten()->avg('skor'));
+            : (int) round($dinilai->avg('skor'));
 
         $skorPerModul = $modul->map(function (Modul $m) use ($selesai) {
             $attempts = $selesai->filter(fn (Collection $g) => $g->first()->id_modul === $m->id);
 
+            $rataRataPerSiswa = $attempts
+                ->map(fn (Collection $g) => $g->pluck('skor')->filter())
+                ->filter(fn (Collection $skor) => $skor->isNotEmpty());
+
             return [
                 'nama_modul' => $m->nama_modul,
-                'rata_rata' => $attempts->isEmpty()
+                'rata_rata' => $rataRataPerSiswa->isEmpty()
                     ? null
-                    : (int) round($attempts->map(fn (Collection $g) => $g->avg('skor'))->avg()),
+                    : (int) round($rataRataPerSiswa->map->avg()->avg()),
                 'jumlah_siswa' => $attempts->count(),
             ];
         })->values();
@@ -59,7 +67,9 @@ class DashboardController extends Controller
             ->map(fn (Collection $g) => [
                 'nama' => $g->first()->user->name,
                 'modul' => $g->first()->modul->nama_modul,
-                'skor' => (int) round($g->avg('skor')),
+                'skor' => $g->contains(fn (HistoryUser $h) => $h->skor === null)
+                    ? null
+                    : (int) round($g->avg('skor')),
                 'waktu' => $g->max('updated_at'),
             ])
             ->sortByDesc('waktu')
@@ -94,16 +104,18 @@ class DashboardController extends Controller
             ->get()
             ->groupBy('id_modul');
 
-        $rataRataSkor = $selesai->isEmpty()
+        $dinilai = $selesai->flatten()->whereNotNull('skor');
+
+        $rataRataSkor = $dinilai->isEmpty()
             ? 0
-            : (int) round($selesai->flatten()->avg('skor'));
+            : (int) round($dinilai->avg('skor'));
 
         $skorPerModul = $modul->map(function (Modul $m) use ($selesai) {
-            $attempt = $selesai->get($m->id);
+            $skor = $selesai->get($m->id)?->pluck('skor')->filter();
 
             return [
                 'nama_modul' => $m->nama_modul,
-                'skor' => $attempt ? (int) round($attempt->avg('skor')) : null,
+                'skor' => $skor && $skor->isNotEmpty() ? (int) round($skor->avg()) : null,
             ];
         })->values();
 

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Siswa;
 
+use App\Models\HistoryUser;
 use App\Models\Kuis;
 use App\Models\Modul;
 use App\Models\User;
@@ -101,6 +102,32 @@ class KuisTest extends TestCase
         $this->actingAs($siswa)
             ->post(route('siswa.kuis.store', $modul), ['jawaban' => []])
             ->assertStatus(409);
+    }
+
+    public function test_submitting_a_quiz_records_ai_feedback_but_leaves_skor_for_the_guru(): void
+    {
+        $siswa = User::factory()->siswa()->create();
+        $modul = Modul::factory()->create();
+        Kuis::factory(5)->create(['id_modul' => $modul->id]);
+
+        $this->actingAs($siswa)->get(route('siswa.kuis.create', $modul));
+        $this->actingAs($siswa)->post(route('siswa.kuis.store', $modul), [
+            'jawaban' => [],
+        ]);
+
+        $this->assertDatabaseHas('history_user', [
+            'id_user' => $siswa->id,
+            'id_modul' => $modul->id,
+            'skor' => null,
+        ]);
+
+        $row = HistoryUser::query()
+            ->where('id_user', $siswa->id)
+            ->where('id_modul', $modul->id)
+            ->first();
+
+        $this->assertNotNull($row->review_ai);
+        $this->assertNull($row->skor);
     }
 
     public function test_modul_show_reports_completion_and_review(): void

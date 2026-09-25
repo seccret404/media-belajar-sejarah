@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Guru;
 
 use App\Http\Controllers\Controller;
 use App\Models\HistoryUser;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -27,15 +29,20 @@ class RiwayatController extends Controller
             ->map(function ($group) {
                 /** @var HistoryUser $first */
                 $first = $group->first();
+                $sudahDinilai = $group->every(fn (HistoryUser $h) => $h->skor !== null);
 
                 return [
                     'id' => "{$first->id_user}-{$first->id_modul}",
+                    'id_user' => $first->id_user,
+                    'id_modul' => $first->id_modul,
                     'nama' => $first->user->name,
                     'angkatan' => $first->user->angkatan,
                     'modul' => $first->modul->nama_modul,
                     'urutan' => $first->modul->urutan,
-                    'skor' => (int) round($group->avg('skor')),
+                    'status' => $sudahDinilai ? 'selesai' : 'menunggu',
+                    'skor' => $sudahDinilai ? (int) round($group->avg('skor')) : null,
                     'detail' => $group->map(fn (HistoryUser $history) => [
+                        'id_kuis' => $history->id_kuis,
                         'soal' => $history->kuis->soal,
                         'jawaban' => $history->jawaban,
                         'skor' => $history->skor,
@@ -43,7 +50,11 @@ class RiwayatController extends Controller
                     ])->values(),
                 ];
             })
-            ->sortBy([['nama', 'asc'], ['urutan', 'asc']])
+            ->sortBy(fn (array $item) => [
+                $item['status'] === 'menunggu' ? 0 : 1,
+                $item['nama'],
+                $item['urutan'],
+            ])
             ->values();
 
         return Inertia::render('guru/riwayat-index', [
@@ -52,5 +63,33 @@ class RiwayatController extends Controller
                 'search' => $search,
             ],
         ]);
+    }
+
+    public function update(Request $request, int $idUser, int $idModul): RedirectResponse
+    {
+        $validated = $request->validate([
+            'skor' => ['required', 'array', 'min:1'],
+            'skor.*' => ['required', 'integer', 'min:0', 'max:100'],
+        ]);
+
+        $rows = HistoryUser::query()
+            ->where('id_user', $idUser)
+            ->where('id_modul', $idModul)
+            ->whereNotNull('jawaban')
+            ->whereNull('skor')
+            ->whereIn('id_kuis', array_keys($validated['skor']))
+            ->get();
+
+        abort_if($rows->isEmpty(), 404);
+
+        DB::transaction(function () use ($rows, $validated) {
+            foreach ($rows as $row) {
+                $row->update(['skor' => $validated['skor'][$row->id_kuis]]);
+            }
+        });
+
+        Inertia::flash('toast', ['type' => 'success', 'message' => 'Skor berhasil disimpan.']);
+
+        return back();
     }
 }

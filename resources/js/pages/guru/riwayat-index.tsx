@@ -1,16 +1,18 @@
 import { Head, router } from '@inertiajs/react';
 import { Inbox, Search } from 'lucide-react';
-import { FormEventHandler, useState } from 'react';
+import { FormEventHandler, useEffect, useState } from 'react';
 import { AiReviewNote } from '@/components/ai-review-note';
-import { Badge } from '@/components/ui/badge';
+import { SkorBadge } from '@/components/skor-badge';
 import { Button } from '@/components/ui/button';
 import {
     Dialog,
     DialogContent,
+    DialogFooter,
     DialogHeader,
     DialogTitle,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
     Table,
     TableBody,
@@ -20,21 +22,25 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import guru from '@/routes/guru';
-import { initials, scoreBadgeClass } from '@/lib/utils';
+import { initials } from '@/lib/utils';
 
 type DetailItem = {
+    id_kuis: number;
     soal: string;
     jawaban: string;
-    skor: number;
+    skor: number | null;
     review_ai: string | null;
 };
 
 type Riwayat = {
     id: string;
+    id_user: number;
+    id_modul: number;
     nama: string;
     angkatan: number | null;
     modul: string;
-    skor: number;
+    status: 'menunggu' | 'selesai';
+    skor: number | null;
     detail: DetailItem[];
 };
 
@@ -47,6 +53,12 @@ export default function GuruRiwayatIndex({
 }) {
     const [search, setSearch] = useState(filters.search);
     const [detail, setDetail] = useState<Riwayat | null>(null);
+    const [skorInput, setSkorInput] = useState<Record<number, string>>({});
+    const [processing, setProcessing] = useState(false);
+
+    useEffect(() => {
+        setSkorInput({});
+    }, [detail?.id]);
 
     const applyFilters: FormEventHandler = (e) => {
         e.preventDefault();
@@ -56,6 +68,27 @@ export default function GuruRiwayatIndex({
             { preserveState: true, replace: true },
         );
     };
+
+    const submitSkor: FormEventHandler = (e) => {
+        e.preventDefault();
+        if (!detail) return;
+
+        setProcessing(true);
+        router.put(
+            guru.riwayat.update([detail.id_user, detail.id_modul]).url,
+            { skor: skorInput },
+            {
+                preserveScroll: true,
+                onSuccess: () => setDetail(null),
+                onFinish: () => setProcessing(false),
+            },
+        );
+    };
+
+    const belumLengkap =
+        detail?.detail.some(
+            (item) => item.skor === null && !skorInput[item.id_kuis]?.trim(),
+        ) ?? true;
 
     return (
         <>
@@ -126,9 +159,7 @@ export default function GuruRiwayatIndex({
                                             : ''}
                                     </p>
                                 </div>
-                                <Badge className={scoreBadgeClass(item.skor)}>
-                                    {item.skor}
-                                </Badge>
+                                <SkorBadge skor={item.skor} label={false} />
                             </button>
                         ))}
                     </div>
@@ -164,13 +195,10 @@ export default function GuruRiwayatIndex({
                                         <TableCell>{item.angkatan}</TableCell>
                                         <TableCell>{item.modul}</TableCell>
                                         <TableCell>
-                                            <Badge
-                                                className={scoreBadgeClass(
-                                                    item.skor,
-                                                )}
-                                            >
-                                                {item.skor}
-                                            </Badge>
+                                            <SkorBadge
+                                                skor={item.skor}
+                                                label={false}
+                                            />
                                         </TableCell>
                                         <TableCell>
                                             <Button
@@ -197,17 +225,13 @@ export default function GuruRiwayatIndex({
                     <DialogHeader>
                         <DialogTitle className="flex flex-wrap items-center gap-2">
                             {detail?.nama} - {detail?.modul}
-                            {detail && (
-                                <Badge className={scoreBadgeClass(detail.skor)}>
-                                    Skor {detail.skor}
-                                </Badge>
-                            )}
+                            {detail && <SkorBadge skor={detail.skor} />}
                         </DialogTitle>
                     </DialogHeader>
-                    <div className="flex flex-col gap-4">
+                    <form onSubmit={submitSkor} className="flex flex-col gap-4">
                         {detail?.detail.map((item, index) => (
                             <div
-                                key={index}
+                                key={item.id_kuis}
                                 className="border-sidebar-border/70 dark:border-sidebar-border rounded-lg border p-3"
                             >
                                 <p className="text-sm font-medium">
@@ -216,17 +240,54 @@ export default function GuruRiwayatIndex({
                                 <p className="text-muted-foreground mt-2 text-sm whitespace-pre-wrap">
                                     Jawaban: {item.jawaban || '(kosong)'}
                                 </p>
-                                <Badge
-                                    className={`mt-2 ${scoreBadgeClass(item.skor)}`}
-                                >
-                                    Skor {item.skor}
-                                </Badge>
+
                                 {item.review_ai && (
                                     <AiReviewNote text={item.review_ai} />
                                 )}
+
+                                {item.skor !== null ? (
+                                    <SkorBadge skor={item.skor} className="mt-2" />
+                                ) : (
+                                    <div className="mt-3 grid gap-1.5">
+                                        <Label
+                                            htmlFor={`skor-${item.id_kuis}`}
+                                        >
+                                            Skor (0-100)
+                                        </Label>
+                                        <Input
+                                            id={`skor-${item.id_kuis}`}
+                                            type="number"
+                                            min={0}
+                                            max={100}
+                                            required
+                                            className="w-28"
+                                            value={
+                                                skorInput[item.id_kuis] ?? ''
+                                            }
+                                            onChange={(e) =>
+                                                setSkorInput((prev) => ({
+                                                    ...prev,
+                                                    [item.id_kuis]:
+                                                        e.target.value,
+                                                }))
+                                            }
+                                        />
+                                    </div>
+                                )}
                             </div>
                         ))}
-                    </div>
+
+                        {detail?.status === 'menunggu' && (
+                            <DialogFooter>
+                                <Button
+                                    type="submit"
+                                    disabled={processing || belumLengkap}
+                                >
+                                    Simpan Skor
+                                </Button>
+                            </DialogFooter>
+                        )}
+                    </form>
                 </DialogContent>
             </Dialog>
         </>

@@ -35,7 +35,74 @@ class RiwayatTest extends TestCase
         $this->assertCount(1, $riwayat);
         $this->assertSame('Budi', $riwayat[0]['nama']);
         $this->assertSame('Modul A', $riwayat[0]['modul']);
+        $this->assertSame('selesai', $riwayat[0]['status']);
         $this->assertSame(90, $riwayat[0]['skor']);
+    }
+
+    public function test_ungraded_submission_shows_as_menunggu_with_a_null_skor(): void
+    {
+        $guru = User::factory()->guru()->create();
+        $modul = Modul::factory()->create();
+        $kuis = Kuis::factory()->create(['id_modul' => $modul->id]);
+        $siswa = User::factory()->siswa()->create();
+
+        HistoryUser::factory()->create([
+            'id_user' => $siswa->id,
+            'id_modul' => $modul->id,
+            'id_kuis' => $kuis->id,
+            'skor' => null,
+        ]);
+
+        $response = $this->actingAs($guru)->get(route('guru.riwayat.index'));
+        $riwayat = $response->inertiaProps('riwayat');
+
+        $this->assertSame('menunggu', $riwayat[0]['status']);
+        $this->assertNull($riwayat[0]['skor']);
+    }
+
+    public function test_guru_can_input_skor_for_an_ungraded_submission(): void
+    {
+        $guru = User::factory()->guru()->create();
+        $modul = Modul::factory()->create();
+        $kuis = Kuis::factory()->create(['id_modul' => $modul->id]);
+        $siswa = User::factory()->siswa()->create();
+
+        $history = HistoryUser::factory()->create([
+            'id_user' => $siswa->id,
+            'id_modul' => $modul->id,
+            'id_kuis' => $kuis->id,
+            'skor' => null,
+        ]);
+
+        $response = $this->actingAs($guru)->put(
+            route('guru.riwayat.update', [$siswa->id, $modul->id]),
+            ['skor' => [$kuis->id => 85]],
+        );
+
+        $response->assertSessionHasNoErrors()->assertRedirect();
+        $this->assertSame(85, $history->fresh()->skor);
+    }
+
+    public function test_guru_cannot_overwrite_a_skor_that_is_already_final(): void
+    {
+        $guru = User::factory()->guru()->create();
+        $modul = Modul::factory()->create();
+        $kuis = Kuis::factory()->create(['id_modul' => $modul->id]);
+        $siswa = User::factory()->siswa()->create();
+
+        $history = HistoryUser::factory()->create([
+            'id_user' => $siswa->id,
+            'id_modul' => $modul->id,
+            'id_kuis' => $kuis->id,
+            'skor' => 70,
+        ]);
+
+        $this->actingAs($guru)->put(
+            route('guru.riwayat.update', [$siswa->id, $modul->id]),
+            ['skor' => [$kuis->id => 40]],
+        )->assertNotFound();
+
+        $this->assertSame(70, $history->fresh()->skor);
     }
 
     public function test_guru_can_filter_riwayat_with_a_single_search_field(): void

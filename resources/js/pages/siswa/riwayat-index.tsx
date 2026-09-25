@@ -1,8 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import { History } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
+import { SkorBadge } from '@/components/skor-badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { scoreBadgeClass } from '@/lib/utils';
 import siswa from '@/routes/siswa';
 
 type Modul = {
@@ -10,7 +9,8 @@ type Modul = {
     nama_modul: string;
     urutan: number;
     jumlah_soal: number;
-    skor: number;
+    status: 'menunggu' | 'selesai';
+    skor: number | null;
 };
 
 export default function SiswaRiwayatIndex({ modul }: { modul: Modul[] }) {
@@ -52,11 +52,7 @@ export default function SiswaRiwayatIndex({ modul }: { modul: Modul[] }) {
                                     <p className="text-muted-foreground text-sm">
                                         {item.jumlah_soal} soal dikerjakan
                                     </p>
-                                    <Badge
-                                        className={scoreBadgeClass(item.skor)}
-                                    >
-                                        Skor {item.skor}
-                                    </Badge>
+                                    <SkorBadge skor={item.skor} />
                                 </CardContent>
                             </Card>
                         </Link>
