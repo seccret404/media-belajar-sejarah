@@ -16,6 +16,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // Render (like most PaaS) terminates TLS at its load balancer and
+        // forwards plain HTTP to the container, so Laravel must trust the
+        // X-Forwarded-* headers to know the original request was HTTPS.
+        $middleware->trustProxies(at: '*');
+
         $middleware->encryptCookies(except: ['appearance', 'sidebar_state']);
 
         $middleware->web(append: [
