@@ -64,6 +64,13 @@ Alur standar setiap kali ada perubahan kode yang perlu naik ke production:
    git commit -m "pesan commit"
    git push origin main
    ```
+4. Kalau diminta update juga ke repo mirror `rara0001/media-belajar-sejarah`
+   (tanpa atribusi Claude/Edward): clone repo itu fresh ke direktori lain,
+   kosongkan isinya, lalu timpa dengan snapshot HEAD repo utama via
+   `git archive HEAD | tar -x`, dan commit pakai identity
+   `-c user.name=rara0001 -c user.email=rara0001@users.noreply.github.com`
+   sebelum push. Ini repo terpisah dari `origin` — VPS tetap tarik kode dari
+   `origin` (seccret404), bukan dari mirror ini.
 
 ### 4.2. Di VPS — tarik kode terbaru & rebuild image
 
