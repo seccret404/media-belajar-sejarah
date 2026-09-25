@@ -3,6 +3,7 @@ import { ArrowRight, BarChart3, BookOpenCheck, Sparkles } from 'lucide-react';
 import { CompletionMeter } from '@/components/dashboard/completion-meter';
 import { ScoreMeterList } from '@/components/dashboard/score-meter-list';
 import { StatCard } from '@/components/dashboard/stat-card';
+import { DeveloperInfoDialog } from '@/components/developer-info-dialog';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { dashboard } from '@/routes';
@@ -136,4 +137,5 @@ export default function SiswaDashboard({
 
 SiswaDashboard.layout = {
     breadcrumbs: [{ title: 'Dashboard', href: dashboard() }],
+    actions: <DeveloperInfoDialog />,
 };
