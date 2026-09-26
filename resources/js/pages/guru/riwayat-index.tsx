@@ -2,6 +2,7 @@ import { Head, router } from '@inertiajs/react';
 import { Inbox, Info, Search } from 'lucide-react';
 import { FormEventHandler, useEffect, useState } from 'react';
 import { AiReviewNote } from '@/components/ai-review-note';
+import InputError from '@/components/input-error';
 import { SkorBadge } from '@/components/skor-badge';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
@@ -97,12 +98,21 @@ export default function GuruRiwayatIndex({
         );
     };
 
+    const skorError = (idKuis: number): string | undefined => {
+        const value = skorInput[idKuis]?.trim();
+        if (!value) return undefined;
+        const angka = Number(value);
+        if (Number.isNaN(angka)) return 'Skor harus berupa angka.';
+        if (angka > SKOR_MAKS) return `Skor tidak boleh lebih dari ${SKOR_MAKS}.`;
+        if (angka < 0) return 'Skor tidak boleh kurang dari 0.';
+        return undefined;
+    };
+
     const belumLengkap =
         detail?.detail.some((item) => {
             const value = skorInput[item.id_kuis]?.trim();
             if (!value) return true;
-            const angka = Number(value);
-            return Number.isNaN(angka) || angka < 0 || angka > SKOR_MAKS;
+            return skorError(item.id_kuis) !== undefined;
         }) ?? true;
 
     return (
@@ -278,6 +288,10 @@ export default function GuruRiwayatIndex({
                                         min={0}
                                         max={SKOR_MAKS}
                                         required
+                                        aria-invalid={
+                                            skorError(item.id_kuis) !==
+                                            undefined
+                                        }
                                         className="w-28"
                                         value={skorInput[item.id_kuis] ?? ''}
                                         onChange={(e) =>
@@ -286,6 +300,9 @@ export default function GuruRiwayatIndex({
                                                 [item.id_kuis]: e.target.value,
                                             }))
                                         }
+                                    />
+                                    <InputError
+                                        message={skorError(item.id_kuis)}
                                     />
                                 </div>
                             </div>
