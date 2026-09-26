@@ -39,26 +39,28 @@ class DashboardController extends Controller
             ->get()
             ->groupBy(fn (HistoryUser $history) => "{$history->id_user}-{$history->id_modul}");
 
-        // Only rows a guru has actually graded count toward score averages —
-        // a submission still waiting for review has skor === null.
-        $dinilai = $selesai->flatten()->whereNotNull('skor');
+        // Each soal is graded 0-20 and a modul's skor is the SUM of its
+        // soal (5 soal x 20 = 100), not an average — so averages here are
+        // taken over those per-modul totals, only once a group is fully
+        // graded (a submission still waiting for review has skor === null).
+        $totalPerGroup = $selesai
+            ->filter(fn (Collection $g) => $g->every(fn (HistoryUser $h) => $h->skor !== null))
+            ->map(fn (Collection $g) => $g->sum('skor'));
 
-        $rataRataSkor = $dinilai->isEmpty()
+        $rataRataSkor = $totalPerGroup->isEmpty()
             ? 0
-            : (int) round($dinilai->avg('skor'));
+            : (int) round($totalPerGroup->avg());
 
         $skorPerModul = $modul->map(function (Modul $m) use ($selesai) {
             $attempts = $selesai->filter(fn (Collection $g) => $g->first()->id_modul === $m->id);
 
-            $rataRataPerSiswa = $attempts
-                ->map(fn (Collection $g) => $g->pluck('skor')->filter())
-                ->filter(fn (Collection $skor) => $skor->isNotEmpty());
+            $totals = $attempts
+                ->filter(fn (Collection $g) => $g->every(fn (HistoryUser $h) => $h->skor !== null))
+                ->map(fn (Collection $g) => $g->sum('skor'));
 
             return [
                 'nama_modul' => $m->nama_modul,
-                'rata_rata' => $rataRataPerSiswa->isEmpty()
-                    ? null
-                    : (int) round($rataRataPerSiswa->map->avg()->avg()),
+                'rata_rata' => $totals->isEmpty() ? null : (int) round($totals->avg()),
                 'jumlah_siswa' => $attempts->count(),
             ];
         })->values();
@@ -69,7 +71,7 @@ class DashboardController extends Controller
                 'modul' => $g->first()->modul->nama_modul,
                 'skor' => $g->contains(fn (HistoryUser $h) => $h->skor === null)
                     ? null
-                    : (int) round($g->avg('skor')),
+                    : $g->sum('skor'),
                 'waktu' => $g->max('updated_at'),
             ])
             ->sortByDesc('waktu')
@@ -104,18 +106,24 @@ class DashboardController extends Controller
             ->get()
             ->groupBy('id_modul');
 
-        $dinilai = $selesai->flatten()->whereNotNull('skor');
+        // Each soal is graded 0-20 and a modul's skor is the SUM of its
+        // soal (5 soal x 20 = 100), only once every soal in that modul has
+        // been graded.
+        $totalPerModul = $selesai
+            ->filter(fn (Collection $g) => $g->every(fn (HistoryUser $h) => $h->skor !== null))
+            ->map(fn (Collection $g) => $g->sum('skor'));
 
-        $rataRataSkor = $dinilai->isEmpty()
+        $rataRataSkor = $totalPerModul->isEmpty()
             ? 0
-            : (int) round($dinilai->avg('skor'));
+            : (int) round($totalPerModul->avg());
 
         $skorPerModul = $modul->map(function (Modul $m) use ($selesai) {
-            $skor = $selesai->get($m->id)?->pluck('skor')->filter();
+            $attempt = $selesai->get($m->id);
+            $sudahDinilai = $attempt && $attempt->every(fn (HistoryUser $h) => $h->skor !== null);
 
             return [
                 'nama_modul' => $m->nama_modul,
-                'skor' => $skor && $skor->isNotEmpty() ? (int) round($skor->avg()) : null,
+                'skor' => $sudahDinilai ? $attempt->sum('skor') : null,
             ];
         })->values();
 

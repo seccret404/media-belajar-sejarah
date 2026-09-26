@@ -20,11 +20,13 @@ export function initials(name: string): string {
         .join('');
 }
 
-export function scoreBadgeClass(skor: number): string {
-    if (skor >= 80) {
+export function scoreBadgeClass(skor: number, maks: number = 100): string {
+    const persen = (skor / maks) * 100;
+
+    if (persen >= 80) {
         return 'border-transparent bg-green-100 text-green-700 dark:bg-green-500/15 dark:text-green-400';
     }
-    if (skor >= 60) {
+    if (persen >= 60) {
         return 'border-transparent bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-400';
     }
     return 'border-transparent bg-red-100 text-red-700 dark:bg-red-500/15 dark:text-red-400';

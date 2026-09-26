@@ -1,8 +1,9 @@
 import { Head, router } from '@inertiajs/react';
-import { Inbox, Search } from 'lucide-react';
+import { Inbox, Info, Search } from 'lucide-react';
 import { FormEventHandler, useEffect, useState } from 'react';
 import { AiReviewNote } from '@/components/ai-review-note';
 import { SkorBadge } from '@/components/skor-badge';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import {
     Dialog,
@@ -31,6 +32,8 @@ type DetailItem = {
     skor: number | null;
     review_ai: string | null;
 };
+
+const SKOR_MAKS = 20;
 
 type Riwayat = {
     id: string;
@@ -95,9 +98,12 @@ export default function GuruRiwayatIndex({
     };
 
     const belumLengkap =
-        detail?.detail.some(
-            (item) => !skorInput[item.id_kuis]?.trim(),
-        ) ?? true;
+        detail?.detail.some((item) => {
+            const value = skorInput[item.id_kuis]?.trim();
+            if (!value) return true;
+            const angka = Number(value);
+            return Number.isNaN(angka) || angka < 0 || angka > SKOR_MAKS;
+        }) ?? true;
 
     return (
         <>
@@ -237,6 +243,14 @@ export default function GuruRiwayatIndex({
                             {detail && <SkorBadge skor={detail.skor} />}
                         </DialogTitle>
                     </DialogHeader>
+                    <Alert>
+                        <Info />
+                        <AlertDescription>
+                            Skor maksimal untuk setiap soal adalah{' '}
+                            {SKOR_MAKS} poin. Skor akhir modul dihitung dari
+                            jumlah seluruh soal.
+                        </AlertDescription>
+                    </Alert>
                     <form onSubmit={submitSkor} className="flex flex-col gap-4">
                         {detail?.detail.map((item, index) => (
                             <div
@@ -256,13 +270,13 @@ export default function GuruRiwayatIndex({
 
                                 <div className="mt-3 grid gap-1.5">
                                     <Label htmlFor={`skor-${item.id_kuis}`}>
-                                        Skor (0-100)
+                                        Skor (0-{SKOR_MAKS})
                                     </Label>
                                     <Input
                                         id={`skor-${item.id_kuis}`}
                                         type="number"
                                         min={0}
-                                        max={100}
+                                        max={SKOR_MAKS}
                                         required
                                         className="w-28"
                                         value={skorInput[item.id_kuis] ?? ''}

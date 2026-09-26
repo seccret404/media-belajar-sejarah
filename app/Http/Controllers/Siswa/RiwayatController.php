@@ -35,7 +35,7 @@ class RiwayatController extends Controller
                     'urutan' => $modul->urutan,
                     'jumlah_soal' => $modul->historyUser->count(),
                     'status' => $sudahDinilai ? 'selesai' : 'menunggu',
-                    'skor' => $sudahDinilai ? (int) round($modul->historyUser->avg('skor')) : null,
+                    'skor' => $sudahDinilai ? $modul->historyUser->sum('skor') : null,
                 ];
             })
             ->values();

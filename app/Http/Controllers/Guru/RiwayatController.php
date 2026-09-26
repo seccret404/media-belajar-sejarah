@@ -40,7 +40,7 @@ class RiwayatController extends Controller
                     'modul' => $first->modul->nama_modul,
                     'urutan' => $first->modul->urutan,
                     'status' => $sudahDinilai ? 'selesai' : 'menunggu',
-                    'skor' => $sudahDinilai ? (int) round($group->avg('skor')) : null,
+                    'skor' => $sudahDinilai ? $group->sum('skor') : null,
                     'detail' => $group->map(fn (HistoryUser $history) => [
                         'id_kuis' => $history->id_kuis,
                         'soal' => $history->kuis->soal,
@@ -67,9 +67,11 @@ class RiwayatController extends Controller
 
     public function update(Request $request, int $idUser, int $idModul): RedirectResponse
     {
+        // Each soal is worth at most 20 points; a modul's final skor is the
+        // sum of all of its soal (5 soal x 20 = 100).
         $validated = $request->validate([
             'skor' => ['required', 'array', 'min:1'],
-            'skor.*' => ['required', 'integer', 'min:0', 'max:100'],
+            'skor.*' => ['required', 'integer', 'min:0', 'max:20'],
         ]);
 
         // Guru can add or revise a skor at any time, even after a

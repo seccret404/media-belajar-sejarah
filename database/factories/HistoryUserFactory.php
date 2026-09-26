@@ -26,7 +26,7 @@ class HistoryUserFactory extends Factory
             'id_modul' => $kuis->id_modul,
             'id_kuis' => $kuis->id,
             'jawaban' => fake()->paragraph(),
-            'skor' => fake()->numberBetween(0, 100),
+            'skor' => fake()->numberBetween(0, 20),
             'review_ai' => fake()->sentence(),
         ];
     }

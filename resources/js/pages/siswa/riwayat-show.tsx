@@ -45,7 +45,11 @@ export default function SiswaRiwayatShow({
                                 <p className="text-muted-foreground mt-2 text-sm whitespace-pre-wrap">
                                     Jawaban kamu: {item.jawaban || '(kosong)'}
                                 </p>
-                                <SkorBadge skor={item.skor} className="mt-2" />
+                                <SkorBadge
+                                    skor={item.skor}
+                                    maks={20}
+                                    className="mt-2"
+                                />
                                 {item.review_ai && (
                                     <AiReviewNote text={item.review_ai} />
                                 )}

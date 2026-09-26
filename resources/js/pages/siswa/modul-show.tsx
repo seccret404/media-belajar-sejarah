@@ -384,6 +384,7 @@ export default function SiswaModulShow({
                                     </p>
                                     <SkorBadge
                                         skor={item.skor}
+                                        maks={20}
                                         className="mt-2"
                                     />
                                     {item.review_ai && (

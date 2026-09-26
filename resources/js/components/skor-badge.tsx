@@ -4,10 +4,12 @@ import { cn, scoreBadgeClass } from '@/lib/utils';
 
 export function SkorBadge({
     skor,
+    maks = 100,
     label = true,
     className,
 }: {
     skor: number | null;
+    maks?: number;
     label?: boolean;
     className?: string;
 }) {
@@ -26,8 +28,10 @@ export function SkorBadge({
     }
 
     return (
-        <Badge className={cn(scoreBadgeClass(skor), className)}>
-            {label ? `Skor ${skor}` : skor}
+        <Badge className={cn(scoreBadgeClass(skor, maks), className)}>
+            {label
+                ? `Skor ${skor}${maks !== 100 ? `/${maks}` : ''}`
+                : skor}
         </Badge>
     );
 }

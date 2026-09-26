@@ -24,7 +24,7 @@ class RiwayatTest extends TestCase
             'id_user' => $siswa->id,
             'id_modul' => $selesai->id,
             'id_kuis' => $kuis->id,
-            'skor' => 80,
+            'skor' => 16,
         ]);
 
         $response = $this->actingAs($siswa)->get(route('siswa.riwayat.index'));
