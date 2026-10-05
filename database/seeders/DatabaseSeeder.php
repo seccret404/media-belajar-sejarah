@@ -9,6 +9,7 @@ use App\Services\ModulContent;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,35 +20,51 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->guru()->create([
-            'name' => 'Guru Sejarah',
-            'email' => 'guru@example.com',
-        ]);
+        // 1. Buat User Guru secara manual tanpa Factory
+        User::firstOrCreate(
+            ['email' => 'guru@example.com'],
+            [
+                'name' => 'Guru Sejarah',
+                'password' => Hash::make('password'),
+                'role' => 'guru',
+            ]
+        );
 
-        User::factory()->siswa(now()->year)->create([
-            'name' => 'Siswa Contoh',
-            'email' => 'siswa@example.com',
-        ]);
+        // 2. Buat User Siswa secara manual tanpa Factory
+        User::firstOrCreate(
+            ['email' => 'siswa@example.com'],
+            [
+                'name' => 'Siswa Contoh',
+                'password' => Hash::make('password'),
+                'role' => 'siswa',
+                'angkatan' => now()->year,
+            ]
+        );
 
         /** @var list<array{urutan: int, soal: list<array{soal: string, jawaban_ekspektasi: string, key_jawaban: string}>}> $evaluasi */
         $evaluasi = json_decode(File::get(resource_path('data/kuis-evaluasi.json')), true);
         $evaluasiByUrutan = collect($evaluasi)->keyBy('urutan');
 
         foreach (ModulContent::all() as $materi) {
-            $modul = Modul::factory()->create([
-                'nama_modul' => $materi['judul'],
-                'urutan' => $materi['urutan'],
-            ]);
+            // Buat Modul secara manual tanpa Factory
+            $modul = Modul::firstOrCreate(
+                ['urutan' => $materi['urutan']],
+                ['nama_modul' => $materi['judul']]
+            );
 
             $soal = $evaluasiByUrutan->get($materi['urutan'])['soal'] ?? [];
 
             foreach ($soal as $item) {
-                Kuis::create([
-                    'id_modul' => $modul->id,
-                    'soal' => $item['soal'],
-                    'jawaban_ekspektasi' => $item['jawaban_ekspektasi'],
-                    'key_jawaban' => $item['key_jawaban'],
-                ]);
+                Kuis::firstOrCreate(
+                    [
+                        'id_modul' => $modul->id,
+                        'soal' => $item['soal'],
+                    ],
+                    [
+                        'jawaban_ekspektasi' => $item['jawaban_ekspektasi'],
+                        'key_jawaban' => $item['key_jawaban'],
+                    ]
+                );
             }
         }
     }
