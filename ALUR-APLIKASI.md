@@ -1,6 +1,6 @@
-# Alur Aplikasi — Media Belajar Sejarah
+# Alur Aplikasi — Historia+
 
-Dokumen ini menjelaskan alur (flow) aplikasi Media Belajar Sejarah sesuai kondisi kode saat ini: Laravel 13 + Inertia.js + React (TypeScript), dua peran pengguna (**guru** dan **siswa**), dengan penilaian esai otomatis berbasis AI.
+Dokumen ini menjelaskan alur (flow) aplikasi Historia+ sesuai kondisi kode saat ini: Laravel 13 + Inertia.js + React (TypeScript), dua peran pengguna (**guru** dan **siswa**), dengan penilaian esai otomatis berbasis AI.
 
 ## 1. Ringkasan Peran
 

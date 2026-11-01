@@ -1,4 +1,4 @@
-# Struktur Database — Media Belajar Sejarah
+# Struktur Database — Historia+
 
 Dokumen ini mendaftar semua tabel yang ada di database (sesuai migration di
 `database/migrations/`) beserta perannya masing-masing.

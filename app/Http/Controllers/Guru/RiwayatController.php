@@ -65,17 +65,15 @@ class RiwayatController extends Controller
         ]);
     }
 
-    public function update(Request $request, int $idUser, int $idModul): RedirectResponse
+   public function update(Request $request, int $idUser, int $idModul): RedirectResponse
     {
-        // Each soal is worth at most 20 points; a modul's final skor is the
-        // sum of all of its soal (5 soal x 20 = 100).
+        // Each soal is worth at most 5 points.
+        // Final score = total score of all soal x 4.
         $validated = $request->validate([
             'skor' => ['required', 'array', 'min:1'],
-            'skor.*' => ['required', 'integer', 'min:0', 'max:20'],
+            'skor.*' => ['required', 'integer', 'min:0', 'max:5'],
         ]);
 
-        // Guru can add or revise a skor at any time, even after a
-        // submission was already fully graded.
         $rows = HistoryUser::query()
             ->where('id_user', $idUser)
             ->where('id_modul', $idModul)
@@ -87,11 +85,22 @@ class RiwayatController extends Controller
 
         DB::transaction(function () use ($rows, $validated) {
             foreach ($rows as $row) {
-                $row->update(['skor' => $validated['skor'][$row->id_kuis]]);
+                $row->update([
+                    'skor' => $validated['skor'][$row->id_kuis]
+                ]);
             }
         });
 
-        Inertia::flash('toast', ['type' => 'success', 'message' => 'Skor berhasil disimpan.']);
+        $totalSkor = $rows->sum(
+            fn ($row) => $validated['skor'][$row->id_kuis]
+        );
+
+        $nilaiAkhir = $totalSkor * 4;
+
+        Inertia::flash('toast', [
+            'type' => 'success',
+            'message' => 'Skor berhasil disimpan.'
+        ]);
 
         return back();
     }

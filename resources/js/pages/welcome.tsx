@@ -28,7 +28,7 @@ export default function Welcome() {
 
                         <div>
                             <h1 className="text-xl font-semibold">
-                                Media Belajar Sejarah
+                                Historia+
                             </h1>
                             <p className="text-muted-foreground mt-2 text-sm">
                                 Platform belajar sejarah untuk guru dan siswa —

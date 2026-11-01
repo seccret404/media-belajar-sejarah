@@ -109,6 +109,6 @@ export default function Login({ status, canResetPassword }: Props) {
 }
 
 Login.layout = {
-    title: 'Selamat datang di Media Belajar Sejarah',
+    title: 'Selamat datang di Historia+',
     description: '',
 };
