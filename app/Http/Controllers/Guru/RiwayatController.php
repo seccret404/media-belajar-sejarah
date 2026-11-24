@@ -40,7 +40,7 @@ class RiwayatController extends Controller
                     'modul' => $first->modul->nama_modul,
                     'urutan' => $first->modul->urutan,
                     'status' => $sudahDinilai ? 'selesai' : 'menunggu',
-                    'skor' => $sudahDinilai ? $group->sum('skor') : null,
+                    'skor' => $sudahDinilai ? $group->sum('skor') * 4 : null,
                     'detail' => $group->map(fn (HistoryUser $history) => [
                         'id_kuis' => $history->id_kuis,
                         'soal' => $history->kuis->soal,
