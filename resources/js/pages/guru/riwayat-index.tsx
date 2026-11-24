@@ -34,7 +34,7 @@ type DetailItem = {
     review_ai: string | null;
 };
 
-const SKOR_MAKS = 20;
+const SKOR_MAKS = 5;
 
 type Riwayat = {
     id: string;

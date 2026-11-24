@@ -1,0 +1,17 @@
+curl -sS -X POST "https://ollama.com/api/chat" \
+  -H "Authorization: Bearer 5c2dc266d9444dc6a1d810da91ed27a5.ShFqtNmKDuREDl_-co3Ufvb-" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gpt-oss:20b",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Halo, apakah kamu aktif? Jawab dalam bahasa Indonesia."
+      }
+    ],
+    "stream": false
+  }' | python3 -m json.tool
+
+
+
+  f1d2b1c625644fe8b7f415c8030c3634.6tVbiiT0VVn8qyrq-A4YGlOj
